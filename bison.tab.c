@@ -436,16 +436,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   284
+#define YYLAST   266
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  69
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  42
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  95
+#define YYNRULES  94
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  224
+#define YYNSTATES  221
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   323
@@ -505,9 +505,9 @@ static const yytype_uint8 yyrline[] =
      173,   174,   175,   176,   177,   178,   179,   180,   181,   182,
      183,   184,   185,   186,   187,   188,   189,   190,   191,   192,
      193,   194,   195,   196,   197,   198,   199,   200,   201,   202,
-     203,   204,   205,   206,   207,   209,   210,   211,   212,   213,
-     214,   215,   216,   217,   218,   219,   220,   221,   222,   223,
-     224,   225,   226,   228,   229,   230
+     203,   204,   205,   206,   208,   209,   210,   211,   212,   213,
+     214,   215,   216,   217,   218,   219,   220,   221,   222,   224,
+     225,   226,   229,   230,   231
 };
 #endif
 
@@ -555,10 +555,10 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -112
+#define YYPACT_NINF -118
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-112)))
+  (!!((Yystate) == (-118)))
 
 #define YYTABLE_NINF -24
 
@@ -569,29 +569,29 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-       4,     6,    27,    38,  -112,   122,    44,    48,    81,   -41,
-     122,   122,    58,    57,    83,    96,   111,   118,   113,   164,
-      81,    81,    81,   126,   135,    -1,   -41,   -41,  -112,  -112,
-      20,   143,   129,   147,   123,   140,   130,   151,  -112,   131,
-      19,   179,  -112,   179,  -112,  -112,  -112,   188,   188,   163,
-    -112,  -112,   202,    -3,     2,  -112,  -112,   166,  -112,  -112,
-    -112,  -112,  -112,  -112,  -112,  -112,  -112,   134,    81,   136,
-      81,   111,   111,   161,   144,  -112,  -112,  -112,    10,   174,
-     162,    20,  -112,  -112,   175,   159,  -112,    18,  -112,   182,
-    -112,   111,   183,   116,  -112,   188,  -112,    19,  -112,    76,
-      53,   202,  -112,   142,   139,   146,    19,    19,    19,    19,
-      19,    19,    19,   179,   179,   197,   188,  -112,  -112,   164,
-     -15,   138,   111,   153,  -112,  -112,  -112,  -112,   177,   187,
-     145,  -112,    44,   145,    48,  -112,  -112,    17,   212,   189,
-     167,   222,  -112,  -112,   164,   164,   188,   128,   128,  -112,
-    -112,  -112,  -112,   230,  -112,  -112,    22,   198,  -112,   111,
-     111,   111,   191,   223,  -112,   201,   188,    20,  -112,   216,
-    -112,  -112,  -112,   111,   111,   188,  -112,   190,   192,   185,
-    -112,   217,   218,   221,   246,   -15,   229,   206,   248,   145,
-    -112,  -112,  -112,   188,   208,  -112,   188,    20,    20,    20,
-    -112,  -112,    20,  -112,   174,   242,   220,  -112,   219,  -112,
-    -112,  -112,   267,  -112,   253,   164,   164,  -112,    20,   190,
-     224,  -112,  -112,  -112
+      31,    32,    48,    34,  -118,     7,    53,    62,   121,     9,
+       7,     7,    83,    92,    89,   105,   119,   125,   128,   103,
+     121,   121,   121,   137,   139,   108,     9,     9,  -118,  -118,
+       6,   124,   136,   140,   120,   142,   132,   160,  -118,   131,
+      15,   118,  -118,   118,  -118,  -118,  -118,   134,   134,   177,
+    -118,  -118,   168,   123,    18,  -118,  -118,   167,  -118,  -118,
+    -118,  -118,  -118,  -118,  -118,  -118,  -118,   143,   121,   144,
+     121,   119,   119,   187,   159,  -118,  -118,  -118,     2,   194,
+     203,     6,  -118,  -118,   208,   197,  -118,    39,  -118,   219,
+    -118,   119,   220,   222,  -118,   134,  -118,    15,  -118,   152,
+      78,   168,  -118,   176,   173,   180,    15,    15,    15,    15,
+      15,    15,    15,   118,   118,   226,   134,  -118,  -118,   103,
+     -12,   169,   119,   170,  -118,  -118,  -118,  -118,   202,   217,
+      67,  -118,    53,    67,    62,  -118,  -118,   230,   206,   198,
+     174,  -118,  -118,   103,   103,   134,    55,    55,  -118,  -118,
+    -118,  -118,   183,  -118,  -118,   -11,   209,  -118,   119,   119,
+     119,   199,   235,  -118,   201,   134,     6,  -118,   216,  -118,
+    -118,  -118,   119,   134,  -118,   189,   188,   190,  -118,   218,
+     221,   223,   240,   -12,   228,   186,   241,    67,  -118,  -118,
+     134,   200,  -118,   134,     6,     6,     6,  -118,  -118,     6,
+    -118,   194,   227,   205,  -118,   204,  -118,  -118,  -118,   249,
+    -118,   237,   103,   103,  -118,     6,   189,   207,  -118,  -118,
+    -118
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -600,38 +600,38 @@ static const yytype_int16 yypact[] =
 static const yytype_uint8 yydefact[] =
 {
        0,     0,     0,     0,     1,     7,    20,    32,    15,    10,
-       7,     7,     0,     0,     0,     0,    35,     0,     0,     0,
+       7,     7,     0,     0,     0,     0,    34,     0,     0,     0,
       15,    15,    15,     0,     0,     0,    10,    10,     5,     6,
-       0,     0,     0,     0,    37,     0,     0,     0,     4,    64,
-       0,     0,    54,     0,    60,    61,    71,     0,     0,     0,
-      68,    76,    43,    44,    53,    59,    11,    70,    72,    73,
-      74,    81,    80,    45,    12,    13,    14,     0,    15,     0,
-      15,    35,    35,     0,    38,    40,     8,     9,    64,    30,
-       0,     0,    26,    28,     0,     0,    27,    53,    16,     0,
-      17,     0,     0,     0,     2,     0,    64,     0,    55,     0,
-       0,     0,    58,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,    67,    75,     0,
-      89,     0,    35,     0,    41,    42,     3,    39,     0,     0,
-       0,    25,    20,     0,    32,    36,    18,    64,     0,    95,
-       0,     0,    52,    62,     0,     0,     0,    46,    47,    48,
-      49,    50,    51,    63,    56,    57,    65,     0,    69,     0,
-       0,     0,     0,     0,    84,     0,     0,     0,    21,     0,
-      19,    24,    31,    35,    35,     0,    93,    79,     0,     0,
-      66,     0,     0,     0,     0,    89,     0,     0,     0,     0,
-      33,    34,    94,     0,     0,    82,     0,     0,     0,     0,
-      86,    88,     0,    85,    30,     0,     0,    77,     0,    90,
-      91,    92,     0,    29,     0,     0,     0,    87,     0,    79,
-       0,    22,    78,    83
+       0,     0,     0,     0,    36,     0,     0,     0,     4,    63,
+       0,     0,    53,     0,    59,    60,    70,     0,     0,     0,
+      67,    75,    42,    43,    52,    58,    11,    69,    71,    72,
+      73,    80,    79,    44,    12,    13,    14,     0,    15,     0,
+      15,    34,    34,     0,    37,    39,     8,     9,    63,    30,
+       0,     0,    26,    28,     0,     0,    27,    52,    16,     0,
+      17,     0,     0,     0,     2,     0,    63,     0,    54,     0,
+       0,     0,    57,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    66,    74,     0,
+      88,     0,    34,     0,    40,    41,     3,    38,     0,     0,
+       0,    25,    20,     0,    32,    35,    18,     0,    94,     0,
+       0,    51,    61,     0,     0,     0,    45,    46,    47,    48,
+      49,    50,    62,    55,    56,    64,     0,    68,     0,     0,
+       0,     0,     0,    83,     0,     0,     0,    21,     0,    19,
+      24,    31,    34,     0,    92,    78,     0,     0,    65,     0,
+       0,     0,     0,    88,     0,     0,     0,     0,    33,    93,
+       0,     0,    81,     0,     0,     0,     0,    85,    87,     0,
+      84,    30,     0,     0,    76,     0,    89,    90,    91,     0,
+      29,     0,     0,     0,    86,     0,    78,     0,    22,    77,
+      82
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-    -112,  -112,  -112,  -112,    91,   119,    74,   115,    52,    64,
-    -112,   148,   -80,   -98,    71,   150,   -67,   -89,  -112,  -112,
-     203,   -19,   -29,   -25,   -16,  -112,  -111,  -112,  -112,  -112,
-      59,  -112,  -112,  -112,  -112,  -112,  -112,  -112,    94,  -112,
-    -112,   101
+    -118,  -118,  -118,  -118,    99,   150,   -47,    40,    33,    54,
+    -118,   126,   -80,   -98,    59,   127,   -67,   -85,  -118,  -118,
+     191,   -19,   -29,   -26,   -16,  -118,  -117,  -118,  -118,  -118,
+      46,  -118,  -118,  -118,  -118,  -118,  -118,  -118,    80,  -118,
+    -118,    91
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -640,8 +640,8 @@ static const yytype_int16 yydefgoto[] =
       -1,     2,     8,    17,     9,    25,    18,    19,    20,    21,
       22,    13,    84,    85,   129,    15,    35,    36,    73,    74,
       75,    86,    52,    53,    87,    55,    56,    57,    58,    59,
-     194,    60,    61,    62,    26,    27,    68,    70,   162,   163,
-      63,   140
+     191,    60,    61,    62,    26,    27,    68,    70,   161,   162,
+      63,   139
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -649,68 +649,64 @@ static const yytype_int16 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      51,   131,   135,    54,   124,   125,   159,     1,   158,   115,
-       3,    98,    99,   138,   101,   -23,   100,   160,   102,    23,
-      24,   116,   173,    96,    78,   115,   117,     4,   103,   104,
-      71,    72,   169,   177,   178,   171,    79,   116,    80,   113,
-     114,   116,   117,     5,    81,    82,   117,    83,    12,    95,
-     161,   118,    14,    40,    40,   165,    95,    10,    97,    41,
-      42,    42,    10,    10,    43,    44,    45,    31,   141,    11,
-     181,   182,   183,    30,    11,    11,   139,   147,   148,   149,
-     150,   151,   152,   153,   101,   101,    50,   188,   154,   155,
-       6,   205,     7,   143,    16,   113,   114,   157,    32,   156,
-      51,    28,    29,    54,   219,   220,   190,   191,    33,   106,
-     107,   108,   109,   110,   111,    34,   142,   209,   210,   211,
-     137,    38,   212,   112,    37,    51,    51,   179,    54,    54,
-      67,     6,    79,     7,    80,    64,    65,    66,   221,    69,
-      81,    82,   121,    83,   123,    76,    77,   187,    88,    39,
-      40,    89,    90,    91,    92,    41,   139,    42,    94,    93,
-      43,    44,    45,   108,   109,   110,   111,   105,    39,   126,
-      95,   119,    83,   120,   206,   122,    72,   208,   128,    40,
-     132,   130,    50,    96,    41,   133,    42,   134,   136,    43,
-      44,    45,    39,   144,   145,   146,    51,    51,    40,    54,
-      54,    96,   164,    41,   168,    42,   167,   176,    43,    44,
-      45,    50,    46,    40,    47,   166,    48,   174,    41,   175,
-      42,    49,    40,    43,    44,    45,   180,    41,   185,    42,
-      50,   184,    43,    44,    45,   106,   107,   108,   109,   110,
-     111,   186,   189,   196,   193,    50,   197,   198,   195,   112,
-     199,   200,   202,   204,    50,   106,   107,   108,   109,   110,
-     111,   207,   142,   106,   107,   108,   109,   110,   111,   203,
-     214,   215,   217,   218,   216,   213,   192,   127,   222,   201,
-     170,     0,     0,   223,   172
+      51,   131,   157,    54,   124,   125,   135,   -23,   116,   158,
+      78,    98,    99,   117,   101,   100,     6,   102,     7,    96,
+     159,   121,    79,   123,    80,   115,   175,   176,   103,   104,
+      81,    82,   168,    83,     1,   170,     3,   116,    10,     5,
+      40,    95,   117,    10,    10,    41,   115,    42,     4,    40,
+      43,    44,    45,   160,    97,   164,    42,    12,   116,    11,
+      64,    65,    66,   117,    11,    11,    14,   118,   140,    23,
+      24,    39,    50,   179,   180,   181,   138,   146,   147,   148,
+     149,   150,   151,   152,   101,   101,   186,   153,   154,   202,
+     108,   109,   110,   111,    83,   216,   217,   156,    30,   155,
+      51,    40,    31,    54,    32,   188,    41,    39,    42,    28,
+      29,    43,    44,    45,   206,   207,   208,    33,   142,   209,
+     113,   114,    96,    34,    51,    51,   177,    54,    54,    88,
+       6,    37,     7,    50,    16,   218,    38,    40,    39,    71,
+      72,    67,    41,    69,    42,    90,   185,    43,    44,    45,
+      91,    46,    40,    47,   138,    48,    92,    41,    89,    42,
+      49,    93,    43,    44,    45,   113,   114,    94,    40,    50,
+      95,   203,   119,    41,   205,    42,    76,    77,    43,    44,
+      45,   105,   120,   122,    50,   106,   107,   108,   109,   110,
+     111,    72,   141,    51,    51,   126,    54,    54,   128,   112,
+      50,   106,   107,   108,   109,   110,   111,   106,   107,   108,
+     109,   110,   111,   132,   141,   112,   106,   107,   108,   109,
+     110,   111,   130,   133,   134,   136,   137,   143,   144,   145,
+      96,   166,   165,   163,   167,   172,   173,   178,   174,   182,
+     183,   184,   187,   190,   192,   197,   201,   194,   193,   200,
+     195,   199,   196,   204,   214,   211,   212,   215,   169,   213,
+     210,   171,   219,   198,   189,   127,   220
 };
 
-static const yytype_int16 yycheck[] =
+static const yytype_uint8 yycheck[] =
 {
-      19,    81,    91,    19,    71,    72,    21,     3,   119,     7,
-       4,    40,    41,    93,    43,     5,    41,    32,    43,    60,
-      61,    19,     5,     4,     4,     7,    24,     0,    47,    48,
-      31,    32,   130,   144,   145,   133,    16,    19,    18,    42,
-      43,    19,    24,     5,    24,    25,    24,    27,     4,    39,
-      65,    49,     4,    34,    34,   122,    39,     5,    39,    39,
-      41,    41,    10,    11,    44,    45,    46,    10,    97,     5,
-     159,   160,   161,    15,    10,    11,    95,   106,   107,   108,
-     109,   110,   111,   112,   113,   114,    66,   167,   113,   114,
-       9,   189,    11,    40,    13,    42,    43,   116,    15,   115,
-     119,    10,    11,   119,   215,   216,   173,   174,    12,    33,
-      34,    35,    36,    37,    38,     4,    40,   197,   198,   199,
-       4,     8,   202,    47,     6,   144,   145,   146,   144,   145,
-       4,     9,    16,    11,    18,    20,    21,    22,   218,     4,
-      24,    25,    68,    27,    70,    26,    27,   166,     5,     4,
-      34,    22,     5,    30,    14,    39,   175,    41,     7,    29,
-      44,    45,    46,    35,    36,    37,    38,     4,     4,     8,
-      39,     5,    27,    39,   193,    39,    32,   196,     4,    34,
-       5,    19,    66,     4,    39,    26,    41,     5,     5,    44,
-      45,    46,     4,    51,    55,    49,   215,   216,    34,   215,
-     216,     4,    64,    39,    17,    41,    29,    40,    44,    45,
-      46,    66,    48,    34,    50,    62,    52,     5,    39,    30,
-      41,    57,    34,    44,    45,    46,    28,    39,     5,    41,
-      66,    40,    44,    45,    46,    33,    34,    35,    36,    37,
-      38,    40,    26,    58,    54,    66,    29,    29,    56,    47,
-      29,     5,    23,     5,    66,    33,    34,    35,    36,    37,
-      38,    53,    40,    33,    34,    35,    36,    37,    38,    63,
-      28,    51,     5,    20,    55,   204,   175,    74,   219,   185,
-     132,    -1,    -1,    59,   134
+      19,    81,   119,    19,    71,    72,    91,     5,    19,    21,
+       4,    40,    41,    24,    43,    41,     9,    43,    11,     4,
+      32,    68,    16,    70,    18,     7,   143,   144,    47,    48,
+      24,    25,   130,    27,     3,   133,     4,    19,     5,     5,
+      34,    39,    24,    10,    11,    39,     7,    41,     0,    34,
+      44,    45,    46,    65,    39,   122,    41,     4,    19,     5,
+      20,    21,    22,    24,    10,    11,     4,    49,    97,    60,
+      61,     4,    66,   158,   159,   160,    95,   106,   107,   108,
+     109,   110,   111,   112,   113,   114,   166,   113,   114,   187,
+      35,    36,    37,    38,    27,   212,   213,   116,    15,   115,
+     119,    34,    10,   119,    15,   172,    39,     4,    41,    10,
+      11,    44,    45,    46,   194,   195,   196,    12,    40,   199,
+      42,    43,     4,     4,   143,   144,   145,   143,   144,     5,
+       9,     6,    11,    66,    13,   215,     8,    34,     4,    31,
+      32,     4,    39,     4,    41,     5,   165,    44,    45,    46,
+      30,    48,    34,    50,   173,    52,    14,    39,    22,    41,
+      57,    29,    44,    45,    46,    42,    43,     7,    34,    66,
+      39,   190,     5,    39,   193,    41,    26,    27,    44,    45,
+      46,     4,    39,    39,    66,    33,    34,    35,    36,    37,
+      38,    32,    40,   212,   213,     8,   212,   213,     4,    47,
+      66,    33,    34,    35,    36,    37,    38,    33,    34,    35,
+      36,    37,    38,     5,    40,    47,    33,    34,    35,    36,
+      37,    38,    19,    26,     5,     5,     4,    51,    55,    49,
+       4,    29,    62,    64,    17,     5,    30,    28,    40,    40,
+       5,    40,    26,    54,    56,     5,     5,    29,    58,    63,
+      29,    23,    29,    53,     5,    28,    51,    20,   132,    55,
+     201,   134,   216,   183,   173,    74,    59
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -730,16 +726,16 @@ static const yytype_uint8 yystos[] =
       92,    91,    92,    90,    90,     4,    33,    34,    35,    36,
       37,    38,    47,    42,    43,     7,    19,    24,    49,     5,
       39,    75,    39,    75,    85,    85,     8,    89,     4,    83,
-      19,    81,     5,    26,     5,    86,     5,     4,    81,    90,
-     110,    91,    40,    40,    51,    55,    49,    91,    91,    91,
-      91,    91,    91,    91,    92,    92,    93,    90,    95,    21,
-      32,    65,   107,   108,    64,    85,    62,    29,    17,    82,
-      80,    82,    84,     5,     5,    30,    40,    95,    95,    90,
-      28,    86,    86,    86,    40,     5,    40,    90,    81,    26,
-      85,    85,   110,    54,    99,    56,    58,    29,    29,    29,
-       5,   107,    23,    63,     5,    82,    90,    53,    90,    81,
-      81,    81,    81,    83,    28,    51,    55,     5,    20,    95,
-      95,    81,    99,    59
+      19,    81,     5,    26,     5,    86,     5,     4,    90,   110,
+      91,    40,    40,    51,    55,    49,    91,    91,    91,    91,
+      91,    91,    91,    92,    92,    93,    90,    95,    21,    32,
+      65,   107,   108,    64,    85,    62,    29,    17,    82,    80,
+      82,    84,     5,    30,    40,    95,    95,    90,    28,    86,
+      86,    86,    40,     5,    40,    90,    81,    26,    85,   110,
+      54,    99,    56,    58,    29,    29,    29,     5,   107,    23,
+      63,     5,    82,    90,    53,    90,    81,    81,    81,    81,
+      83,    28,    51,    55,     5,    20,    95,    95,    81,    99,
+      59
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -748,13 +744,13 @@ static const yytype_uint8 yyr1[] =
        0,    69,    70,    71,    72,    73,    73,    73,    74,    74,
       74,    75,    76,    76,    76,    76,    77,    78,    79,    80,
       80,    81,    81,    81,    81,    81,    81,    82,    82,    83,
-      83,    84,    84,    85,    85,    85,    86,    86,    87,    87,
-      87,    88,    89,    90,    90,    90,    91,    91,    91,    91,
-      91,    91,    91,    91,    91,    91,    92,    92,    92,    92,
-      92,    92,    92,    92,    93,    93,    93,    93,    94,    95,
-      95,    96,    96,    96,    96,    97,    97,    98,    99,    99,
-     100,   100,   101,   102,   103,   104,   105,   106,   107,   107,
-     108,   108,   108,   109,   110,   110
+      83,    84,    84,    85,    85,    86,    86,    87,    87,    87,
+      88,    89,    90,    90,    90,    91,    91,    91,    91,    91,
+      91,    91,    91,    91,    91,    92,    92,    92,    92,    92,
+      92,    92,    92,    93,    93,    93,    93,    94,    95,    95,
+      96,    96,    96,    96,    97,    97,    98,    99,    99,   100,
+     100,   101,   102,   103,   104,   105,   106,   107,   107,   108,
+     108,   108,   109,   110,   110
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -763,13 +759,13 @@ static const yytype_uint8 yyr2[] =
        0,     2,     7,     4,     2,     2,     2,     0,     2,     2,
        0,     2,     2,     2,     2,     0,     4,     4,     4,     5,
        0,     3,     8,     1,     3,     2,     1,     1,     1,     5,
-       0,     5,     0,     5,     5,     0,     3,     1,     1,     2,
-       1,     2,     2,     1,     1,     1,     3,     3,     3,     3,
-       3,     3,     3,     1,     1,     2,     3,     3,     2,     1,
-       1,     1,     3,     3,     1,     3,     4,     2,     1,     3,
-       1,     1,     1,     1,     1,     2,     1,     6,     5,     0,
-       1,     1,     5,     9,     4,     6,     5,     7,     3,     0,
-       4,     4,     4,     4,     3,     1
+       0,     5,     0,     5,     0,     3,     1,     1,     2,     1,
+       2,     2,     1,     1,     1,     3,     3,     3,     3,     3,
+       3,     3,     1,     1,     2,     3,     3,     2,     1,     1,
+       1,     3,     3,     1,     3,     4,     2,     1,     3,     1,
+       1,     1,     1,     1,     2,     1,     6,     5,     0,     1,
+       1,     5,     9,     4,     6,     5,     7,     3,     0,     4,
+       4,     4,     4,     3,     1
 };
 
 
@@ -1457,546 +1453,564 @@ yyreduce:
     {
   case 2:
 #line 135 "bison.y"
-    {}
-#line 1462 "bison.tab.c"
+    {printf("BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO por desc_algoritmo\n");}
+#line 1458 "bison.tab.c"
     break;
 
   case 3:
 #line 136 "bison.y"
-    {}
-#line 1468 "bison.tab.c"
+    {printf("decl_globales decl_a_f decl_ent_sal BCOMENTARIO por cabecera_alg\n");}
+#line 1464 "bison.tab.c"
     break;
 
   case 4:
 #line 137 "bison.y"
-    {}
-#line 1474 "bison.tab.c"
+    {printf("bloque BCOMENTARIO por bloque_alg\n");}
+#line 1470 "bison.tab.c"
     break;
 
   case 5:
 #line 138 "bison.y"
-    {}
-#line 1480 "bison.tab.c"
+    {printf("declaracion_tipo decl_globales por decl_globales\n");}
+#line 1476 "bison.tab.c"
     break;
 
   case 6:
 #line 139 "bison.y"
-    {}
-#line 1486 "bison.tab.c"
+    {printf("declaracion_const decl_globales por decl_globales\n");}
+#line 1482 "bison.tab.c"
     break;
 
   case 7:
 #line 140 "bison.y"
-    {}
-#line 1492 "bison.tab.c"
+    {printf("%empty por decl_globales\n");}
+#line 1488 "bison.tab.c"
     break;
 
   case 8:
 #line 141 "bison.y"
-    {}
-#line 1498 "bison.tab.c"
+    {printf("accion_d decl_a_f por decl_a_f\n");}
+#line 1494 "bison.tab.c"
     break;
 
   case 9:
 #line 142 "bison.y"
-    {}
-#line 1504 "bison.tab.c"
+    {printf("funcion_d decl_a_f por decl_a_f\n");}
+#line 1500 "bison.tab.c"
     break;
 
   case 10:
 #line 143 "bison.y"
-    {}
-#line 1510 "bison.tab.c"
+    {printf("%empty por decl_a_f\n");}
+#line 1506 "bison.tab.c"
     break;
 
   case 11:
 #line 144 "bison.y"
-    {}
-#line 1516 "bison.tab.c"
+    {printf("declaraciones instrucciones por bloque\n");}
+#line 1512 "bison.tab.c"
     break;
 
   case 12:
 #line 145 "bison.y"
-    {}
-#line 1522 "bison.tab.c"
+    {printf("declaracion_tipo declaraciones por declaraciones\n");}
+#line 1518 "bison.tab.c"
     break;
 
   case 13:
 #line 146 "bison.y"
-    {}
-#line 1528 "bison.tab.c"
+    {printf("declaracion_const declaraciones por declaraciones\n");}
+#line 1524 "bison.tab.c"
     break;
 
   case 14:
 #line 147 "bison.y"
-    {}
-#line 1534 "bison.tab.c"
+    {printf("declaracion_var declaraciones por declaraciones\n");}
+#line 1530 "bison.tab.c"
     break;
 
   case 15:
 #line 148 "bison.y"
-    {}
-#line 1540 "bison.tab.c"
+    {printf("%empty por declaraciones\n");}
+#line 1536 "bison.tab.c"
     break;
 
   case 16:
 #line 149 "bison.y"
-    {}
-#line 1546 "bison.tab.c"
+    {printf("BTIPO lista_d_tipo BFTIPO BPUNTO_Y_COMA por declaracion_tipo\n");}
+#line 1542 "bison.tab.c"
     break;
 
   case 17:
 #line 150 "bison.y"
-    {}
-#line 1552 "bison.tab.c"
+    {printf("BCONST lista_d_cte BFCONST BPUNTO_Y_COMA por declaracion_const\n");}
+#line 1548 "bison.tab.c"
     break;
 
   case 18:
 #line 151 "bison.y"
-    {}
-#line 1558 "bison.tab.c"
+    {printf("BVAR lista_d_var BFVAR BPUNTO_Y_COMA por declaracion_var\n");}
+#line 1554 "bison.tab.c"
     break;
 
   case 19:
 #line 152 "bison.y"
-    {}
-#line 1564 "bison.tab.c"
+    {printf("BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo por lista_d_tipo\n");}
+#line 1560 "bison.tab.c"
     break;
 
   case 20:
 #line 153 "bison.y"
-    {}
-#line 1570 "bison.tab.c"
+    {printf("%empty por lista_d_tipo\n");}
+#line 1566 "bison.tab.c"
+    break;
+
+  case 21:
+#line 154 "bison.y"
+    {printf("BTUPLA lista_campos BFTUPLA por d_tipo\n");}
+#line 1572 "bison.tab.c"
     break;
 
   case 22:
 #line 155 "bison.y"
-    {}
-#line 1576 "bison.tab.c"
+    {printf("BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo por d_tipo\n");}
+#line 1578 "bison.tab.c"
     break;
 
   case 23:
 #line 156 "bison.y"
-    {}
-#line 1582 "bison.tab.c"
+    {printf("BIDENTIFICADOR por d_tipo\n");}
+#line 1584 "bison.tab.c"
     break;
 
   case 24:
 #line 157 "bison.y"
-    {}
-#line 1588 "bison.tab.c"
+    {printf("expresion_t BPUNTOSS expresion_t por d_tipo\n");}
+#line 1590 "bison.tab.c"
     break;
 
   case 25:
 #line 158 "bison.y"
-    {}
-#line 1594 "bison.tab.c"
+    {printf("BREF d_tipo por d_tipo\n");}
+#line 1596 "bison.tab.c"
     break;
 
   case 26:
 #line 159 "bison.y"
-    {}
-#line 1600 "bison.tab.c"
+    {printf("BTIPO_BASE por d_tipo\n");}
+#line 1602 "bison.tab.c"
+    break;
+
+  case 27:
+#line 160 "bison.y"
+    {printf("expresion por expresion_t\n");}
+#line 1608 "bison.tab.c"
     break;
 
   case 28:
 #line 161 "bison.y"
-    {}
-#line 1606 "bison.tab.c"
+    {printf("BLITERAL_CARACTER por expresion_t\n");}
+#line 1614 "bison.tab.c"
     break;
 
   case 29:
 #line 162 "bison.y"
-    {}
-#line 1612 "bison.tab.c"
+    {printf("BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos por lista_campos\n");}
+#line 1620 "bison.tab.c"
     break;
 
   case 30:
 #line 163 "bison.y"
-    {}
-#line 1618 "bison.tab.c"
+    {printf("%empty por lista_campos\n");}
+#line 1626 "bison.tab.c"
     break;
 
   case 31:
 #line 164 "bison.y"
-    {}
-#line 1624 "bison.tab.c"
+    {printf("BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+#line 1632 "bison.tab.c"
     break;
 
   case 32:
 #line 165 "bison.y"
-    {}
-#line 1630 "bison.tab.c"
+    {printf("%empty por lista_d_cte\n");}
+#line 1638 "bison.tab.c"
     break;
 
   case 33:
 #line 166 "bison.y"
-    {}
-#line 1636 "bison.tab.c"
+    {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
+#line 1644 "bison.tab.c"
     break;
 
   case 34:
 #line 167 "bison.y"
-    {}
-#line 1642 "bison.tab.c"
+    {printf("%empty por lista_d_var\n");}
+#line 1650 "bison.tab.c"
     break;
 
   case 35:
 #line 168 "bison.y"
-    {}
-#line 1648 "bison.tab.c"
+    {printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
+#line 1656 "bison.tab.c"
     break;
 
   case 36:
 #line 169 "bison.y"
-    {}
-#line 1654 "bison.tab.c"
+    {printf("%empty por lista_id\n");}
+#line 1662 "bison.tab.c"
     break;
 
   case 37:
 #line 170 "bison.y"
-    {}
-#line 1660 "bison.tab.c"
+    {printf("decl_ent por decl_ent_sal\n");}
+#line 1668 "bison.tab.c"
     break;
 
   case 38:
 #line 171 "bison.y"
-    {}
-#line 1666 "bison.tab.c"
+    {printf("decl_ent decl_sal por decl_ent_sal\n");}
+#line 1674 "bison.tab.c"
     break;
 
   case 39:
 #line 172 "bison.y"
-    {}
-#line 1672 "bison.tab.c"
+    {printf("decl_sal por decl_ent_sal\n");}
+#line 1680 "bison.tab.c"
     break;
 
   case 40:
 #line 173 "bison.y"
-    {}
-#line 1678 "bison.tab.c"
+    {printf("BENT lista_d_var por decl_ent\n");}
+#line 1686 "bison.tab.c"
     break;
 
   case 41:
 #line 174 "bison.y"
-    {}
-#line 1684 "bison.tab.c"
+    {printf("BSAL lista_d_var por decl_sal\n");}
+#line 1692 "bison.tab.c"
     break;
 
   case 42:
 #line 175 "bison.y"
-    {}
-#line 1690 "bison.tab.c"
+    {printf("exp_a por expresion\n");}
+#line 1698 "bison.tab.c"
     break;
 
   case 43:
 #line 176 "bison.y"
-    {}
-#line 1696 "bison.tab.c"
+    {printf("exp_b por expresion\n");}
+#line 1704 "bison.tab.c"
     break;
 
   case 44:
 #line 177 "bison.y"
-    {}
-#line 1702 "bison.tab.c"
+    {printf("funcion_ll por expresion\n");}
+#line 1710 "bison.tab.c"
     break;
 
   case 45:
 #line 178 "bison.y"
-    {}
-#line 1708 "bison.tab.c"
+    {printf("exp_a BSUMA exp_a por exp_a\n");}
+#line 1716 "bison.tab.c"
     break;
 
   case 46:
 #line 179 "bison.y"
-    {}
-#line 1714 "bison.tab.c"
+    {printf("exp_a BMENOS exp_a por exp_a\n");}
+#line 1722 "bison.tab.c"
     break;
 
   case 47:
 #line 180 "bison.y"
-    {}
-#line 1720 "bison.tab.c"
+    {printf("exp_a BPOR exp_a por exp_a\n");}
+#line 1728 "bison.tab.c"
     break;
 
   case 48:
 #line 181 "bison.y"
-    {}
-#line 1726 "bison.tab.c"
+    {printf("exp_a BENTRE exp_a por exp_a\n");}
+#line 1734 "bison.tab.c"
     break;
 
   case 49:
 #line 182 "bison.y"
-    {}
-#line 1732 "bison.tab.c"
+    {printf("exp_a BMOD exp_a por exp_a\n");}
+#line 1740 "bison.tab.c"
     break;
 
   case 50:
 #line 183 "bison.y"
-    {}
-#line 1738 "bison.tab.c"
+    {printf("exp_a BDIV exp_a por exp_a\n");}
+#line 1746 "bison.tab.c"
     break;
 
   case 51:
 #line 184 "bison.y"
-    {}
-#line 1744 "bison.tab.c"
+    {printf("BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE por exp_a\n");}
+#line 1752 "bison.tab.c"
     break;
 
   case 52:
 #line 185 "bison.y"
-    {}
-#line 1750 "bison.tab.c"
+    {printf("operando por exp_a\n");}
+#line 1758 "bison.tab.c"
     break;
 
   case 53:
 #line 186 "bison.y"
-    {}
-#line 1756 "bison.tab.c"
+    {printf("BLITERAL_NUMERICO por exp_a\n");}
+#line 1764 "bison.tab.c"
     break;
 
   case 54:
 #line 187 "bison.y"
-    {}
-#line 1762 "bison.tab.c"
+    {printf("BMENOS exp_a por exp_a\n");}
+#line 1770 "bison.tab.c"
     break;
 
   case 55:
 #line 188 "bison.y"
-    {}
-#line 1768 "bison.tab.c"
+    {printf("exp_b BY exp_b por exp_b\n");}
+#line 1776 "bison.tab.c"
     break;
 
   case 56:
 #line 189 "bison.y"
-    {}
-#line 1774 "bison.tab.c"
+    {printf("exp_b BO exp_b por exp_b\n");}
+#line 1782 "bison.tab.c"
     break;
 
   case 57:
 #line 190 "bison.y"
-    {}
-#line 1780 "bison.tab.c"
+    {printf("BNO exp_b por exp_b\n");}
+#line 1788 "bison.tab.c"
     break;
 
   case 58:
 #line 191 "bison.y"
-    {}
-#line 1786 "bison.tab.c"
+    {printf("operando_booleano por exp_b\n");}
+#line 1794 "bison.tab.c"
     break;
 
   case 59:
 #line 192 "bison.y"
-    {}
-#line 1792 "bison.tab.c"
+    {printf("BVERDADERO por exp_b\n");}
+#line 1800 "bison.tab.c"
     break;
 
   case 60:
 #line 193 "bison.y"
-    {}
-#line 1798 "bison.tab.c"
+    {printf("BFALSO por exp_b\n");}
+#line 1806 "bison.tab.c"
     break;
 
   case 61:
 #line 194 "bison.y"
-    {}
-#line 1804 "bison.tab.c"
+    {printf("BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE por exp_b\n");}
+#line 1812 "bison.tab.c"
     break;
 
   case 62:
 #line 195 "bison.y"
-    {}
-#line 1810 "bison.tab.c"
+    {printf("exp_a BOPREL exp_a por exp_b\n");}
+#line 1818 "bison.tab.c"
     break;
 
   case 63:
 #line 196 "bison.y"
-    {}
-#line 1816 "bison.tab.c"
+    {printf("BIDENTIFICADOR por operando\n");}
+#line 1824 "bison.tab.c"
     break;
 
   case 64:
 #line 197 "bison.y"
-    {}
-#line 1822 "bison.tab.c"
+    {printf("operando BPUNTO operando por operando\n");}
+#line 1830 "bison.tab.c"
     break;
 
   case 65:
 #line 198 "bison.y"
-    {}
-#line 1828 "bison.tab.c"
+    {printf("operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE por operando\n");}
+#line 1836 "bison.tab.c"
     break;
 
   case 66:
 #line 199 "bison.y"
-    {}
-#line 1834 "bison.tab.c"
+    {printf("operando BREF por operando\n");}
+#line 1842 "bison.tab.c"
     break;
 
   case 67:
 #line 200 "bison.y"
-    {}
-#line 1840 "bison.tab.c"
+    {printf("BIDENTIFICADOR por operando_booleano\n");}
+#line 1848 "bison.tab.c"
     break;
 
   case 68:
 #line 201 "bison.y"
-    {}
-#line 1846 "bison.tab.c"
+    {printf("instruccion BPUNTO_Y_COMA instrucciones por instrucciones\n");}
+#line 1854 "bison.tab.c"
     break;
 
   case 69:
 #line 202 "bison.y"
-    {}
-#line 1852 "bison.tab.c"
+    {printf("instruccion por instrucciones\n");}
+#line 1860 "bison.tab.c"
     break;
 
   case 70:
 #line 203 "bison.y"
-    {}
-#line 1858 "bison.tab.c"
+    {printf("BCONTINUAR por instruccion\n");}
+#line 1866 "bison.tab.c"
     break;
 
   case 71:
 #line 204 "bison.y"
-    {}
-#line 1864 "bison.tab.c"
+    {printf("asignacion por instruccion\n");}
+#line 1872 "bison.tab.c"
     break;
 
   case 72:
 #line 205 "bison.y"
-    {}
-#line 1870 "bison.tab.c"
+    {printf("alternativa por instruccion\n");}
+#line 1878 "bison.tab.c"
     break;
 
   case 73:
 #line 206 "bison.y"
-    {}
-#line 1876 "bison.tab.c"
+    {printf("iteracion por instruccion\n");}
+#line 1884 "bison.tab.c"
     break;
 
   case 74:
-#line 207 "bison.y"
-    {}
-#line 1882 "bison.tab.c"
+#line 208 "bison.y"
+    {printf("operando BDOS_PUNTOS_IGUAL por asignacion\n");}
+#line 1890 "bison.tab.c"
+    break;
+
+  case 75:
+#line 209 "bison.y"
+    {printf("expresion por asignacion\n");}
+#line 1896 "bison.tab.c"
     break;
 
   case 76:
 #line 210 "bison.y"
-    {}
-#line 1888 "bison.tab.c"
+    {printf("BSI expresion BENTONCES instrucciones lista_opciones BFSI por alternativa\n");}
+#line 1902 "bison.tab.c"
     break;
 
   case 77:
 #line 211 "bison.y"
-    {}
-#line 1894 "bison.tab.c"
+    {printf("BSINO expresion BENTONCES instrucciones lista_opciones por lista_opciones\n");}
+#line 1908 "bison.tab.c"
     break;
 
   case 78:
 #line 212 "bison.y"
-    {}
-#line 1900 "bison.tab.c"
+    {printf("%empty por lista_opciones\n");}
+#line 1914 "bison.tab.c"
     break;
 
   case 79:
 #line 213 "bison.y"
-    {}
-#line 1906 "bison.tab.c"
+    {printf("it_cota_fija por iteracion\n");}
+#line 1920 "bison.tab.c"
     break;
 
   case 80:
 #line 214 "bison.y"
-    {}
-#line 1912 "bison.tab.c"
+    {printf("it_cota_exp por iteracion\n");}
+#line 1926 "bison.tab.c"
     break;
 
   case 81:
 #line 215 "bison.y"
-    {}
-#line 1918 "bison.tab.c"
+    {printf("BMIENTRAS expresion BHACER instrucciones BFMIENTRAS por it_cota_exp\n");}
+#line 1932 "bison.tab.c"
     break;
 
   case 82:
 #line 216 "bison.y"
-    {}
-#line 1924 "bison.tab.c"
+    {printf("BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA por it_cota_fija\n");}
+#line 1938 "bison.tab.c"
     break;
 
   case 83:
 #line 217 "bison.y"
-    {}
-#line 1930 "bison.tab.c"
+    {printf("BACCION a_cabecera bloque BFACCION por accion_d\n");}
+#line 1944 "bison.tab.c"
     break;
 
   case 84:
 #line 218 "bison.y"
-    {}
-#line 1936 "bison.tab.c"
+    {printf("BFUNCION f_cabecera bloque BDEV expresion BFFUNCION por funcion_d\n");}
+#line 1950 "bison.tab.c"
     break;
 
   case 85:
 #line 219 "bison.y"
-    {}
-#line 1942 "bison.tab.c"
+    {printf("BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA por a_cabecera\n");}
+#line 1956 "bison.tab.c"
     break;
 
   case 86:
 #line 220 "bison.y"
-    {}
-#line 1948 "bison.tab.c"
+    {printf("BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA por f_cabecera\n");}
+#line 1962 "bison.tab.c"
     break;
 
   case 87:
 #line 221 "bison.y"
-    {}
-#line 1954 "bison.tab.c"
+    {printf("d_p_form BPUNTO_Y_COMA d_par_form por d_par_form\n");}
+#line 1968 "bison.tab.c"
+    break;
+
+  case 88:
+#line 222 "bison.y"
+    {printf("%empty por d_par_form\n");}
+#line 1974 "bison.tab.c"
     break;
 
   case 89:
-#line 223 "bison.y"
-    {}
-#line 1960 "bison.tab.c"
+#line 224 "bison.y"
+    {printf("BEND lista_id BDOS_PUNTOS d_tipo por d_p_form\n");}
+#line 1980 "bison.tab.c"
     break;
 
   case 90:
-#line 224 "bison.y"
-    {}
-#line 1966 "bison.tab.c"
+#line 225 "bison.y"
+    {printf("BSAL lista_id BDOS_PUNTOS d_tipo por d_p_form\n");}
+#line 1986 "bison.tab.c"
     break;
 
   case 91:
-#line 225 "bison.y"
-    {}
-#line 1972 "bison.tab.c"
+#line 226 "bison.y"
+    {printf("BES lista_id BDOS_PUNTOS d_tipo por d_p_form\n");}
+#line 1992 "bison.tab.c"
     break;
 
   case 92:
-#line 226 "bison.y"
-    {}
-#line 1978 "bison.tab.c"
+#line 229 "bison.y"
+    {printf("BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE por funcion_ll\n");}
+#line 1998 "bison.tab.c"
     break;
 
   case 93:
-#line 228 "bison.y"
-    {}
-#line 1984 "bison.tab.c"
+#line 230 "bison.y"
+    {printf("expresion BCOMA l_ll por l_ll\n");}
+#line 2004 "bison.tab.c"
     break;
 
   case 94:
-#line 229 "bison.y"
-    {}
-#line 1990 "bison.tab.c"
-    break;
-
-  case 95:
-#line 230 "bison.y"
-    {}
-#line 1996 "bison.tab.c"
+#line 231 "bison.y"
+    {printf("expresion por l_ll\n");}
+#line 2010 "bison.tab.c"
     break;
 
 
-#line 2000 "bison.tab.c"
+#line 2014 "bison.tab.c"
 
       default: break;
     }
@@ -2227,4 +2241,21 @@ yyreturn:
     YYSTACK_FREE (yymsg);
 #endif
   return yyresult;
+}
+#line 233 "bison.y"
+
+ 
+int main() {
+	yyin = stdin;
+
+	do {
+		yyparse();
+	} while(!feof(yyin));
+
+	return 0;
+}
+
+void yyerror(const char* s) {
+	fprintf(stderr, "Parse error: %s\n", s);
+	exit(1);
 }

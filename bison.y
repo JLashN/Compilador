@@ -164,7 +164,6 @@ lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos {prin
 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte {printf("BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	| %empty {printf("%empty por lista_d_cte\n");};
 lista_d_var: lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
-	| lista_id BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
 	| %empty {printf("%empty por lista_d_var\n");};
 lista_id: BIDENTIFICADOR BCOMA lista_id {printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
 	| BIDENTIFICADOR {printf("%empty por lista_id\n");};
@@ -230,7 +229,9 @@ d_p_form: BEND lista_id BDOS_PUNTOS d_tipo {printf("BEND lista_id BDOS_PUNTOS d_
 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE {printf("BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE por funcion_ll\n");};
 l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 	| expresion {printf("expresion por l_ll\n");};
-
+ 
+%%
+ 
 int main() {
 	yyin = stdin;
 
