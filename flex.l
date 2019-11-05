@@ -109,73 +109,73 @@ DR_PALABRA_FFUNCION ffuncion
 
 %%
 
-{DR_PARENTESIS_CIERRE} printf("Se ha leido parentesis de cierre\n");
-{DR_PARENTESIS_APERTURA} printf("Se ha leido parentesis de apertura\n");
-{DR_PALABRA_FPARA} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FSI} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FTIPO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FTUPLA} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FUNCION} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FVAR} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_HACER} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_HASTA} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_MIENTRAS} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_MOD} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_NO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_O} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_PARA} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_REAL} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_RCF} printf("Se ha leido %s\n",yytext);	
-{DR_PALABRA_SAL} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_SI} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_TABLA} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_TIPO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_TUPLA} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_VAR} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_VERDADERO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_Y} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_ACCION} printf("Se ha leido %s\n",yytext); 
-{DR_PALABRA_ALGORITMO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_BOOLEANO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_CADENA} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_CARACTER} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_CONST} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_CONTINUAR} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_DE} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_DEV} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_DIV} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_ENT} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_ENTERO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_ES} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FACCION} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FALGORITMO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FALSO} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FCONST} printf("Se ha leido %s\n",yytext);
-{DR_PALABRA_FFUNCION} printf("Se ha leido %s\n",yytext);
-{DR_ASIGNACION} printf("Se ha leido asignacion -> %s\n",yytext);
-{DR_SECUENCIAL} printf("Se ha leido secuencial -> %s\n",yytext);
-{DR_SEPARADOR} printf("Se ha leido separador -> %s\n",yytext);
-{DR_SUBRANGO} printf("Se ha leido  subrango -> %s\n",yytext);
-{DR_DEF_TIPO} printf("Se ha leido tipo -> %s\n",yytext);
-{DR_ENTONCES} printf("Se ha leido entonces -> %s\n",yytext);
-{DR_SINOSI} printf("Se ha leido sinosi -> %s\n",yytext);
-{DR_TIPO} printf("Se ha leido tipo -> %s\n",yytext);
-{DR_ARRAY} printf("Se ha leido array -> %s\n",yytext);
-{DR_FIN_ARRAY} printf("Se ha leido farray -> %s\n",yytext);
-{DR_IGUAL} printf("Se ha leido igual -> %s\n",yytext);
-{DR_MAYOR} printf("Se ha leido mayor -> %s\n",yytext);
-{DR_MENOR} printf("Se ha leido menor -> %s\n",yytext);
-{DR_MAYOR_IGUAL} printf("Se ha leido mayorigual -> %s\n",yytext);
-{DR_MENOR_IGUAL} printf("Se ha leido menorigual -> %s\n",yytext);
-{DR_DIFERENTE} printf("Se ha leido diferente -> %s\n",yytext);
-{DR_SUMA} printf("Se ha leido suma -> %s\n",yytext);
-{DR_NEGATIVO} printf("Se ha leido negativo-> %s\n",yytext);
-{DR_MULTIPLICACION} printf("Se ha leido multiplicacion-> %s\n",yytext); 
-{DR_DIVISION} printf("Se ha leido division -> %s\n",yytext);
-{DR_MOD} printf("Se ha leido mod -> %s\n",yytext);
-{DR_EXPONENTE} printf("Se ha exponente diferente -> %s\n",yytext);
-{DR_OR} printf("Se ha leido or -> %s\n",yytext);
-{DR_AND} printf("Se ha leido and-> %s\n",yytext);
+{DR_PARENTESIS_CIERRE} {printf("Se ha leido %s\n",yytext);return BPARENTESIS_CIERRE;}
+{DR_PARENTESIS_APERTURA} {printf("Se ha leido %s\n",yytext);return BPARENTESIS_APERTURA;}
+{DR_PALABRA_FPARA} {printf("Se ha leido %s\n",yytext);return BPARA;}
+{DR_PALABRA_FSI} {printf("Se ha leido %s\n",yytext);return BFSI;}
+{DR_PALABRA_FTIPO} {printf("Se ha leido %s\n",yytext);return BFTIPO;}
+{DR_PALABRA_FTUPLA} {printf("Se ha leido %s\n",yytext);return BFTUPLA;}
+{DR_PALABRA_FUNCION} {printf("Se ha leido %s\n",yytext);return BFUNCION;}
+{DR_PALABRA_FVAR} {printf("Se ha leido %s\n",yytext);return BFVAR;}
+{DR_PALABRA_HACER} {printf("Se ha leido %s\n",yytext);return BHACER;}
+{DR_PALABRA_HASTA} {printf("Se ha leido %s\n",yytext);return BHASTA;}
+{DR_PALABRA_MIENTRAS} {printf("Se ha leido %s\n",yytext);return BMIENTRAS;}
+{DR_PALABRA_MOD} {printf("Se ha leido %s\n",yytext);return BMOD;}
+{DR_PALABRA_NO} {printf("Se ha leido %s\n",yytext);return BNO;});
+{DR_PALABRA_O} {printf("Se ha leido %s\n",yytext);return BO;}
+{DR_PALABRA_PARA} {printf("Se ha leido %s\n",yytext);return BPARA;}
+{DR_PALABRA_REAL} {printf("Se ha leido %s\n",yytext);return BREAL;}
+{DR_PALABRA_RCF} {printf("Se ha leido %s\n",yytext);return BRCF;}
+{DR_PALABRA_SAL} {printf("Se ha leido %s\n",yytext);return BSAL;}
+{DR_PALABRA_SI} {printf("Se ha leido %s\n",yytext);return BSI;}
+{DR_PALABRA_TABLA} {printf("Se ha leido %s\n",yytext);return BTABLA;}
+{DR_PALABRA_TIPO} {printf("Se ha leido %s\n",yytext);return BTIPO;}
+{DR_PALABRA_TUPLA} {printf("Se ha leido %s\n",yytext);return BTUPLA;}
+{DR_PALABRA_VAR} {printf("Se ha leido %s\n",yytext);return BVAR;}
+{DR_PALABRA_VERDADERO} {printf("Se ha leido %s\n",yytext);return BVERDADERO;}
+{DR_PALABRA_Y} {printf("Se ha leido %s\n",yytext);return BY;}
+{DR_PALABRA_ACCION} {printf("Se ha leido %s\n",yytext);return BACCION;} 
+{DR_PALABRA_ALGORITMO} {printf("Se ha leido %s\n",yytext);return BALGORITMO;}
+{DR_PALABRA_BOOLEANO} {printf("Se ha leido %s\n",yytext);return BTIPO;}
+{DR_PALABRA_CADENA} {printf("Se ha leido %s\n",yytext);return BTIPO;}
+{DR_PALABRA_CARACTER} {printf("Se ha leido %s\n",yytext);return BTIPO;}
+{DR_PALABRA_CONST} {printf("Se ha leido %s\n",yytext);return BTIPO;}
+{DR_PALABRA_CONTINUAR} {printf("Se ha leido %s\n",yytext);return BCONTINUAR;}
+{DR_PALABRA_DE} {printf("Se ha leido %s\n",yytext);return BDE;}
+{DR_PALABRA_DEV} {printf("Se ha leido %s\n",yytext);return BDEV;}
+{DR_PALABRA_DIV} {printf("Se ha leido %s\n",yytext);return BDIV;}
+{DR_PALABRA_ENT} {printf("Se ha leido %s\n",yytext);return BENT;}
+{DR_PALABRA_ENTERO} {printf("Se ha leido %s\n",yytext);return BTIPO;}
+{DR_PALABRA_ES} {printf("Se ha leido %s\n",yytext);return BES;}
+{DR_PALABRA_FACCION} {printf("Se ha leido %s\n",yytext);return BFACCION;}
+{DR_PALABRA_FALGORITMO} {printf("Se ha leido %s\n",yytext);return BFALGORITMO;}
+{DR_PALABRA_FALSO} {printf("Se ha leido %s\n",yytext);return BFALSO;}
+{DR_PALABRA_FCONST} {printf("Se ha leido %s\n",yytext);return BFCONST;}
+{DR_PALABRA_FFUNCION} {printf("Se ha leido %s\n",yytext);return BFFUNCION;}
+{DR_ASIGNACION} {printf("Se ha leido %s\n",yytext);return BDOS_PUNTOS_IGBALGORITMOUAL;}
+{DR_SECUENCIAL} {printf("Se ha leido %s\n",yytext);return BPUNTO_Y_COMA;}
+{DR_SEPARADOR} {printf("Se ha leido %s\n",yytext);return BCOMA;}
+{DR_SUBRANGO} {printf("Se ha leido %s\n",yytext);return BPUNTOSS;}
+{DR_DEF_TIPO} {printf("Se ha leido %s\n",yytext);return BDOS_PUNTOS;}
+{DR_ENTONCES} {printf("Se ha leido %s\n",yytext);return BENTONCES;}
+{DR_SINOSI} {printf("Se ha leido %s\n",yytext);return BSINO;}
+{DR_TIPO} {printf("Se ha leido %s\n",yytext);return BIGUAL;}
+{DR_ARRAY} {printf("Se ha leido %s\n",yytext);return BCORCHETE_APERTURA;}
+{DR_FIN_ARRAY} {printf("Se ha leido %s\n",yytext);return B_CORCHETE_CIERRE;}
+{DR_IGUAL} {printf("Se ha leido %s\n",yytext);return BIGUAL;}
+{DR_MAYOR} {printf("Se ha leido %s\n",yytext);return BOPREL;}
+{DR_MENOR} {printf("Se ha leido %s\n",yytext);return BOPREL;}
+{DR_MAYOR_IGUAL} {printf("Se ha leido %s\n",yytext);return BOPREL;}
+{DR_MENOR_IGUAL} {printf("Se ha leido %s\n",yytext);return BOPREL;}
+{DR_DIFERENTE} {printf("Se ha leido %s\n",yytext);return BOPREL;}
+{DR_SUMA} {printf("Se ha leido %s\n",yytext);return BSUMA;}
+{DR_NEGATIVO} {printf("Se ha leido %s\n",yytext);return BMENOS;}
+{DR_MULTIPLICACION} {printf("Se ha leido %s\n",yytext);return BPOR;} 
+{DR_DIVISION} {printf("Se ha leido %s\n",yytext);return BDIV;}
+{DR_MOD} {printf("Se ha leido %s\n",yytext);return BMOD;}
+{DR_EXPONENTE} {printf("Se ha leido %s\n",yytext);}
+{DR_OR} {printf("Se ha leido %s\n",yytext);return BO;}
+{DR_AND} {printf("Se ha leido %s\n",yytext);return BY;}
 
 
 
