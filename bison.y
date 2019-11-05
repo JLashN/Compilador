@@ -229,6 +229,17 @@ funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE{};
 l_ll: expresion BCOMA l_ll {}
 	| expresion {};
 
+int main() {
+	yyin = stdin;
 
+	do {
+		yyparse();
+	} while(!feof(yyin));
 
+	return 0;
+}
 
+void yyerror(const char* s) {
+	fprintf(stderr, "Parse error: %s\n", s);
+	exit(1);
+}
