@@ -44,7 +44,8 @@ DR_AND &&
 DR_PARENTESIS_APERTURA \(
 DR_PARENTESIS_CIERRE \)
 
-DR_ID ({DR_LETRA})({DR_LETRA}|{DR_DIGIT})*
+DR_ID ([ac-zAC-Z])({DR_LETRA}|{DR_DIGIT})*
+DR_ID_BOOLEANO (B|b)({DR_LETRA}|{DR_DIGIT})*
 DR_LOD {DR_LETRA}|{DR_DIGIT}
 
 /*Literales enteros*/
@@ -177,6 +178,8 @@ DR_PALABRA_FFUNCION ffuncion
 {DR_AND} printf("Se ha leido and-> %s\n",yytext);
 
 
+
+
 {DR_COMENTARIO}	printf("Se ha leido un comentario %s\n", yytext);
 
 {DR_CADENA}	printf("Se ha leido una cadena %s\n", yytext);
@@ -187,8 +190,8 @@ DR_PALABRA_FFUNCION ffuncion
 
 {DR_LR}	printf("Se ha leido un literal real con valor %f\n", deCadenaAFloat(yytext));
 
-{DR_ID}	printf("Se ha leido un id %s\n", yytext);
-
+{DR_ID} printf("Se ha leido un identificador\n");
+{DR_ID_BOOLEANO} printf("Se ha leido un identificador booleano\n");
 
 
 
