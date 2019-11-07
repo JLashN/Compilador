@@ -4,6 +4,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include "y.tab.h"
 
 int deCadenaAEntero(char* cadena);
 

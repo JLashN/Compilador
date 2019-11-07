@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+void yyerror(const char* s);
 %}
 
 %union {
@@ -137,20 +138,20 @@ cabecera_alg: decl_globales decl_a_f decl_ent_sal BCOMENTARIO {printf("decl_glob
 bloque_alg: bloque BCOMENTARIO {printf("bloque BCOMENTARIO por bloque_alg\n");};
 decl_globales: declaracion_tipo decl_globales {printf("declaracion_tipo decl_globales por decl_globales\n");}
 	| declaracion_const decl_globales {printf("declaracion_const decl_globales por decl_globales\n");}
-	| %empty {printf("%empty por decl_globales\n");};
+	| %empty {printf("empty por decl_globales\n");};
 decl_a_f: accion_d decl_a_f {printf("accion_d decl_a_f por decl_a_f\n");}
 	| funcion_d decl_a_f {printf("funcion_d decl_a_f por decl_a_f\n");}
-	| %empty {printf("%empty por decl_a_f\n");};
+	| %empty {printf("empty por decl_a_f\n");};
 bloque: declaraciones instrucciones {printf("declaraciones instrucciones por bloque\n");};
 declaraciones: declaracion_tipo declaraciones {printf("declaracion_tipo declaraciones por declaraciones\n");}
 	| declaracion_const declaraciones {printf("declaracion_const declaraciones por declaraciones\n");}
 	| declaracion_var declaraciones {printf("declaracion_var declaraciones por declaraciones\n");}
-	| %empty {printf("%empty por declaraciones\n");};
+	| %empty {printf("empty por declaraciones\n");};
 declaracion_tipo: BTIPO lista_d_tipo BFTIPO BPUNTO_Y_COMA {printf("BTIPO lista_d_tipo BFTIPO BPUNTO_Y_COMA por declaracion_tipo\n");};
 declaracion_const: BCONST lista_d_cte BFCONST BPUNTO_Y_COMA {printf("BCONST lista_d_cte BFCONST BPUNTO_Y_COMA por declaracion_const\n");};
 declaracion_var: BVAR lista_d_var BFVAR BPUNTO_Y_COMA {printf("BVAR lista_d_var BFVAR BPUNTO_Y_COMA por declaracion_var\n");};
 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo {printf("BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo por lista_d_tipo\n");}
-	| %empty {printf("%empty por lista_d_tipo\n");};
+	| %empty {printf("empty por lista_d_tipo\n");};
 d_tipo: BTUPLA lista_campos BFTUPLA {printf("BTUPLA lista_campos BFTUPLA por d_tipo\n");}
 	| BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo {printf("BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo por d_tipo\n");}
 	| BIDENTIFICADOR {printf("BIDENTIFICADOR por d_tipo\n");}
@@ -160,13 +161,13 @@ d_tipo: BTUPLA lista_campos BFTUPLA {printf("BTUPLA lista_campos BFTUPLA por d_t
 expresion_t: expresion {printf("expresion por expresion_t\n");}
 	| BLITERAL_CARACTER {printf("BLITERAL_CARACTER por expresion_t\n");};
 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos {printf("BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos por lista_campos\n");}
-	| %empty {printf("%empty por lista_campos\n");};
+	| %empty {printf("empty por lista_campos\n");};
 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte {printf("BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
-	| %empty {printf("%empty por lista_d_cte\n");};
+	| %empty {printf("empty por lista_d_cte\n");};
 lista_d_var: lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
-	| %empty {printf("%empty por lista_d_var\n");};
+	| %empty {printf("empty por lista_d_var\n");};
 lista_id: BIDENTIFICADOR BCOMA lista_id {printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
-	| BIDENTIFICADOR {printf("%empty por lista_id\n");};
+	| BIDENTIFICADOR {printf("empty por lista_id\n");};
 decl_ent_sal: decl_ent {printf("decl_ent por decl_ent_sal\n");}
 	| decl_ent decl_sal {printf("decl_ent decl_sal por decl_ent_sal\n");}
 	| decl_sal {printf("decl_sal por decl_ent_sal\n");};
@@ -209,7 +210,7 @@ asignacion: operando BDOS_PUNTOS_IGUAL {printf("operando BDOS_PUNTOS_IGUAL por a
 	| expresion {printf("expresion por asignacion\n");};
 alternativa: BSI expresion BENTONCES instrucciones lista_opciones BFSI {printf("BSI expresion BENTONCES instrucciones lista_opciones BFSI por alternativa\n");};
 lista_opciones: BSINO expresion BENTONCES instrucciones lista_opciones {printf("BSINO expresion BENTONCES instrucciones lista_opciones por lista_opciones\n");}
-	| %empty {printf("%empty por lista_opciones\n");};
+	| %empty {printf("empty por lista_opciones\n");};
 iteracion: it_cota_fija {printf("it_cota_fija por iteracion\n");}
 	| it_cota_exp {printf("it_cota_exp por iteracion\n");};
 it_cota_exp: BMIENTRAS expresion BHACER instrucciones BFMIENTRAS {printf("BMIENTRAS expresion BHACER instrucciones BFMIENTRAS por it_cota_exp\n");};
@@ -219,7 +220,7 @@ funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION {printf("BFUNCION
 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA {printf("BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA por a_cabecera\n");};
 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA {printf("BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA por f_cabecera\n");};
 d_par_form: d_p_form BPUNTO_Y_COMA d_par_form {printf("d_p_form BPUNTO_Y_COMA d_par_form por d_par_form\n");};
-	| %empty {printf("%empty por d_par_form\n");};
+	| %empty {printf("empty por d_par_form\n");};
 
 d_p_form: BEND lista_id BDOS_PUNTOS d_tipo {printf("BEND lista_id BDOS_PUNTOS d_tipo por d_p_form\n");}
 	| BSAL lista_id BDOS_PUNTOS d_tipo {printf("BSAL lista_id BDOS_PUNTOS d_tipo por d_p_form\n");}
