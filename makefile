@@ -1,5 +1,6 @@
 all: a.out
 	@echo "Todo en orden"
+
 a.out: lex.yy.c bisonte
 	@gcc y.tab.c lex.yy.c -lfl
 	@echo "Compilado el archivo lex.yy.c"
@@ -14,6 +15,10 @@ bisonte:
 run: a.out
 	@cat prueba.txt | ./a.out
 clean:
-	@rm a.out
+	
 	@rm lex.yy.c
+	@rm y.output
+	@rm y.tab.c
+	@rm y.tab.h
+	@rm a.out
 	@echo "Todo limpio"
