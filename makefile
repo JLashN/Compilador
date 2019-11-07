@@ -15,7 +15,6 @@ bisonte:
 run: a.out
 	@cat prueba.txt | ./a.out
 clean:
-	
 	@rm lex.yy.c
 	@rm y.output
 	@rm y.tab.c
