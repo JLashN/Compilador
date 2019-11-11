@@ -17,12 +17,14 @@ typedef struct Elemento {
 typedef struct Lista {
 	Elemento *inicio;
 	Elemento *ultimo;
-}Lista;
+	int contador;
+}TablaDeSimbolos;
 
 
-void inicializacion (Lista *lista){
+void inicializacion (TablaDeSimbolos *lista){
 	lista->inicio = NULL;
 	lista->ultimo = NULL;
+	contador = 0;
 }
 
 void insertar_variable(Lista *lista,char* nombre, Tipo tipo){
@@ -65,7 +67,7 @@ void leerlista(Lista *lista){
 
 
 int main(){
-	Lista lista;
+	TablaDeSimbolos lista;
 	inicializacion(&lista);
 	char prueba1[20] = "Hola";
 	Tipo tipo = booleano;
