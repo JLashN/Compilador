@@ -125,7 +125,7 @@ DR_PALABRA_FFUNCION ffuncion
 {DR_PALABRA_NO} {printf("Se ha leido %s\n",yytext);return (BNO);};
 {DR_PALABRA_O} {printf("Se ha leido %s\n",yytext);return (BO);}
 {DR_PALABRA_PARA} {printf("Se ha leido %s\n",yytext);return (BPARA);}
-{DR_PALABRA_REAL} {printf("Se ha leido %s\n",yytext);}
+{DR_PALABRA_REAL} {printf("Se ha leido %s\n",yytext);return (BTIPO_BASE)}
 {DR_PALABRA_REF} {printf("Se ha leido %s\n",yytext);return (BREF);}
 {DR_PALABRA_SAL} {printf("Se ha leido %s\n",yytext);return (BSAL);}
 {DR_PALABRA_SI} {printf("Se ha leido %s\n",yytext);return (BSI);}
@@ -137,16 +137,16 @@ DR_PALABRA_FFUNCION ffuncion
 {DR_PALABRA_Y} {printf("Se ha leido %s\n",yytext);return (BY);}
 {DR_PALABRA_ACCION} {printf("Se ha leido %s\n",yytext);return (BACCION);} 
 {DR_PALABRA_ALGORITMO} {printf("Se ha leido %s\n",yytext);return (BALGORITMO);}
-{DR_PALABRA_BOOLEANO} {printf("Se ha leido %s\n",yytext);return (BTIPO);}
-{DR_PALABRA_CADENA} {printf("Se ha leido %s\n",yytext);return (BTIPO);}
-{DR_PALABRA_CARACTER} {printf("Se ha leido %s\n",yytext);return (BTIPO);}
-{DR_PALABRA_CONST} {printf("Se ha leido %s\n",yytext);return (BTIPO);}
+{DR_PALABRA_BOOLEANO} {printf("Se ha leido %s\n",yytext);return (BTIPO_BASE);}
+{DR_PALABRA_CADENA} {printf("Se ha leido %s\n",yytext);return (BTIPO_BASE);}
+{DR_PALABRA_CARACTER} {printf("Se ha leido %s\n",yytext);return (BTIPO_BASE);}
+{DR_PALABRA_CONST} {printf("Se ha leido %s\n",yytext);return (BTIPO_BASE);}
 {DR_PALABRA_CONTINUAR} {printf("Se ha leido %s\n",yytext);return (BCONTINUAR);}
 {DR_PALABRA_DE} {printf("Se ha leido %s\n",yytext);return (BDE);}
 {DR_PALABRA_DEV} {printf("Se ha leido %s\n",yytext);return (BDEV);}
 {DR_PALABRA_DIV} {printf("Se ha leido %s\n",yytext);return (BDIV);}
 {DR_PALABRA_ENT} {printf("Se ha leido %s\n",yytext);return (BENT);}
-{DR_PALABRA_ENTERO} {printf("Se ha leido %s\n",yytext);return (BTIPO);}
+{DR_PALABRA_ENTERO} {printf("Se ha leido %s\n",yytext);return (BTIPO_BASE);}
 {DR_PALABRA_ES} {printf("Se ha leido %s\n",yytext);return (BES);}
 {DR_PALABRA_FACCION} {printf("Se ha leido %s\n",yytext);return (BFACCION);}
 {DR_PALABRA_FALGORITMO} {printf("Se ha leido %s\n",yytext);return (BFALGORITMO);}
@@ -191,7 +191,7 @@ DR_PALABRA_FFUNCION ffuncion
 
 {DR_LR}	{printf("Se ha leido un literal real con valor %f\n", deCadenaAFloat(yytext)); return (BLITERAL_NUMERICO);}
 
-{DR_ID} {printf("Se ha leido un identificador\n"); return (BIDENTIFICADOR);}
+{DR_ID} {printf("Se ha leido un identificador\n"); return BIDENTIFICADOR;}
 {DR_ID_BOOLEANO} {printf("Se ha leido un identificador booleano\n"); return (BIDENTIFICADORB);}
 
 
