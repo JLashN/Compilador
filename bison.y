@@ -187,7 +187,8 @@ exp_a: exp_a BSUMA exp_a {printf("exp_a BSUMA exp_a por exp_a\n");}
 	| BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE {printf("BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE por exp_a\n");}
 	| operando {printf("operando por exp_a\n");}
 	| BLITERAL_NUMERICO {printf("BLITERAL_NUMERICO por exp_a\n");}
- 	| BMENOS exp_a %prec UMINUS {printf("BMENOS exp_a por exp_a\n");};
+ 	| BMENOS exp_a %prec UMINUS {printf("BMENOS exp_a por exp_a\n");}
+	| BSUMA exp_a {printf("BMAS exp_a por exp_a\n");};	
 exp_b: exp_b BY exp_b {printf("exp_b BY exp_b por exp_b\n");}
 	| exp_b BO exp_b {printf("exp_b BO exp_b por exp_b\n");}
 	| BNO exp_b %prec UBNO {printf("BNO exp_b por exp_b\n");}
@@ -208,7 +209,7 @@ instruccion: BCONTINUAR {printf("BCONTINUAR por instruccion\n");}
 	| alternativa {printf("alternativa por instruccion\n");}
 	| iteracion {printf("iteracion por instruccion\n");}; 
 	//| accion_ll {};
-asignacion: operando BDOS_PUNTOS_IGUAL {printf("operando BDOS_PUNTOS_IGUAL por asignacion\n");}
+asignacion: operando BDOS_PUNTOS_IGUAL expresion{printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
 	| expresion {printf("expresion por asignacion\n");};
 alternativa: BSI expresion BENTONCES instrucciones lista_opciones BFSI {printf("BSI expresion BENTONCES instrucciones lista_opciones BFSI por alternativa\n");};
 lista_opciones: BSINO expresion BENTONCES instrucciones lista_opciones {printf("BSINO expresion BENTONCES instrucciones lista_opciones por lista_opciones\n");}

@@ -76,65 +76,66 @@ Gramática
    51      | operando
    52      | BLITERAL_NUMERICO
    53      | BMENOS exp_a
+   54      | BSUMA exp_a
 
-   54 exp_b: exp_b BY exp_b
-   55      | exp_b BO exp_b
-   56      | BNO exp_b
-   57      | operando_booleano
-   58      | BVERDADERO
-   59      | BFALSO
-   60      | BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE
-   61      | exp_a BOPREL exp_a
+   55 exp_b: exp_b BY exp_b
+   56      | exp_b BO exp_b
+   57      | BNO exp_b
+   58      | operando_booleano
+   59      | BVERDADERO
+   60      | BFALSO
+   61      | BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE
+   62      | exp_a BOPREL exp_a
 
-   62 operando: BIDENTIFICADOR
-   63         | operando BPUNTO operando
-   64         | operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
-   65         | operando BREF
+   63 operando: BIDENTIFICADOR
+   64         | operando BPUNTO operando
+   65         | operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
+   66         | operando BREF
 
-   66 operando_booleano: BIDENTIFICADORB
+   67 operando_booleano: BIDENTIFICADORB
 
-   67 instrucciones: instruccion BPUNTO_Y_COMA instrucciones
-   68              | instruccion
+   68 instrucciones: instruccion BPUNTO_Y_COMA instrucciones
+   69              | instruccion
 
-   69 instruccion: BCONTINUAR
-   70            | asignacion
-   71            | alternativa
-   72            | iteracion
+   70 instruccion: BCONTINUAR
+   71            | asignacion
+   72            | alternativa
+   73            | iteracion
 
-   73 asignacion: operando BDOS_PUNTOS_IGUAL
-   74           | expresion
+   74 asignacion: operando BDOS_PUNTOS_IGUAL expresion
+   75           | expresion
 
-   75 alternativa: BSI expresion BENTONCES instrucciones lista_opciones BFSI
+   76 alternativa: BSI expresion BENTONCES instrucciones lista_opciones BFSI
 
-   76 lista_opciones: BSINO expresion BENTONCES instrucciones lista_opciones
-   77               | %empty
+   77 lista_opciones: BSINO expresion BENTONCES instrucciones lista_opciones
+   78               | %empty
 
-   78 iteracion: it_cota_fija
-   79          | it_cota_exp
+   79 iteracion: it_cota_fija
+   80          | it_cota_exp
 
-   80 it_cota_exp: BMIENTRAS expresion BHACER instrucciones BFMIENTRAS
+   81 it_cota_exp: BMIENTRAS expresion BHACER instrucciones BFMIENTRAS
 
-   81 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA
+   82 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA
 
-   82 accion_d: BACCION a_cabecera bloque BFACCION
+   83 accion_d: BACCION a_cabecera bloque BFACCION
 
-   83 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION
+   84 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION
 
-   84 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
+   85 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
 
-   85 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+   86 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
 
-   86 d_par_form: d_p_form BPUNTO_Y_COMA d_par_form
-   87           | %empty
+   87 d_par_form: d_p_form BPUNTO_Y_COMA d_par_form
+   88           | %empty
 
-   88 d_p_form: BEND lista_id BDOS_PUNTOS d_tipo
-   89         | BSAL lista_id BDOS_PUNTOS d_tipo
-   90         | BES lista_id BDOS_PUNTOS d_tipo
+   89 d_p_form: BEND lista_id BDOS_PUNTOS d_tipo
+   90         | BSAL lista_id BDOS_PUNTOS d_tipo
+   91         | BES lista_id BDOS_PUNTOS d_tipo
 
-   91 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
+   92 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
 
-   92 l_ll: expresion BCOMA l_ll
-   93     | expresion
+   93 l_ll: expresion BCOMA l_ll
+   94     | expresion
 
 
 Terminales con las reglas donde aparecen
@@ -142,10 +143,10 @@ Terminales con las reglas donde aparecen
 $end (0) 0
 error (256)
 BALGORITMO (258) 1
-BIDENTIFICADOR (259) 1 18 22 28 30 34 35 62 81 84 85 91
-BPUNTO_Y_COMA (260) 1 15 16 17 18 28 30 32 67 84 85 86
+BIDENTIFICADOR (259) 1 18 22 28 30 34 35 63 82 85 86 92
+BPUNTO_Y_COMA (260) 1 15 16 17 18 28 30 32 68 85 86 87
 BFALGORITMO (261) 1
-BPUNTO (262) 1 63
+BPUNTO (262) 1 64
 BCOMENTARIO (263) 2 3
 BTIPO (264) 15
 BFTIPO (265) 15
@@ -157,54 +158,54 @@ BIGUAL (270) 18 30
 BTUPLA (271) 20
 BFTUPLA (272) 20
 BTABLA (273) 21
-BCORCHETE_APERTURA (274) 21 64
+BCORCHETE_APERTURA (274) 21 65
 BDE (275) 21
-BEND (276) 88
+BEND (276) 89
 BLITERAL (277) 30
-BDEF (278) 85
-BREF (279) 24 65
+BDEF (278) 86
+BREF (279) 24 66
 BTIPO_BASE (280) 25
 BPUNTOSS (281) 21 23
 BLITERAL_CARACTER (282) 27
-BCORCHETE_CIERRE (283) 21 64
-BDOS_PUNTOS (284) 28 32 88 89 90
-BCOMA (285) 34 92
+BCORCHETE_CIERRE (283) 21 65
+BDOS_PUNTOS (284) 28 32 89 90 91
+BCOMA (285) 34 93
 BENT (286) 39
-BSAL (287) 40 89
-BSUMA (288) 44
+BSAL (287) 40 90
+BSUMA (288) 44 54
 BMENOS (289) 45 53
 BPOR (290) 46
 BENTRE (291) 47
 BMOD (292) 48
 BDIV (293) 49
-BPARENTESIS_APERTURA (294) 50 60 84 85 91
-BPARENTESIS_CIERRE (295) 50 60 84 85 91
+BPARENTESIS_APERTURA (294) 50 61 85 86 92
+BPARENTESIS_CIERRE (295) 50 61 85 86 92
 BLITERAL_NUMERICO (296) 52
-BY (297) 54
-BO (298) 55
-BNO (299) 56
-BVERDADERO (300) 58
-BFALSO (301) 59
-BOPREL (302) 61
-BCONTINUAR (303) 69
-BDOS_PUNTOS_IGUAL (304) 73 81
-BSI (305) 75
-BENTONCES (306) 75 76
-BMIENTRAS (307) 80
-BFSI (308) 75
-BSINO (309) 76
-BHACER (310) 80 81
-BFMIENTRAS (311) 80
-BPARA (312) 81
-BHASTA (313) 81
-BFPARA (314) 81
-BACCION (315) 82
-BFUNCION (316) 83
-BDEV (317) 83
-BFFUNCION (318) 83
-BFACCION (319) 82
-BES (320) 90
-BIDENTIFICADORB (321) 66
+BY (297) 55
+BO (298) 56
+BNO (299) 57
+BVERDADERO (300) 59
+BFALSO (301) 60
+BOPREL (302) 62
+BCONTINUAR (303) 70
+BDOS_PUNTOS_IGUAL (304) 74 82
+BSI (305) 76
+BENTONCES (306) 76 77
+BMIENTRAS (307) 81
+BFSI (308) 76
+BSINO (309) 77
+BHACER (310) 81 82
+BFMIENTRAS (311) 81
+BPARA (312) 82
+BHASTA (313) 82
+BFPARA (314) 82
+BACCION (315) 83
+BFUNCION (316) 84
+BDEV (317) 84
+BFFUNCION (318) 84
+BFACCION (319) 83
+BES (320) 91
+BIDENTIFICADORB (321) 67
 UMINUS (322)
 UBNO (323)
 
@@ -224,7 +225,7 @@ decl_globales (73)
 decl_a_f (74)
     en la izquierda: 7 8 9, en la derecha: 2 7 8
 bloque (75)
-    en la izquierda: 10, en la derecha: 3 82 83
+    en la izquierda: 10, en la derecha: 3 83 84
 declaraciones (76)
     en la izquierda: 11 12 13 14, en la derecha: 10 11 12 13
 declaracion_tipo (77)
@@ -237,7 +238,7 @@ lista_d_tipo (80)
     en la izquierda: 18 19, en la derecha: 15 18
 d_tipo (81)
     en la izquierda: 20 21 22 23 24 25, en la derecha: 18 21 24 28
-    32 85 88 89 90
+    32 86 89 90 91
 expresion_t (82)
     en la izquierda: 26 27, en la derecha: 21 23
 lista_campos (83)
@@ -245,9 +246,9 @@ lista_campos (83)
 lista_d_cte (84)
     en la izquierda: 30 31, en la derecha: 16 30
 lista_d_var (85)
-    en la izquierda: 32 33, en la derecha: 17 32 39 40 85
+    en la izquierda: 32 33, en la derecha: 17 32 39 40 86
 lista_id (86)
-    en la izquierda: 34 35, en la derecha: 32 34 88 89 90
+    en la izquierda: 34 35, en la derecha: 32 34 89 90 91
 decl_ent_sal (87)
     en la izquierda: 36 37 38, en la derecha: 2
 decl_ent (88)
@@ -255,50 +256,50 @@ decl_ent (88)
 decl_sal (89)
     en la izquierda: 40, en la derecha: 37 38
 expresion (90)
-    en la izquierda: 41 42 43, en la derecha: 26 64 74 75 76 80 81
-    83 92 93
+    en la izquierda: 41 42 43, en la derecha: 26 65 74 75 76 77 81
+    82 84 93 94
 exp_a (91)
-    en la izquierda: 44 45 46 47 48 49 50 51 52 53, en la derecha:
-    41 44 45 46 47 48 49 50 53 61
+    en la izquierda: 44 45 46 47 48 49 50 51 52 53 54, en la derecha:
+    41 44 45 46 47 48 49 50 53 54 62
 exp_b (92)
-    en la izquierda: 54 55 56 57 58 59 60 61, en la derecha: 42 54
-    55 56 60
+    en la izquierda: 55 56 57 58 59 60 61 62, en la derecha: 42 55
+    56 57 61
 operando (93)
-    en la izquierda: 62 63 64 65, en la derecha: 51 63 64 65 73
+    en la izquierda: 63 64 65 66, en la derecha: 51 64 65 66 74
 operando_booleano (94)
-    en la izquierda: 66, en la derecha: 57
+    en la izquierda: 67, en la derecha: 58
 instrucciones (95)
-    en la izquierda: 67 68, en la derecha: 10 67 75 76 80 81
+    en la izquierda: 68 69, en la derecha: 10 68 76 77 81 82
 instruccion (96)
-    en la izquierda: 69 70 71 72, en la derecha: 67 68
+    en la izquierda: 70 71 72 73, en la derecha: 68 69
 asignacion (97)
-    en la izquierda: 73 74, en la derecha: 70
+    en la izquierda: 74 75, en la derecha: 71
 alternativa (98)
-    en la izquierda: 75, en la derecha: 71
+    en la izquierda: 76, en la derecha: 72
 lista_opciones (99)
-    en la izquierda: 76 77, en la derecha: 75 76
+    en la izquierda: 77 78, en la derecha: 76 77
 iteracion (100)
-    en la izquierda: 78 79, en la derecha: 72
+    en la izquierda: 79 80, en la derecha: 73
 it_cota_exp (101)
-    en la izquierda: 80, en la derecha: 79
+    en la izquierda: 81, en la derecha: 80
 it_cota_fija (102)
-    en la izquierda: 81, en la derecha: 78
+    en la izquierda: 82, en la derecha: 79
 accion_d (103)
-    en la izquierda: 82, en la derecha: 7
+    en la izquierda: 83, en la derecha: 7
 funcion_d (104)
-    en la izquierda: 83, en la derecha: 8
+    en la izquierda: 84, en la derecha: 8
 a_cabecera (105)
-    en la izquierda: 84, en la derecha: 82
-f_cabecera (106)
     en la izquierda: 85, en la derecha: 83
+f_cabecera (106)
+    en la izquierda: 86, en la derecha: 84
 d_par_form (107)
-    en la izquierda: 86 87, en la derecha: 84 86
+    en la izquierda: 87 88, en la derecha: 85 87
 d_p_form (108)
-    en la izquierda: 88 89 90, en la derecha: 86
+    en la izquierda: 89 90 91, en la derecha: 87
 funcion_ll (109)
-    en la izquierda: 91, en la derecha: 43
+    en la izquierda: 92, en la derecha: 43
 l_ll (110)
-    en la izquierda: 92 93, en la derecha: 91 92
+    en la izquierda: 93 94, en la derecha: 92 93
 
 
 Estado 0
@@ -494,31 +495,32 @@ Estado 19
    10 bloque: declaraciones . instrucciones
 
     BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BCONTINUAR            desplazar e ir al estado 46
-    BSI                   desplazar e ir al estado 47
-    BMIENTRAS             desplazar e ir al estado 48
-    BPARA                 desplazar e ir al estado 49
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BCONTINUAR            desplazar e ir al estado 47
+    BSI                   desplazar e ir al estado 48
+    BMIENTRAS             desplazar e ir al estado 49
+    BPARA                 desplazar e ir al estado 50
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    expresion          ir al estado 51
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 54
-    operando_booleano  ir al estado 55
-    instrucciones      ir al estado 56
-    instruccion        ir al estado 57
-    asignacion         ir al estado 58
-    alternativa        ir al estado 59
-    iteracion          ir al estado 60
-    it_cota_exp        ir al estado 61
-    it_cota_fija       ir al estado 62
-    funcion_ll         ir al estado 63
+    expresion          ir al estado 52
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 55
+    operando_booleano  ir al estado 56
+    instrucciones      ir al estado 57
+    instruccion        ir al estado 58
+    asignacion         ir al estado 59
+    alternativa        ir al estado 60
+    iteracion          ir al estado 61
+    it_cota_exp        ir al estado 62
+    it_cota_fija       ir al estado 63
+    funcion_ll         ir al estado 64
 
 
 Estado 20
@@ -531,7 +533,7 @@ Estado 20
 
     $default  reduce usando la regla 14 (declaraciones)
 
-    declaraciones      ir al estado 64
+    declaraciones      ir al estado 65
     declaracion_tipo   ir al estado 20
     declaracion_const  ir al estado 21
     declaracion_var    ir al estado 22
@@ -547,7 +549,7 @@ Estado 21
 
     $default  reduce usando la regla 14 (declaraciones)
 
-    declaraciones      ir al estado 65
+    declaraciones      ir al estado 66
     declaracion_tipo   ir al estado 20
     declaracion_const  ir al estado 21
     declaracion_var    ir al estado 22
@@ -563,7 +565,7 @@ Estado 22
 
     $default  reduce usando la regla 14 (declaraciones)
 
-    declaraciones      ir al estado 66
+    declaraciones      ir al estado 67
     declaracion_tipo   ir al estado 20
     declaracion_const  ir al estado 21
     declaracion_var    ir al estado 22
@@ -571,32 +573,32 @@ Estado 22
 
 Estado 23
 
-   82 accion_d: BACCION . a_cabecera bloque BFACCION
+   83 accion_d: BACCION . a_cabecera bloque BFACCION
 
-    BIDENTIFICADOR  desplazar e ir al estado 67
+    BIDENTIFICADOR  desplazar e ir al estado 68
 
-    a_cabecera  ir al estado 68
+    a_cabecera  ir al estado 69
 
 
 Estado 24
 
-   83 funcion_d: BFUNCION . f_cabecera bloque BDEV expresion BFFUNCION
+   84 funcion_d: BFUNCION . f_cabecera bloque BDEV expresion BFFUNCION
 
-    BIDENTIFICADOR  desplazar e ir al estado 69
+    BIDENTIFICADOR  desplazar e ir al estado 70
 
-    f_cabecera  ir al estado 70
+    f_cabecera  ir al estado 71
 
 
 Estado 25
 
     2 cabecera_alg: decl_globales decl_a_f . decl_ent_sal BCOMENTARIO
 
-    BENT  desplazar e ir al estado 71
-    BSAL  desplazar e ir al estado 72
+    BENT  desplazar e ir al estado 72
+    BSAL  desplazar e ir al estado 73
 
-    decl_ent_sal  ir al estado 73
-    decl_ent      ir al estado 74
-    decl_sal      ir al estado 75
+    decl_ent_sal  ir al estado 74
+    decl_ent      ir al estado 75
+    decl_sal      ir al estado 76
 
 
 Estado 26
@@ -608,7 +610,7 @@ Estado 26
 
     $default  reduce usando la regla 9 (decl_a_f)
 
-    decl_a_f   ir al estado 76
+    decl_a_f   ir al estado 77
     accion_d   ir al estado 26
     funcion_d  ir al estado 27
 
@@ -622,7 +624,7 @@ Estado 27
 
     $default  reduce usando la regla 9 (decl_a_f)
 
-    decl_a_f   ir al estado 77
+    decl_a_f   ir al estado 78
     accion_d   ir al estado 26
     funcion_d  ir al estado 27
 
@@ -645,49 +647,50 @@ Estado 30
 
    18 lista_d_tipo: BIDENTIFICADOR BIGUAL . d_tipo BPUNTO_Y_COMA lista_d_tipo
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    d_tipo             ir al estado 84
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    d_tipo             ir al estado 85
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 31
 
    15 declaracion_tipo: BTIPO lista_d_tipo BFTIPO . BPUNTO_Y_COMA
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 88
+    BPUNTO_Y_COMA  desplazar e ir al estado 89
 
 
 Estado 32
 
    30 lista_d_cte: BIDENTIFICADOR BIGUAL . BLITERAL BPUNTO_Y_COMA lista_d_cte
 
-    BLITERAL  desplazar e ir al estado 89
+    BLITERAL  desplazar e ir al estado 90
 
 
 Estado 33
 
    16 declaracion_const: BCONST lista_d_cte BFCONST . BPUNTO_Y_COMA
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 90
+    BPUNTO_Y_COMA  desplazar e ir al estado 91
 
 
 Estado 34
@@ -695,7 +698,7 @@ Estado 34
    34 lista_id: BIDENTIFICADOR . BCOMA lista_id
    35         | BIDENTIFICADOR .
 
-    BCOMA  desplazar e ir al estado 91
+    BCOMA  desplazar e ir al estado 92
 
     $default  reduce usando la regla 35 (lista_id)
 
@@ -704,21 +707,21 @@ Estado 35
 
    17 declaracion_var: BVAR lista_d_var . BFVAR BPUNTO_Y_COMA
 
-    BFVAR  desplazar e ir al estado 92
+    BFVAR  desplazar e ir al estado 93
 
 
 Estado 36
 
    32 lista_d_var: lista_id . BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_d_var
 
-    BDOS_PUNTOS  desplazar e ir al estado 93
+    BDOS_PUNTOS  desplazar e ir al estado 94
 
 
 Estado 37
 
     1 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO . BPUNTO
 
-    BPUNTO  desplazar e ir al estado 94
+    BPUNTO  desplazar e ir al estado 95
 
 
 Estado 38
@@ -730,158 +733,177 @@ Estado 38
 
 Estado 39
 
-   62 operando: BIDENTIFICADOR .
-   91 funcion_ll: BIDENTIFICADOR . BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
+   63 operando: BIDENTIFICADOR .
+   92 funcion_ll: BIDENTIFICADOR . BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
 
-    BPARENTESIS_APERTURA  desplazar e ir al estado 95
+    BPARENTESIS_APERTURA  desplazar e ir al estado 96
 
-    $default  reduce usando la regla 62 (operando)
+    $default  reduce usando la regla 63 (operando)
 
 
 Estado 40
 
-   53 exp_a: BMENOS . exp_a
+   54 exp_a: BSUMA . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
-    exp_a     ir al estado 98
-    operando  ir al estado 87
+    exp_a     ir al estado 99
+    operando  ir al estado 88
 
 
 Estado 41
 
-   50 exp_a: BPARENTESIS_APERTURA . exp_a BPARENTESIS_CIERRE
-   60 exp_b: BPARENTESIS_APERTURA . exp_b BPARENTESIS_CIERRE
+   53 exp_a: BMENOS . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
-    exp_a              ir al estado 99
-    exp_b              ir al estado 100
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
+    exp_a     ir al estado 100
+    operando  ir al estado 88
 
 
 Estado 42
+
+   50 exp_a: BPARENTESIS_APERTURA . exp_a BPARENTESIS_CIERRE
+   61 exp_b: BPARENTESIS_APERTURA . exp_b BPARENTESIS_CIERRE
+
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    exp_a              ir al estado 101
+    exp_b              ir al estado 102
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+
+
+Estado 43
 
    52 exp_a: BLITERAL_NUMERICO .
 
     $default  reduce usando la regla 52 (exp_a)
 
 
-Estado 43
-
-   56 exp_b: BNO . exp_b
-
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    exp_a              ir al estado 101
-    exp_b              ir al estado 102
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-
-
 Estado 44
 
-   58 exp_b: BVERDADERO .
+   57 exp_b: BNO . exp_b
 
-    $default  reduce usando la regla 58 (exp_b)
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    exp_a              ir al estado 103
+    exp_b              ir al estado 104
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
 
 
 Estado 45
 
-   59 exp_b: BFALSO .
+   59 exp_b: BVERDADERO .
 
     $default  reduce usando la regla 59 (exp_b)
 
 
 Estado 46
 
-   69 instruccion: BCONTINUAR .
+   60 exp_b: BFALSO .
 
-    $default  reduce usando la regla 69 (instruccion)
+    $default  reduce usando la regla 60 (exp_b)
 
 
 Estado 47
 
-   75 alternativa: BSI . expresion BENTONCES instrucciones lista_opciones BFSI
+   70 instruccion: BCONTINUAR .
 
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 103
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    $default  reduce usando la regla 70 (instruccion)
 
 
 Estado 48
 
-   80 it_cota_exp: BMIENTRAS . expresion BHACER instrucciones BFMIENTRAS
+   76 alternativa: BSI . expresion BENTONCES instrucciones lista_opciones BFSI
 
     BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    expresion          ir al estado 104
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    expresion          ir al estado 105
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 49
 
-   81 it_cota_fija: BPARA . BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA
+   81 it_cota_exp: BMIENTRAS . expresion BHACER instrucciones BFMIENTRAS
 
-    BIDENTIFICADOR  desplazar e ir al estado 105
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion          ir al estado 106
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 50
 
-   66 operando_booleano: BIDENTIFICADORB .
+   82 it_cota_fija: BPARA . BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA
 
-    $default  reduce usando la regla 66 (operando_booleano)
+    BIDENTIFICADOR  desplazar e ir al estado 107
 
 
 Estado 51
 
-   74 asignacion: expresion .
+   67 operando_booleano: BIDENTIFICADORB .
 
-    $default  reduce usando la regla 74 (asignacion)
+    $default  reduce usando la regla 67 (operando_booleano)
 
 
 Estado 52
+
+   75 asignacion: expresion .
+
+    $default  reduce usando la regla 75 (asignacion)
+
+
+Estado 53
 
    41 expresion: exp_a .
    44 exp_a: exp_a . BSUMA exp_a
@@ -890,168 +912,144 @@ Estado 52
    47      | exp_a . BENTRE exp_a
    48      | exp_a . BMOD exp_a
    49      | exp_a . BDIV exp_a
-   61 exp_b: exp_a . BOPREL exp_a
+   62 exp_b: exp_a . BOPREL exp_a
 
-    BSUMA   desplazar e ir al estado 106
-    BMENOS  desplazar e ir al estado 107
-    BPOR    desplazar e ir al estado 108
-    BENTRE  desplazar e ir al estado 109
-    BMOD    desplazar e ir al estado 110
-    BDIV    desplazar e ir al estado 111
-    BOPREL  desplazar e ir al estado 112
+    BSUMA   desplazar e ir al estado 108
+    BMENOS  desplazar e ir al estado 109
+    BPOR    desplazar e ir al estado 110
+    BENTRE  desplazar e ir al estado 111
+    BMOD    desplazar e ir al estado 112
+    BDIV    desplazar e ir al estado 113
+    BOPREL  desplazar e ir al estado 114
 
     $default  reduce usando la regla 41 (expresion)
 
 
-Estado 53
+Estado 54
 
    42 expresion: exp_b .
-   54 exp_b: exp_b . BY exp_b
-   55      | exp_b . BO exp_b
+   55 exp_b: exp_b . BY exp_b
+   56      | exp_b . BO exp_b
 
-    BY  desplazar e ir al estado 113
-    BO  desplazar e ir al estado 114
+    BY  desplazar e ir al estado 115
+    BO  desplazar e ir al estado 116
 
     $default  reduce usando la regla 42 (expresion)
 
 
-Estado 54
+Estado 55
 
    51 exp_a: operando .
-   63 operando: operando . BPUNTO operando
-   64         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
-   65         | operando . BREF
-   73 asignacion: operando . BDOS_PUNTOS_IGUAL
+   64 operando: operando . BPUNTO operando
+   65         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
+   66         | operando . BREF
+   74 asignacion: operando . BDOS_PUNTOS_IGUAL expresion
 
-    BPUNTO              desplazar e ir al estado 115
-    BCORCHETE_APERTURA  desplazar e ir al estado 116
-    BREF                desplazar e ir al estado 117
-    BDOS_PUNTOS_IGUAL   desplazar e ir al estado 118
+    BPUNTO              desplazar e ir al estado 117
+    BCORCHETE_APERTURA  desplazar e ir al estado 118
+    BREF                desplazar e ir al estado 119
+    BDOS_PUNTOS_IGUAL   desplazar e ir al estado 120
 
     $default  reduce usando la regla 51 (exp_a)
 
 
-Estado 55
-
-   57 exp_b: operando_booleano .
-
-    $default  reduce usando la regla 57 (exp_b)
-
-
 Estado 56
+
+   58 exp_b: operando_booleano .
+
+    $default  reduce usando la regla 58 (exp_b)
+
+
+Estado 57
 
    10 bloque: declaraciones instrucciones .
 
     $default  reduce usando la regla 10 (bloque)
 
 
-Estado 57
-
-   67 instrucciones: instruccion . BPUNTO_Y_COMA instrucciones
-   68              | instruccion .
-
-    BPUNTO_Y_COMA  desplazar e ir al estado 119
-
-    $default  reduce usando la regla 68 (instrucciones)
-
-
 Estado 58
 
-   70 instruccion: asignacion .
+   68 instrucciones: instruccion . BPUNTO_Y_COMA instrucciones
+   69              | instruccion .
 
-    $default  reduce usando la regla 70 (instruccion)
+    BPUNTO_Y_COMA  desplazar e ir al estado 121
+
+    $default  reduce usando la regla 69 (instrucciones)
 
 
 Estado 59
 
-   71 instruccion: alternativa .
+   71 instruccion: asignacion .
 
     $default  reduce usando la regla 71 (instruccion)
 
 
 Estado 60
 
-   72 instruccion: iteracion .
+   72 instruccion: alternativa .
 
     $default  reduce usando la regla 72 (instruccion)
 
 
 Estado 61
 
-   79 iteracion: it_cota_exp .
+   73 instruccion: iteracion .
 
-    $default  reduce usando la regla 79 (iteracion)
+    $default  reduce usando la regla 73 (instruccion)
 
 
 Estado 62
 
-   78 iteracion: it_cota_fija .
+   80 iteracion: it_cota_exp .
 
-    $default  reduce usando la regla 78 (iteracion)
+    $default  reduce usando la regla 80 (iteracion)
 
 
 Estado 63
+
+   79 iteracion: it_cota_fija .
+
+    $default  reduce usando la regla 79 (iteracion)
+
+
+Estado 64
 
    43 expresion: funcion_ll .
 
     $default  reduce usando la regla 43 (expresion)
 
 
-Estado 64
+Estado 65
 
    11 declaraciones: declaracion_tipo declaraciones .
 
     $default  reduce usando la regla 11 (declaraciones)
 
 
-Estado 65
+Estado 66
 
    12 declaraciones: declaracion_const declaraciones .
 
     $default  reduce usando la regla 12 (declaraciones)
 
 
-Estado 66
+Estado 67
 
    13 declaraciones: declaracion_var declaraciones .
 
     $default  reduce usando la regla 13 (declaraciones)
 
 
-Estado 67
-
-   84 a_cabecera: BIDENTIFICADOR . BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
-
-    BPARENTESIS_APERTURA  desplazar e ir al estado 120
-
-
 Estado 68
 
-   82 accion_d: BACCION a_cabecera . bloque BFACCION
-
-    BTIPO   desplazar e ir al estado 6
-    BCONST  desplazar e ir al estado 7
-    BVAR    desplazar e ir al estado 16
-
-    $default  reduce usando la regla 14 (declaraciones)
-
-    bloque             ir al estado 121
-    declaraciones      ir al estado 19
-    declaracion_tipo   ir al estado 20
-    declaracion_const  ir al estado 21
-    declaracion_var    ir al estado 22
-
-
-Estado 69
-
-   85 f_cabecera: BIDENTIFICADOR . BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+   85 a_cabecera: BIDENTIFICADOR . BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
 
     BPARENTESIS_APERTURA  desplazar e ir al estado 122
 
 
-Estado 70
+Estado 69
 
-   83 funcion_d: BFUNCION f_cabecera . bloque BDEV expresion BFFUNCION
+   83 accion_d: BACCION a_cabecera . bloque BFACCION
 
     BTIPO   desplazar e ir al estado 6
     BCONST  desplazar e ir al estado 7
@@ -1066,7 +1064,31 @@ Estado 70
     declaracion_var    ir al estado 22
 
 
+Estado 70
+
+   86 f_cabecera: BIDENTIFICADOR . BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+
+    BPARENTESIS_APERTURA  desplazar e ir al estado 124
+
+
 Estado 71
+
+   84 funcion_d: BFUNCION f_cabecera . bloque BDEV expresion BFFUNCION
+
+    BTIPO   desplazar e ir al estado 6
+    BCONST  desplazar e ir al estado 7
+    BVAR    desplazar e ir al estado 16
+
+    $default  reduce usando la regla 14 (declaraciones)
+
+    bloque             ir al estado 125
+    declaraciones      ir al estado 19
+    declaracion_tipo   ir al estado 20
+    declaracion_const  ir al estado 21
+    declaracion_var    ir al estado 22
+
+
+Estado 72
 
    39 decl_ent: BENT . lista_d_var
 
@@ -1074,11 +1096,11 @@ Estado 71
 
     $default  reduce usando la regla 33 (lista_d_var)
 
-    lista_d_var  ir al estado 124
+    lista_d_var  ir al estado 126
     lista_id     ir al estado 36
 
 
-Estado 72
+Estado 73
 
    40 decl_sal: BSAL . lista_d_var
 
@@ -1086,272 +1108,294 @@ Estado 72
 
     $default  reduce usando la regla 33 (lista_d_var)
 
-    lista_d_var  ir al estado 125
+    lista_d_var  ir al estado 127
     lista_id     ir al estado 36
-
-
-Estado 73
-
-    2 cabecera_alg: decl_globales decl_a_f decl_ent_sal . BCOMENTARIO
-
-    BCOMENTARIO  desplazar e ir al estado 126
 
 
 Estado 74
 
-   36 decl_ent_sal: decl_ent .
-   37             | decl_ent . decl_sal
+    2 cabecera_alg: decl_globales decl_a_f decl_ent_sal . BCOMENTARIO
 
-    BSAL  desplazar e ir al estado 72
-
-    $default  reduce usando la regla 36 (decl_ent_sal)
-
-    decl_sal  ir al estado 127
+    BCOMENTARIO  desplazar e ir al estado 128
 
 
 Estado 75
+
+   36 decl_ent_sal: decl_ent .
+   37             | decl_ent . decl_sal
+
+    BSAL  desplazar e ir al estado 73
+
+    $default  reduce usando la regla 36 (decl_ent_sal)
+
+    decl_sal  ir al estado 129
+
+
+Estado 76
 
    38 decl_ent_sal: decl_sal .
 
     $default  reduce usando la regla 38 (decl_ent_sal)
 
 
-Estado 76
+Estado 77
 
     7 decl_a_f: accion_d decl_a_f .
 
     $default  reduce usando la regla 7 (decl_a_f)
 
 
-Estado 77
+Estado 78
 
     8 decl_a_f: funcion_d decl_a_f .
 
     $default  reduce usando la regla 8 (decl_a_f)
 
 
-Estado 78
-
-   22 d_tipo: BIDENTIFICADOR .
-   62 operando: BIDENTIFICADOR .
-   91 funcion_ll: BIDENTIFICADOR . BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
-
-    BPARENTESIS_APERTURA  desplazar e ir al estado 95
-
-    BPUNTO_Y_COMA  reduce usando la regla 22 (d_tipo)
-    $default       reduce usando la regla 62 (operando)
-
-
 Estado 79
 
-   20 d_tipo: BTUPLA . lista_campos BFTUPLA
+   22 d_tipo: BIDENTIFICADOR .
+   63 operando: BIDENTIFICADOR .
+   92 funcion_ll: BIDENTIFICADOR . BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
 
-    BIDENTIFICADOR  desplazar e ir al estado 128
+    BPARENTESIS_APERTURA  desplazar e ir al estado 96
 
-    $default  reduce usando la regla 29 (lista_campos)
-
-    lista_campos  ir al estado 129
+    BPUNTO_Y_COMA  reduce usando la regla 22 (d_tipo)
+    $default       reduce usando la regla 63 (operando)
 
 
 Estado 80
 
-   21 d_tipo: BTABLA . BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo
+   20 d_tipo: BTUPLA . lista_campos BFTUPLA
 
-    BCORCHETE_APERTURA  desplazar e ir al estado 130
+    BIDENTIFICADOR  desplazar e ir al estado 130
+
+    $default  reduce usando la regla 29 (lista_campos)
+
+    lista_campos  ir al estado 131
 
 
 Estado 81
 
-   24 d_tipo: BREF . d_tipo
+   21 d_tipo: BTABLA . BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    d_tipo             ir al estado 131
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    BCORCHETE_APERTURA  desplazar e ir al estado 132
 
 
 Estado 82
+
+   24 d_tipo: BREF . d_tipo
+
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    d_tipo             ir al estado 133
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+
+
+Estado 83
 
    25 d_tipo: BTIPO_BASE .
 
     $default  reduce usando la regla 25 (d_tipo)
 
 
-Estado 83
+Estado 84
 
    27 expresion_t: BLITERAL_CARACTER .
 
     $default  reduce usando la regla 27 (expresion_t)
 
 
-Estado 84
+Estado 85
 
    18 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo . BPUNTO_Y_COMA lista_d_tipo
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 132
-
-
-Estado 85
-
-   23 d_tipo: expresion_t . BPUNTOSS expresion_t
-
-    BPUNTOSS  desplazar e ir al estado 133
+    BPUNTO_Y_COMA  desplazar e ir al estado 134
 
 
 Estado 86
+
+   23 d_tipo: expresion_t . BPUNTOSS expresion_t
+
+    BPUNTOSS  desplazar e ir al estado 135
+
+
+Estado 87
 
    26 expresion_t: expresion .
 
     $default  reduce usando la regla 26 (expresion_t)
 
 
-Estado 87
+Estado 88
 
    51 exp_a: operando .
-   63 operando: operando . BPUNTO operando
-   64         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
-   65         | operando . BREF
+   64 operando: operando . BPUNTO operando
+   65         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
+   66         | operando . BREF
 
-    BPUNTO              desplazar e ir al estado 115
-    BCORCHETE_APERTURA  desplazar e ir al estado 116
-    BREF                desplazar e ir al estado 117
+    BPUNTO              desplazar e ir al estado 117
+    BCORCHETE_APERTURA  desplazar e ir al estado 118
+    BREF                desplazar e ir al estado 119
 
     $default  reduce usando la regla 51 (exp_a)
 
 
-Estado 88
+Estado 89
 
    15 declaracion_tipo: BTIPO lista_d_tipo BFTIPO BPUNTO_Y_COMA .
 
     $default  reduce usando la regla 15 (declaracion_tipo)
 
 
-Estado 89
+Estado 90
 
    30 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL . BPUNTO_Y_COMA lista_d_cte
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 134
+    BPUNTO_Y_COMA  desplazar e ir al estado 136
 
 
-Estado 90
+Estado 91
 
    16 declaracion_const: BCONST lista_d_cte BFCONST BPUNTO_Y_COMA .
 
     $default  reduce usando la regla 16 (declaracion_const)
 
 
-Estado 91
+Estado 92
 
    34 lista_id: BIDENTIFICADOR BCOMA . lista_id
 
     BIDENTIFICADOR  desplazar e ir al estado 34
 
-    lista_id  ir al estado 135
-
-
-Estado 92
-
-   17 declaracion_var: BVAR lista_d_var BFVAR . BPUNTO_Y_COMA
-
-    BPUNTO_Y_COMA  desplazar e ir al estado 136
+    lista_id  ir al estado 137
 
 
 Estado 93
 
-   32 lista_d_var: lista_id BDOS_PUNTOS . d_tipo BPUNTO_Y_COMA lista_d_var
+   17 declaracion_var: BVAR lista_d_var BFVAR . BPUNTO_Y_COMA
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    d_tipo             ir al estado 137
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    BPUNTO_Y_COMA  desplazar e ir al estado 138
 
 
 Estado 94
+
+   32 lista_d_var: lista_id BDOS_PUNTOS . d_tipo BPUNTO_Y_COMA lista_d_var
+
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    d_tipo             ir al estado 139
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+
+
+Estado 95
 
     1 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO .
 
     $default  reduce usando la regla 1 (desc_algoritmo)
 
 
-Estado 95
-
-   91 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA . l_ll BPARENTESIS_CIERRE
-
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 138
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
-    l_ll               ir al estado 139
-
-
 Estado 96
 
-   62 operando: BIDENTIFICADOR .
+   92 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA . l_ll BPARENTESIS_CIERRE
 
-    $default  reduce usando la regla 62 (operando)
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion          ir al estado 140
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+    l_ll               ir al estado 141
 
 
 Estado 97
 
-   50 exp_a: BPARENTESIS_APERTURA . exp_a BPARENTESIS_CIERRE
+   63 operando: BIDENTIFICADOR .
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-
-    exp_a     ir al estado 140
-    operando  ir al estado 87
+    $default  reduce usando la regla 63 (operando)
 
 
 Estado 98
+
+   50 exp_a: BPARENTESIS_APERTURA . exp_a BPARENTESIS_CIERRE
+
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+
+    exp_a     ir al estado 142
+    operando  ir al estado 88
+
+
+Estado 99
+
+   44 exp_a: exp_a . BSUMA exp_a
+   45      | exp_a . BMENOS exp_a
+   46      | exp_a . BPOR exp_a
+   47      | exp_a . BENTRE exp_a
+   48      | exp_a . BMOD exp_a
+   49      | exp_a . BDIV exp_a
+   54      | BSUMA exp_a .
+
+    BPOR    desplazar e ir al estado 110
+    BENTRE  desplazar e ir al estado 111
+    BMOD    desplazar e ir al estado 112
+    BDIV    desplazar e ir al estado 113
+
+    $default  reduce usando la regla 54 (exp_a)
+
+
+Estado 100
 
    44 exp_a: exp_a . BSUMA exp_a
    45      | exp_a . BMENOS exp_a
@@ -1364,38 +1408,6 @@ Estado 98
     $default  reduce usando la regla 53 (exp_a)
 
 
-Estado 99
-
-   44 exp_a: exp_a . BSUMA exp_a
-   45      | exp_a . BMENOS exp_a
-   46      | exp_a . BPOR exp_a
-   47      | exp_a . BENTRE exp_a
-   48      | exp_a . BMOD exp_a
-   49      | exp_a . BDIV exp_a
-   50      | BPARENTESIS_APERTURA exp_a . BPARENTESIS_CIERRE
-   61 exp_b: exp_a . BOPREL exp_a
-
-    BSUMA               desplazar e ir al estado 106
-    BMENOS              desplazar e ir al estado 107
-    BPOR                desplazar e ir al estado 108
-    BENTRE              desplazar e ir al estado 109
-    BMOD                desplazar e ir al estado 110
-    BDIV                desplazar e ir al estado 111
-    BPARENTESIS_CIERRE  desplazar e ir al estado 141
-    BOPREL              desplazar e ir al estado 112
-
-
-Estado 100
-
-   54 exp_b: exp_b . BY exp_b
-   55      | exp_b . BO exp_b
-   60      | BPARENTESIS_APERTURA exp_b . BPARENTESIS_CIERRE
-
-    BPARENTESIS_CIERRE  desplazar e ir al estado 142
-    BY                  desplazar e ir al estado 113
-    BO                  desplazar e ir al estado 114
-
-
 Estado 101
 
    44 exp_a: exp_a . BSUMA exp_a
@@ -1404,365 +1416,424 @@ Estado 101
    47      | exp_a . BENTRE exp_a
    48      | exp_a . BMOD exp_a
    49      | exp_a . BDIV exp_a
-   61 exp_b: exp_a . BOPREL exp_a
+   50      | BPARENTESIS_APERTURA exp_a . BPARENTESIS_CIERRE
+   62 exp_b: exp_a . BOPREL exp_a
 
-    BSUMA   desplazar e ir al estado 106
-    BMENOS  desplazar e ir al estado 107
-    BPOR    desplazar e ir al estado 108
-    BENTRE  desplazar e ir al estado 109
-    BMOD    desplazar e ir al estado 110
-    BDIV    desplazar e ir al estado 111
-    BOPREL  desplazar e ir al estado 112
+    BSUMA               desplazar e ir al estado 108
+    BMENOS              desplazar e ir al estado 109
+    BPOR                desplazar e ir al estado 110
+    BENTRE              desplazar e ir al estado 111
+    BMOD                desplazar e ir al estado 112
+    BDIV                desplazar e ir al estado 113
+    BPARENTESIS_CIERRE  desplazar e ir al estado 143
+    BOPREL              desplazar e ir al estado 114
 
 
 Estado 102
 
-   54 exp_b: exp_b . BY exp_b
-   55      | exp_b . BO exp_b
-   56      | BNO exp_b .
+   55 exp_b: exp_b . BY exp_b
+   56      | exp_b . BO exp_b
+   61      | BPARENTESIS_APERTURA exp_b . BPARENTESIS_CIERRE
 
-    $default  reduce usando la regla 56 (exp_b)
+    BPARENTESIS_CIERRE  desplazar e ir al estado 144
+    BY                  desplazar e ir al estado 115
+    BO                  desplazar e ir al estado 116
 
 
 Estado 103
 
-   75 alternativa: BSI expresion . BENTONCES instrucciones lista_opciones BFSI
+   44 exp_a: exp_a . BSUMA exp_a
+   45      | exp_a . BMENOS exp_a
+   46      | exp_a . BPOR exp_a
+   47      | exp_a . BENTRE exp_a
+   48      | exp_a . BMOD exp_a
+   49      | exp_a . BDIV exp_a
+   62 exp_b: exp_a . BOPREL exp_a
 
-    BENTONCES  desplazar e ir al estado 143
+    BSUMA   desplazar e ir al estado 108
+    BMENOS  desplazar e ir al estado 109
+    BPOR    desplazar e ir al estado 110
+    BENTRE  desplazar e ir al estado 111
+    BMOD    desplazar e ir al estado 112
+    BDIV    desplazar e ir al estado 113
+    BOPREL  desplazar e ir al estado 114
 
 
 Estado 104
 
-   80 it_cota_exp: BMIENTRAS expresion . BHACER instrucciones BFMIENTRAS
+   55 exp_b: exp_b . BY exp_b
+   56      | exp_b . BO exp_b
+   57      | BNO exp_b .
 
-    BHACER  desplazar e ir al estado 144
+    $default  reduce usando la regla 57 (exp_b)
 
 
 Estado 105
 
-   81 it_cota_fija: BPARA BIDENTIFICADOR . BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA
+   76 alternativa: BSI expresion . BENTONCES instrucciones lista_opciones BFSI
 
-    BDOS_PUNTOS_IGUAL  desplazar e ir al estado 145
+    BENTONCES  desplazar e ir al estado 145
 
 
 Estado 106
 
-   44 exp_a: exp_a BSUMA . exp_a
+   81 it_cota_exp: BMIENTRAS expresion . BHACER instrucciones BFMIENTRAS
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-
-    exp_a     ir al estado 146
-    operando  ir al estado 87
+    BHACER  desplazar e ir al estado 146
 
 
 Estado 107
 
-   45 exp_a: exp_a BMENOS . exp_a
+   82 it_cota_fija: BPARA BIDENTIFICADOR . BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-
-    exp_a     ir al estado 147
-    operando  ir al estado 87
+    BDOS_PUNTOS_IGUAL  desplazar e ir al estado 147
 
 
 Estado 108
 
-   46 exp_a: exp_a BPOR . exp_a
+   44 exp_a: exp_a BSUMA . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
     exp_a     ir al estado 148
-    operando  ir al estado 87
+    operando  ir al estado 88
 
 
 Estado 109
 
-   47 exp_a: exp_a BENTRE . exp_a
+   45 exp_a: exp_a BMENOS . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
     exp_a     ir al estado 149
-    operando  ir al estado 87
+    operando  ir al estado 88
 
 
 Estado 110
 
-   48 exp_a: exp_a BMOD . exp_a
+   46 exp_a: exp_a BPOR . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
     exp_a     ir al estado 150
-    operando  ir al estado 87
+    operando  ir al estado 88
 
 
 Estado 111
 
-   49 exp_a: exp_a BDIV . exp_a
+   47 exp_a: exp_a BENTRE . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
     exp_a     ir al estado 151
-    operando  ir al estado 87
+    operando  ir al estado 88
 
 
 Estado 112
 
-   61 exp_b: exp_a BOPREL . exp_a
+   48 exp_a: exp_a BMOD . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 97
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
     exp_a     ir al estado 152
-    operando  ir al estado 87
+    operando  ir al estado 88
 
 
 Estado 113
 
-   54 exp_b: exp_b BY . exp_b
+   49 exp_a: exp_a BDIV . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
-    exp_a              ir al estado 101
-    exp_b              ir al estado 153
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
+    exp_a     ir al estado 153
+    operando  ir al estado 88
 
 
 Estado 114
 
-   55 exp_b: exp_b BO . exp_b
+   62 exp_b: exp_a BOPREL . exp_a
 
-    BIDENTIFICADOR        desplazar e ir al estado 96
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 98
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
 
-    exp_a              ir al estado 101
-    exp_b              ir al estado 154
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
+    exp_a     ir al estado 154
+    operando  ir al estado 88
 
 
 Estado 115
 
-   63 operando: operando BPUNTO . operando
+   55 exp_b: exp_b BY . exp_b
 
-    BIDENTIFICADOR  desplazar e ir al estado 96
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    operando  ir al estado 155
+    exp_a              ir al estado 103
+    exp_b              ir al estado 155
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
 
 
 Estado 116
 
-   64 operando: operando BCORCHETE_APERTURA . expresion BCORCHETE_CIERRE
+   56 exp_b: exp_b BO . exp_b
 
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BIDENTIFICADOR        desplazar e ir al estado 97
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    expresion          ir al estado 156
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    exp_a              ir al estado 103
+    exp_b              ir al estado 156
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
 
 
 Estado 117
 
-   65 operando: operando BREF .
+   64 operando: operando BPUNTO . operando
 
-    $default  reduce usando la regla 65 (operando)
+    BIDENTIFICADOR  desplazar e ir al estado 97
+
+    operando  ir al estado 157
 
 
 Estado 118
 
-   73 asignacion: operando BDOS_PUNTOS_IGUAL .
+   65 operando: operando BCORCHETE_APERTURA . expresion BCORCHETE_CIERRE
 
-    $default  reduce usando la regla 73 (asignacion)
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion          ir al estado 158
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 119
 
-   67 instrucciones: instruccion BPUNTO_Y_COMA . instrucciones
+   66 operando: operando BREF .
 
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BCONTINUAR            desplazar e ir al estado 46
-    BSI                   desplazar e ir al estado 47
-    BMIENTRAS             desplazar e ir al estado 48
-    BPARA                 desplazar e ir al estado 49
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 51
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 54
-    operando_booleano  ir al estado 55
-    instrucciones      ir al estado 157
-    instruccion        ir al estado 57
-    asignacion         ir al estado 58
-    alternativa        ir al estado 59
-    iteracion          ir al estado 60
-    it_cota_exp        ir al estado 61
-    it_cota_fija       ir al estado 62
-    funcion_ll         ir al estado 63
+    $default  reduce usando la regla 66 (operando)
 
 
 Estado 120
 
-   84 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA . d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
+   74 asignacion: operando BDOS_PUNTOS_IGUAL . expresion
 
-    BEND  desplazar e ir al estado 158
-    BSAL  desplazar e ir al estado 159
-    BES   desplazar e ir al estado 160
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    $default  reduce usando la regla 87 (d_par_form)
-
-    d_par_form  ir al estado 161
-    d_p_form    ir al estado 162
+    expresion          ir al estado 159
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 121
 
-   82 accion_d: BACCION a_cabecera bloque . BFACCION
+   68 instrucciones: instruccion BPUNTO_Y_COMA . instrucciones
 
-    BFACCION  desplazar e ir al estado 163
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BCONTINUAR            desplazar e ir al estado 47
+    BSI                   desplazar e ir al estado 48
+    BMIENTRAS             desplazar e ir al estado 49
+    BPARA                 desplazar e ir al estado 50
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion          ir al estado 52
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 55
+    operando_booleano  ir al estado 56
+    instrucciones      ir al estado 160
+    instruccion        ir al estado 58
+    asignacion         ir al estado 59
+    alternativa        ir al estado 60
+    iteracion          ir al estado 61
+    it_cota_exp        ir al estado 62
+    it_cota_fija       ir al estado 63
+    funcion_ll         ir al estado 64
 
 
 Estado 122
 
-   85 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA . lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+   85 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA . d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
+
+    BEND  desplazar e ir al estado 161
+    BSAL  desplazar e ir al estado 162
+    BES   desplazar e ir al estado 163
+
+    $default  reduce usando la regla 88 (d_par_form)
+
+    d_par_form  ir al estado 164
+    d_p_form    ir al estado 165
+
+
+Estado 123
+
+   83 accion_d: BACCION a_cabecera bloque . BFACCION
+
+    BFACCION  desplazar e ir al estado 166
+
+
+Estado 124
+
+   86 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA . lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
 
     BIDENTIFICADOR  desplazar e ir al estado 34
 
     $default  reduce usando la regla 33 (lista_d_var)
 
-    lista_d_var  ir al estado 164
+    lista_d_var  ir al estado 167
     lista_id     ir al estado 36
 
 
-Estado 123
+Estado 125
 
-   83 funcion_d: BFUNCION f_cabecera bloque . BDEV expresion BFFUNCION
+   84 funcion_d: BFUNCION f_cabecera bloque . BDEV expresion BFFUNCION
 
-    BDEV  desplazar e ir al estado 165
+    BDEV  desplazar e ir al estado 168
 
 
-Estado 124
+Estado 126
 
    39 decl_ent: BENT lista_d_var .
 
     $default  reduce usando la regla 39 (decl_ent)
 
 
-Estado 125
+Estado 127
 
    40 decl_sal: BSAL lista_d_var .
 
     $default  reduce usando la regla 40 (decl_sal)
 
 
-Estado 126
+Estado 128
 
     2 cabecera_alg: decl_globales decl_a_f decl_ent_sal BCOMENTARIO .
 
     $default  reduce usando la regla 2 (cabecera_alg)
 
 
-Estado 127
+Estado 129
 
    37 decl_ent_sal: decl_ent decl_sal .
 
     $default  reduce usando la regla 37 (decl_ent_sal)
 
 
-Estado 128
+Estado 130
 
    28 lista_campos: BIDENTIFICADOR . BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos
 
-    BDOS_PUNTOS  desplazar e ir al estado 166
+    BDOS_PUNTOS  desplazar e ir al estado 169
 
 
-Estado 129
+Estado 131
 
    20 d_tipo: BTUPLA lista_campos . BFTUPLA
 
-    BFTUPLA  desplazar e ir al estado 167
+    BFTUPLA  desplazar e ir al estado 170
 
 
-Estado 130
+Estado 132
 
    21 d_tipo: BTABLA BCORCHETE_APERTURA . expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo
 
     BIDENTIFICADOR        desplazar e ir al estado 39
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    expresion_t        ir al estado 168
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    expresion_t        ir al estado 171
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
-Estado 131
+Estado 133
 
    24 d_tipo: BREF d_tipo .
 
     $default  reduce usando la regla 24 (d_tipo)
 
 
-Estado 132
+Estado 134
 
    18 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA . lista_d_tipo
 
@@ -1770,33 +1841,34 @@ Estado 132
 
     $default  reduce usando la regla 19 (lista_d_tipo)
 
-    lista_d_tipo  ir al estado 169
+    lista_d_tipo  ir al estado 172
 
 
-Estado 133
+Estado 135
 
    23 d_tipo: expresion_t BPUNTOSS . expresion_t
 
     BIDENTIFICADOR        desplazar e ir al estado 39
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    expresion_t        ir al estado 170
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    expresion_t        ir al estado 173
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
-Estado 134
+Estado 136
 
    30 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA . lista_d_cte
 
@@ -1804,48 +1876,48 @@ Estado 134
 
     $default  reduce usando la regla 31 (lista_d_cte)
 
-    lista_d_cte  ir al estado 171
+    lista_d_cte  ir al estado 174
 
 
-Estado 135
+Estado 137
 
    34 lista_id: BIDENTIFICADOR BCOMA lista_id .
 
     $default  reduce usando la regla 34 (lista_id)
 
 
-Estado 136
+Estado 138
 
    17 declaracion_var: BVAR lista_d_var BFVAR BPUNTO_Y_COMA .
 
     $default  reduce usando la regla 17 (declaracion_var)
 
 
-Estado 137
+Estado 139
 
    32 lista_d_var: lista_id BDOS_PUNTOS d_tipo . BPUNTO_Y_COMA lista_d_var
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 172
-
-
-Estado 138
-
-   92 l_ll: expresion . BCOMA l_ll
-   93     | expresion .
-
-    BCOMA  desplazar e ir al estado 173
-
-    $default  reduce usando la regla 93 (l_ll)
-
-
-Estado 139
-
-   91 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll . BPARENTESIS_CIERRE
-
-    BPARENTESIS_CIERRE  desplazar e ir al estado 174
+    BPUNTO_Y_COMA  desplazar e ir al estado 175
 
 
 Estado 140
+
+   93 l_ll: expresion . BCOMA l_ll
+   94     | expresion .
+
+    BCOMA  desplazar e ir al estado 176
+
+    $default  reduce usando la regla 94 (l_ll)
+
+
+Estado 141
+
+   92 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll . BPARENTESIS_CIERRE
+
+    BPARENTESIS_CIERRE  desplazar e ir al estado 177
+
+
+Estado 142
 
    44 exp_a: exp_a . BSUMA exp_a
    45      | exp_a . BMENOS exp_a
@@ -1855,115 +1927,118 @@ Estado 140
    49      | exp_a . BDIV exp_a
    50      | BPARENTESIS_APERTURA exp_a . BPARENTESIS_CIERRE
 
-    BSUMA               desplazar e ir al estado 106
-    BMENOS              desplazar e ir al estado 107
-    BPOR                desplazar e ir al estado 108
-    BENTRE              desplazar e ir al estado 109
-    BMOD                desplazar e ir al estado 110
-    BDIV                desplazar e ir al estado 111
-    BPARENTESIS_CIERRE  desplazar e ir al estado 141
+    BSUMA               desplazar e ir al estado 108
+    BMENOS              desplazar e ir al estado 109
+    BPOR                desplazar e ir al estado 110
+    BENTRE              desplazar e ir al estado 111
+    BMOD                desplazar e ir al estado 112
+    BDIV                desplazar e ir al estado 113
+    BPARENTESIS_CIERRE  desplazar e ir al estado 143
 
 
-Estado 141
+Estado 143
 
    50 exp_a: BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE .
 
     $default  reduce usando la regla 50 (exp_a)
 
 
-Estado 142
-
-   60 exp_b: BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE .
-
-    $default  reduce usando la regla 60 (exp_b)
-
-
-Estado 143
-
-   75 alternativa: BSI expresion BENTONCES . instrucciones lista_opciones BFSI
-
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BCONTINUAR            desplazar e ir al estado 46
-    BSI                   desplazar e ir al estado 47
-    BMIENTRAS             desplazar e ir al estado 48
-    BPARA                 desplazar e ir al estado 49
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 51
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 54
-    operando_booleano  ir al estado 55
-    instrucciones      ir al estado 175
-    instruccion        ir al estado 57
-    asignacion         ir al estado 58
-    alternativa        ir al estado 59
-    iteracion          ir al estado 60
-    it_cota_exp        ir al estado 61
-    it_cota_fija       ir al estado 62
-    funcion_ll         ir al estado 63
-
-
 Estado 144
 
-   80 it_cota_exp: BMIENTRAS expresion BHACER . instrucciones BFMIENTRAS
+   61 exp_b: BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE .
 
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BCONTINUAR            desplazar e ir al estado 46
-    BSI                   desplazar e ir al estado 47
-    BMIENTRAS             desplazar e ir al estado 48
-    BPARA                 desplazar e ir al estado 49
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 51
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 54
-    operando_booleano  ir al estado 55
-    instrucciones      ir al estado 176
-    instruccion        ir al estado 57
-    asignacion         ir al estado 58
-    alternativa        ir al estado 59
-    iteracion          ir al estado 60
-    it_cota_exp        ir al estado 61
-    it_cota_fija       ir al estado 62
-    funcion_ll         ir al estado 63
+    $default  reduce usando la regla 61 (exp_b)
 
 
 Estado 145
 
-   81 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL . expresion BHASTA expresion BHACER instrucciones BFPARA
+   76 alternativa: BSI expresion BENTONCES . instrucciones lista_opciones BFSI
 
     BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BCONTINUAR            desplazar e ir al estado 47
+    BSI                   desplazar e ir al estado 48
+    BMIENTRAS             desplazar e ir al estado 49
+    BPARA                 desplazar e ir al estado 50
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    expresion          ir al estado 177
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    expresion          ir al estado 52
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 55
+    operando_booleano  ir al estado 56
+    instrucciones      ir al estado 178
+    instruccion        ir al estado 58
+    asignacion         ir al estado 59
+    alternativa        ir al estado 60
+    iteracion          ir al estado 61
+    it_cota_exp        ir al estado 62
+    it_cota_fija       ir al estado 63
+    funcion_ll         ir al estado 64
 
 
 Estado 146
+
+   81 it_cota_exp: BMIENTRAS expresion BHACER . instrucciones BFMIENTRAS
+
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BCONTINUAR            desplazar e ir al estado 47
+    BSI                   desplazar e ir al estado 48
+    BMIENTRAS             desplazar e ir al estado 49
+    BPARA                 desplazar e ir al estado 50
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion          ir al estado 52
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 55
+    operando_booleano  ir al estado 56
+    instrucciones      ir al estado 179
+    instruccion        ir al estado 58
+    asignacion         ir al estado 59
+    alternativa        ir al estado 60
+    iteracion          ir al estado 61
+    it_cota_exp        ir al estado 62
+    it_cota_fija       ir al estado 63
+    funcion_ll         ir al estado 64
+
+
+Estado 147
+
+   82 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL . expresion BHASTA expresion BHACER instrucciones BFPARA
+
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion          ir al estado 180
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+
+
+Estado 148
 
    44 exp_a: exp_a . BSUMA exp_a
    44      | exp_a BSUMA exp_a .
@@ -1973,15 +2048,15 @@ Estado 146
    48      | exp_a . BMOD exp_a
    49      | exp_a . BDIV exp_a
 
-    BPOR    desplazar e ir al estado 108
-    BENTRE  desplazar e ir al estado 109
-    BMOD    desplazar e ir al estado 110
-    BDIV    desplazar e ir al estado 111
+    BPOR    desplazar e ir al estado 110
+    BENTRE  desplazar e ir al estado 111
+    BMOD    desplazar e ir al estado 112
+    BDIV    desplazar e ir al estado 113
 
     $default  reduce usando la regla 44 (exp_a)
 
 
-Estado 147
+Estado 149
 
    44 exp_a: exp_a . BSUMA exp_a
    45      | exp_a . BMENOS exp_a
@@ -1991,15 +2066,15 @@ Estado 147
    48      | exp_a . BMOD exp_a
    49      | exp_a . BDIV exp_a
 
-    BPOR    desplazar e ir al estado 108
-    BENTRE  desplazar e ir al estado 109
-    BMOD    desplazar e ir al estado 110
-    BDIV    desplazar e ir al estado 111
+    BPOR    desplazar e ir al estado 110
+    BENTRE  desplazar e ir al estado 111
+    BMOD    desplazar e ir al estado 112
+    BDIV    desplazar e ir al estado 113
 
     $default  reduce usando la regla 45 (exp_a)
 
 
-Estado 148
+Estado 150
 
    44 exp_a: exp_a . BSUMA exp_a
    45      | exp_a . BMENOS exp_a
@@ -2012,7 +2087,7 @@ Estado 148
     $default  reduce usando la regla 46 (exp_a)
 
 
-Estado 149
+Estado 151
 
    44 exp_a: exp_a . BSUMA exp_a
    45      | exp_a . BMENOS exp_a
@@ -2025,7 +2100,7 @@ Estado 149
     $default  reduce usando la regla 47 (exp_a)
 
 
-Estado 150
+Estado 152
 
    44 exp_a: exp_a . BSUMA exp_a
    45      | exp_a . BMENOS exp_a
@@ -2038,7 +2113,7 @@ Estado 150
     $default  reduce usando la regla 48 (exp_a)
 
 
-Estado 151
+Estado 153
 
    44 exp_a: exp_a . BSUMA exp_a
    45      | exp_a . BMENOS exp_a
@@ -2051,7 +2126,7 @@ Estado 151
     $default  reduce usando la regla 49 (exp_a)
 
 
-Estado 152
+Estado 154
 
    44 exp_a: exp_a . BSUMA exp_a
    45      | exp_a . BMENOS exp_a
@@ -2059,203 +2134,212 @@ Estado 152
    47      | exp_a . BENTRE exp_a
    48      | exp_a . BMOD exp_a
    49      | exp_a . BDIV exp_a
-   61 exp_b: exp_a BOPREL exp_a .
+   62 exp_b: exp_a BOPREL exp_a .
 
-    BSUMA   desplazar e ir al estado 106
-    BMENOS  desplazar e ir al estado 107
-    BPOR    desplazar e ir al estado 108
-    BENTRE  desplazar e ir al estado 109
-    BMOD    desplazar e ir al estado 110
-    BDIV    desplazar e ir al estado 111
+    BSUMA   desplazar e ir al estado 108
+    BMENOS  desplazar e ir al estado 109
+    BPOR    desplazar e ir al estado 110
+    BENTRE  desplazar e ir al estado 111
+    BMOD    desplazar e ir al estado 112
+    BDIV    desplazar e ir al estado 113
 
-    $default  reduce usando la regla 61 (exp_b)
-
-
-Estado 153
-
-   54 exp_b: exp_b . BY exp_b
-   54      | exp_b BY exp_b .
-   55      | exp_b . BO exp_b
-
-    $default  reduce usando la regla 54 (exp_b)
-
-
-Estado 154
-
-   54 exp_b: exp_b . BY exp_b
-   55      | exp_b . BO exp_b
-   55      | exp_b BO exp_b .
-
-    $default  reduce usando la regla 55 (exp_b)
+    $default  reduce usando la regla 62 (exp_b)
 
 
 Estado 155
 
-   63 operando: operando . BPUNTO operando
-   63         | operando BPUNTO operando .
-   64         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
-   65         | operando . BREF
+   55 exp_b: exp_b . BY exp_b
+   55      | exp_b BY exp_b .
+   56      | exp_b . BO exp_b
 
-    BCORCHETE_APERTURA  desplazar e ir al estado 116
-    BREF                desplazar e ir al estado 117
-
-    $default  reduce usando la regla 63 (operando)
+    $default  reduce usando la regla 55 (exp_b)
 
 
 Estado 156
 
-   64 operando: operando BCORCHETE_APERTURA expresion . BCORCHETE_CIERRE
+   55 exp_b: exp_b . BY exp_b
+   56      | exp_b . BO exp_b
+   56      | exp_b BO exp_b .
 
-    BCORCHETE_CIERRE  desplazar e ir al estado 178
+    $default  reduce usando la regla 56 (exp_b)
 
 
 Estado 157
 
-   67 instrucciones: instruccion BPUNTO_Y_COMA instrucciones .
+   64 operando: operando . BPUNTO operando
+   64         | operando BPUNTO operando .
+   65         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
+   66         | operando . BREF
 
-    $default  reduce usando la regla 67 (instrucciones)
+    BCORCHETE_APERTURA  desplazar e ir al estado 118
+    BREF                desplazar e ir al estado 119
+
+    $default  reduce usando la regla 64 (operando)
 
 
 Estado 158
 
-   88 d_p_form: BEND . lista_id BDOS_PUNTOS d_tipo
+   65 operando: operando BCORCHETE_APERTURA expresion . BCORCHETE_CIERRE
 
-    BIDENTIFICADOR  desplazar e ir al estado 34
-
-    lista_id  ir al estado 179
+    BCORCHETE_CIERRE  desplazar e ir al estado 181
 
 
 Estado 159
 
-   89 d_p_form: BSAL . lista_id BDOS_PUNTOS d_tipo
+   74 asignacion: operando BDOS_PUNTOS_IGUAL expresion .
 
-    BIDENTIFICADOR  desplazar e ir al estado 34
-
-    lista_id  ir al estado 180
+    $default  reduce usando la regla 74 (asignacion)
 
 
 Estado 160
 
-   90 d_p_form: BES . lista_id BDOS_PUNTOS d_tipo
+   68 instrucciones: instruccion BPUNTO_Y_COMA instrucciones .
 
-    BIDENTIFICADOR  desplazar e ir al estado 34
-
-    lista_id  ir al estado 181
+    $default  reduce usando la regla 68 (instrucciones)
 
 
 Estado 161
 
-   84 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form . BPARENTESIS_CIERRE BPUNTO_Y_COMA
+   89 d_p_form: BEND . lista_id BDOS_PUNTOS d_tipo
 
-    BPARENTESIS_CIERRE  desplazar e ir al estado 182
+    BIDENTIFICADOR  desplazar e ir al estado 34
+
+    lista_id  ir al estado 182
 
 
 Estado 162
 
-   86 d_par_form: d_p_form . BPUNTO_Y_COMA d_par_form
+   90 d_p_form: BSAL . lista_id BDOS_PUNTOS d_tipo
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 183
+    BIDENTIFICADOR  desplazar e ir al estado 34
+
+    lista_id  ir al estado 183
 
 
 Estado 163
 
-   82 accion_d: BACCION a_cabecera bloque BFACCION .
+   91 d_p_form: BES . lista_id BDOS_PUNTOS d_tipo
 
-    $default  reduce usando la regla 82 (accion_d)
+    BIDENTIFICADOR  desplazar e ir al estado 34
+
+    lista_id  ir al estado 184
 
 
 Estado 164
 
-   85 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var . BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+   85 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form . BPARENTESIS_CIERRE BPUNTO_Y_COMA
 
-    BPARENTESIS_CIERRE  desplazar e ir al estado 184
+    BPARENTESIS_CIERRE  desplazar e ir al estado 185
 
 
 Estado 165
 
-   83 funcion_d: BFUNCION f_cabecera bloque BDEV . expresion BFFUNCION
+   87 d_par_form: d_p_form . BPUNTO_Y_COMA d_par_form
 
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 185
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    BPUNTO_Y_COMA  desplazar e ir al estado 186
 
 
 Estado 166
 
-   28 lista_campos: BIDENTIFICADOR BDOS_PUNTOS . d_tipo BPUNTO_Y_COMA lista_campos
+   83 accion_d: BACCION a_cabecera bloque BFACCION .
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    d_tipo             ir al estado 186
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    $default  reduce usando la regla 83 (accion_d)
 
 
 Estado 167
+
+   86 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var . BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+
+    BPARENTESIS_CIERRE  desplazar e ir al estado 187
+
+
+Estado 168
+
+   84 funcion_d: BFUNCION f_cabecera bloque BDEV . expresion BFFUNCION
+
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion          ir al estado 188
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+
+
+Estado 169
+
+   28 lista_campos: BIDENTIFICADOR BDOS_PUNTOS . d_tipo BPUNTO_Y_COMA lista_campos
+
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    d_tipo             ir al estado 189
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+
+
+Estado 170
 
    20 d_tipo: BTUPLA lista_campos BFTUPLA .
 
     $default  reduce usando la regla 20 (d_tipo)
 
 
-Estado 168
+Estado 171
 
    21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t . BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo
 
-    BPUNTOSS  desplazar e ir al estado 187
+    BPUNTOSS  desplazar e ir al estado 190
 
 
-Estado 169
+Estado 172
 
    18 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo .
 
     $default  reduce usando la regla 18 (lista_d_tipo)
 
 
-Estado 170
+Estado 173
 
    23 d_tipo: expresion_t BPUNTOSS expresion_t .
 
     $default  reduce usando la regla 23 (d_tipo)
 
 
-Estado 171
+Estado 174
 
    30 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte .
 
     $default  reduce usando la regla 30 (lista_d_cte)
 
 
-Estado 172
+Estado 175
 
    32 lista_d_var: lista_id BDOS_PUNTOS d_tipo BPUNTO_Y_COMA . lista_d_var
 
@@ -2263,574 +2347,585 @@ Estado 172
 
     $default  reduce usando la regla 33 (lista_d_var)
 
-    lista_d_var  ir al estado 188
+    lista_d_var  ir al estado 191
     lista_id     ir al estado 36
-
-
-Estado 173
-
-   92 l_ll: expresion BCOMA . l_ll
-
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 138
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
-    l_ll               ir al estado 189
-
-
-Estado 174
-
-   91 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE .
-
-    $default  reduce usando la regla 91 (funcion_ll)
-
-
-Estado 175
-
-   75 alternativa: BSI expresion BENTONCES instrucciones . lista_opciones BFSI
-
-    BSINO  desplazar e ir al estado 190
-
-    $default  reduce usando la regla 77 (lista_opciones)
-
-    lista_opciones  ir al estado 191
 
 
 Estado 176
 
-   80 it_cota_exp: BMIENTRAS expresion BHACER instrucciones . BFMIENTRAS
+   93 l_ll: expresion BCOMA . l_ll
 
-    BFMIENTRAS  desplazar e ir al estado 192
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion          ir al estado 140
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+    l_ll               ir al estado 192
 
 
 Estado 177
 
-   81 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion . BHASTA expresion BHACER instrucciones BFPARA
+   92 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE .
 
-    BHASTA  desplazar e ir al estado 193
+    $default  reduce usando la regla 92 (funcion_ll)
 
 
 Estado 178
 
-   64 operando: operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE .
+   76 alternativa: BSI expresion BENTONCES instrucciones . lista_opciones BFSI
 
-    $default  reduce usando la regla 64 (operando)
+    BSINO  desplazar e ir al estado 193
+
+    $default  reduce usando la regla 78 (lista_opciones)
+
+    lista_opciones  ir al estado 194
 
 
 Estado 179
 
-   88 d_p_form: BEND lista_id . BDOS_PUNTOS d_tipo
+   81 it_cota_exp: BMIENTRAS expresion BHACER instrucciones . BFMIENTRAS
 
-    BDOS_PUNTOS  desplazar e ir al estado 194
+    BFMIENTRAS  desplazar e ir al estado 195
 
 
 Estado 180
 
-   89 d_p_form: BSAL lista_id . BDOS_PUNTOS d_tipo
+   82 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion . BHASTA expresion BHACER instrucciones BFPARA
 
-    BDOS_PUNTOS  desplazar e ir al estado 195
+    BHASTA  desplazar e ir al estado 196
 
 
 Estado 181
 
-   90 d_p_form: BES lista_id . BDOS_PUNTOS d_tipo
+   65 operando: operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE .
 
-    BDOS_PUNTOS  desplazar e ir al estado 196
+    $default  reduce usando la regla 65 (operando)
 
 
 Estado 182
 
-   84 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE . BPUNTO_Y_COMA
+   89 d_p_form: BEND lista_id . BDOS_PUNTOS d_tipo
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 197
+    BDOS_PUNTOS  desplazar e ir al estado 197
 
 
 Estado 183
 
-   86 d_par_form: d_p_form BPUNTO_Y_COMA . d_par_form
+   90 d_p_form: BSAL lista_id . BDOS_PUNTOS d_tipo
 
-    BEND  desplazar e ir al estado 158
-    BSAL  desplazar e ir al estado 159
-    BES   desplazar e ir al estado 160
-
-    $default  reduce usando la regla 87 (d_par_form)
-
-    d_par_form  ir al estado 198
-    d_p_form    ir al estado 162
+    BDOS_PUNTOS  desplazar e ir al estado 198
 
 
 Estado 184
 
-   85 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE . BDEF d_tipo BPUNTO_Y_COMA
+   91 d_p_form: BES lista_id . BDOS_PUNTOS d_tipo
 
-    BDEF  desplazar e ir al estado 199
+    BDOS_PUNTOS  desplazar e ir al estado 199
 
 
 Estado 185
 
-   83 funcion_d: BFUNCION f_cabecera bloque BDEV expresion . BFFUNCION
+   85 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE . BPUNTO_Y_COMA
 
-    BFFUNCION  desplazar e ir al estado 200
+    BPUNTO_Y_COMA  desplazar e ir al estado 200
 
 
 Estado 186
 
-   28 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo . BPUNTO_Y_COMA lista_campos
+   87 d_par_form: d_p_form BPUNTO_Y_COMA . d_par_form
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 201
+    BEND  desplazar e ir al estado 161
+    BSAL  desplazar e ir al estado 162
+    BES   desplazar e ir al estado 163
+
+    $default  reduce usando la regla 88 (d_par_form)
+
+    d_par_form  ir al estado 201
+    d_p_form    ir al estado 165
 
 
 Estado 187
 
-   21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS . expresion_t BCORCHETE_CIERRE BDE d_tipo
+   86 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE . BDEF d_tipo BPUNTO_Y_COMA
 
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion_t        ir al estado 202
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    BDEF  desplazar e ir al estado 202
 
 
 Estado 188
+
+   84 funcion_d: BFUNCION f_cabecera bloque BDEV expresion . BFFUNCION
+
+    BFFUNCION  desplazar e ir al estado 203
+
+
+Estado 189
+
+   28 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo . BPUNTO_Y_COMA lista_campos
+
+    BPUNTO_Y_COMA  desplazar e ir al estado 204
+
+
+Estado 190
+
+   21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS . expresion_t BCORCHETE_CIERRE BDE d_tipo
+
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    expresion_t        ir al estado 205
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+
+
+Estado 191
 
    32 lista_d_var: lista_id BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_d_var .
 
     $default  reduce usando la regla 32 (lista_d_var)
 
 
-Estado 189
-
-   92 l_ll: expresion BCOMA l_ll .
-
-    $default  reduce usando la regla 92 (l_ll)
-
-
-Estado 190
-
-   76 lista_opciones: BSINO . expresion BENTONCES instrucciones lista_opciones
-
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 203
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
-
-
-Estado 191
-
-   75 alternativa: BSI expresion BENTONCES instrucciones lista_opciones . BFSI
-
-    BFSI  desplazar e ir al estado 204
-
-
 Estado 192
 
-   80 it_cota_exp: BMIENTRAS expresion BHACER instrucciones BFMIENTRAS .
+   93 l_ll: expresion BCOMA l_ll .
 
-    $default  reduce usando la regla 80 (it_cota_exp)
+    $default  reduce usando la regla 93 (l_ll)
 
 
 Estado 193
 
-   81 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA . expresion BHACER instrucciones BFPARA
+   77 lista_opciones: BSINO . expresion BENTONCES instrucciones lista_opciones
 
     BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    expresion          ir al estado 205
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    expresion          ir al estado 206
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 194
 
-   88 d_p_form: BEND lista_id BDOS_PUNTOS . d_tipo
+   76 alternativa: BSI expresion BENTONCES instrucciones lista_opciones . BFSI
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    d_tipo             ir al estado 206
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    BFSI  desplazar e ir al estado 207
 
 
 Estado 195
 
-   89 d_p_form: BSAL lista_id BDOS_PUNTOS . d_tipo
+   81 it_cota_exp: BMIENTRAS expresion BHACER instrucciones BFMIENTRAS .
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    d_tipo             ir al estado 207
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    $default  reduce usando la regla 81 (it_cota_exp)
 
 
 Estado 196
 
-   90 d_p_form: BES lista_id BDOS_PUNTOS . d_tipo
+   82 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA . expresion BHACER instrucciones BFPARA
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    d_tipo             ir al estado 208
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    expresion          ir al estado 208
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 197
 
-   84 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA .
+   89 d_p_form: BEND lista_id BDOS_PUNTOS . d_tipo
 
-    $default  reduce usando la regla 84 (a_cabecera)
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    d_tipo             ir al estado 209
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 198
 
-   86 d_par_form: d_p_form BPUNTO_Y_COMA d_par_form .
+   90 d_p_form: BSAL lista_id BDOS_PUNTOS . d_tipo
 
-    $default  reduce usando la regla 86 (d_par_form)
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    d_tipo             ir al estado 210
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 199
 
-   85 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF . d_tipo BPUNTO_Y_COMA
+   91 d_p_form: BES lista_id BDOS_PUNTOS . d_tipo
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    d_tipo             ir al estado 209
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    d_tipo             ir al estado 211
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 200
 
-   83 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION .
+   85 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA .
 
-    $default  reduce usando la regla 83 (funcion_d)
+    $default  reduce usando la regla 85 (a_cabecera)
 
 
 Estado 201
 
-   28 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA . lista_campos
+   87 d_par_form: d_p_form BPUNTO_Y_COMA d_par_form .
 
-    BIDENTIFICADOR  desplazar e ir al estado 128
-
-    $default  reduce usando la regla 29 (lista_campos)
-
-    lista_campos  ir al estado 210
+    $default  reduce usando la regla 87 (d_par_form)
 
 
 Estado 202
 
-   21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t . BCORCHETE_CIERRE BDE d_tipo
+   86 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF . d_tipo BPUNTO_Y_COMA
 
-    BCORCHETE_CIERRE  desplazar e ir al estado 211
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    d_tipo             ir al estado 212
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
 
 
 Estado 203
 
-   76 lista_opciones: BSINO expresion . BENTONCES instrucciones lista_opciones
+   84 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION .
 
-    BENTONCES  desplazar e ir al estado 212
+    $default  reduce usando la regla 84 (funcion_d)
 
 
 Estado 204
 
-   75 alternativa: BSI expresion BENTONCES instrucciones lista_opciones BFSI .
+   28 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA . lista_campos
 
-    $default  reduce usando la regla 75 (alternativa)
+    BIDENTIFICADOR  desplazar e ir al estado 130
+
+    $default  reduce usando la regla 29 (lista_campos)
+
+    lista_campos  ir al estado 213
 
 
 Estado 205
 
-   81 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion . BHACER instrucciones BFPARA
+   21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t . BCORCHETE_CIERRE BDE d_tipo
 
-    BHACER  desplazar e ir al estado 213
+    BCORCHETE_CIERRE  desplazar e ir al estado 214
 
 
 Estado 206
 
-   88 d_p_form: BEND lista_id BDOS_PUNTOS d_tipo .
+   77 lista_opciones: BSINO expresion . BENTONCES instrucciones lista_opciones
 
-    $default  reduce usando la regla 88 (d_p_form)
+    BENTONCES  desplazar e ir al estado 215
 
 
 Estado 207
 
-   89 d_p_form: BSAL lista_id BDOS_PUNTOS d_tipo .
+   76 alternativa: BSI expresion BENTONCES instrucciones lista_opciones BFSI .
 
-    $default  reduce usando la regla 89 (d_p_form)
+    $default  reduce usando la regla 76 (alternativa)
 
 
 Estado 208
 
-   90 d_p_form: BES lista_id BDOS_PUNTOS d_tipo .
+   82 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion . BHACER instrucciones BFPARA
 
-    $default  reduce usando la regla 90 (d_p_form)
+    BHACER  desplazar e ir al estado 216
 
 
 Estado 209
 
-   85 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo . BPUNTO_Y_COMA
+   89 d_p_form: BEND lista_id BDOS_PUNTOS d_tipo .
 
-    BPUNTO_Y_COMA  desplazar e ir al estado 214
+    $default  reduce usando la regla 89 (d_p_form)
 
 
 Estado 210
+
+   90 d_p_form: BSAL lista_id BDOS_PUNTOS d_tipo .
+
+    $default  reduce usando la regla 90 (d_p_form)
+
+
+Estado 211
+
+   91 d_p_form: BES lista_id BDOS_PUNTOS d_tipo .
+
+    $default  reduce usando la regla 91 (d_p_form)
+
+
+Estado 212
+
+   86 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo . BPUNTO_Y_COMA
+
+    BPUNTO_Y_COMA  desplazar e ir al estado 217
+
+
+Estado 213
 
    28 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos .
 
     $default  reduce usando la regla 28 (lista_campos)
 
 
-Estado 211
+Estado 214
 
    21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE . BDE d_tipo
 
-    BDE  desplazar e ir al estado 215
-
-
-Estado 212
-
-   76 lista_opciones: BSINO expresion BENTONCES . instrucciones lista_opciones
-
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BCONTINUAR            desplazar e ir al estado 46
-    BSI                   desplazar e ir al estado 47
-    BMIENTRAS             desplazar e ir al estado 48
-    BPARA                 desplazar e ir al estado 49
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 51
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 54
-    operando_booleano  ir al estado 55
-    instrucciones      ir al estado 216
-    instruccion        ir al estado 57
-    asignacion         ir al estado 58
-    alternativa        ir al estado 59
-    iteracion          ir al estado 60
-    it_cota_exp        ir al estado 61
-    it_cota_fija       ir al estado 62
-    funcion_ll         ir al estado 63
-
-
-Estado 213
-
-   81 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER . instrucciones BFPARA
-
-    BIDENTIFICADOR        desplazar e ir al estado 39
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BCONTINUAR            desplazar e ir al estado 46
-    BSI                   desplazar e ir al estado 47
-    BMIENTRAS             desplazar e ir al estado 48
-    BPARA                 desplazar e ir al estado 49
-    BIDENTIFICADORB       desplazar e ir al estado 50
-
-    expresion          ir al estado 51
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 54
-    operando_booleano  ir al estado 55
-    instrucciones      ir al estado 217
-    instruccion        ir al estado 57
-    asignacion         ir al estado 58
-    alternativa        ir al estado 59
-    iteracion          ir al estado 60
-    it_cota_exp        ir al estado 61
-    it_cota_fija       ir al estado 62
-    funcion_ll         ir al estado 63
-
-
-Estado 214
-
-   85 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA .
-
-    $default  reduce usando la regla 85 (f_cabecera)
+    BDE  desplazar e ir al estado 218
 
 
 Estado 215
 
-   21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE . d_tipo
+   77 lista_opciones: BSINO expresion BENTONCES . instrucciones lista_opciones
 
-    BIDENTIFICADOR        desplazar e ir al estado 78
-    BTUPLA                desplazar e ir al estado 79
-    BTABLA                desplazar e ir al estado 80
-    BREF                  desplazar e ir al estado 81
-    BTIPO_BASE            desplazar e ir al estado 82
-    BLITERAL_CARACTER     desplazar e ir al estado 83
-    BMENOS                desplazar e ir al estado 40
-    BPARENTESIS_APERTURA  desplazar e ir al estado 41
-    BLITERAL_NUMERICO     desplazar e ir al estado 42
-    BNO                   desplazar e ir al estado 43
-    BVERDADERO            desplazar e ir al estado 44
-    BFALSO                desplazar e ir al estado 45
-    BIDENTIFICADORB       desplazar e ir al estado 50
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BCONTINUAR            desplazar e ir al estado 47
+    BSI                   desplazar e ir al estado 48
+    BMIENTRAS             desplazar e ir al estado 49
+    BPARA                 desplazar e ir al estado 50
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    d_tipo             ir al estado 218
-    expresion_t        ir al estado 85
-    expresion          ir al estado 86
-    exp_a              ir al estado 52
-    exp_b              ir al estado 53
-    operando           ir al estado 87
-    operando_booleano  ir al estado 55
-    funcion_ll         ir al estado 63
+    expresion          ir al estado 52
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 55
+    operando_booleano  ir al estado 56
+    instrucciones      ir al estado 219
+    instruccion        ir al estado 58
+    asignacion         ir al estado 59
+    alternativa        ir al estado 60
+    iteracion          ir al estado 61
+    it_cota_exp        ir al estado 62
+    it_cota_fija       ir al estado 63
+    funcion_ll         ir al estado 64
 
 
 Estado 216
 
-   76 lista_opciones: BSINO expresion BENTONCES instrucciones . lista_opciones
+   82 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER . instrucciones BFPARA
 
-    BSINO  desplazar e ir al estado 190
+    BIDENTIFICADOR        desplazar e ir al estado 39
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BCONTINUAR            desplazar e ir al estado 47
+    BSI                   desplazar e ir al estado 48
+    BMIENTRAS             desplazar e ir al estado 49
+    BPARA                 desplazar e ir al estado 50
+    BIDENTIFICADORB       desplazar e ir al estado 51
 
-    $default  reduce usando la regla 77 (lista_opciones)
-
-    lista_opciones  ir al estado 219
+    expresion          ir al estado 52
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 55
+    operando_booleano  ir al estado 56
+    instrucciones      ir al estado 220
+    instruccion        ir al estado 58
+    asignacion         ir al estado 59
+    alternativa        ir al estado 60
+    iteracion          ir al estado 61
+    it_cota_exp        ir al estado 62
+    it_cota_fija       ir al estado 63
+    funcion_ll         ir al estado 64
 
 
 Estado 217
 
-   81 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones . BFPARA
+   86 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA .
 
-    BFPARA  desplazar e ir al estado 220
+    $default  reduce usando la regla 86 (f_cabecera)
 
 
 Estado 218
+
+   21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE . d_tipo
+
+    BIDENTIFICADOR        desplazar e ir al estado 79
+    BTUPLA                desplazar e ir al estado 80
+    BTABLA                desplazar e ir al estado 81
+    BREF                  desplazar e ir al estado 82
+    BTIPO_BASE            desplazar e ir al estado 83
+    BLITERAL_CARACTER     desplazar e ir al estado 84
+    BSUMA                 desplazar e ir al estado 40
+    BMENOS                desplazar e ir al estado 41
+    BPARENTESIS_APERTURA  desplazar e ir al estado 42
+    BLITERAL_NUMERICO     desplazar e ir al estado 43
+    BNO                   desplazar e ir al estado 44
+    BVERDADERO            desplazar e ir al estado 45
+    BFALSO                desplazar e ir al estado 46
+    BIDENTIFICADORB       desplazar e ir al estado 51
+
+    d_tipo             ir al estado 221
+    expresion_t        ir al estado 86
+    expresion          ir al estado 87
+    exp_a              ir al estado 53
+    exp_b              ir al estado 54
+    operando           ir al estado 88
+    operando_booleano  ir al estado 56
+    funcion_ll         ir al estado 64
+
+
+Estado 219
+
+   77 lista_opciones: BSINO expresion BENTONCES instrucciones . lista_opciones
+
+    BSINO  desplazar e ir al estado 193
+
+    $default  reduce usando la regla 78 (lista_opciones)
+
+    lista_opciones  ir al estado 222
+
+
+Estado 220
+
+   82 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones . BFPARA
+
+    BFPARA  desplazar e ir al estado 223
+
+
+Estado 221
 
    21 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo .
 
     $default  reduce usando la regla 21 (d_tipo)
 
 
-Estado 219
+Estado 222
 
-   76 lista_opciones: BSINO expresion BENTONCES instrucciones lista_opciones .
+   77 lista_opciones: BSINO expresion BENTONCES instrucciones lista_opciones .
 
-    $default  reduce usando la regla 76 (lista_opciones)
+    $default  reduce usando la regla 77 (lista_opciones)
 
 
-Estado 220
+Estado 223
 
-   81 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA .
+   82 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA .
 
-    $default  reduce usando la regla 81 (it_cota_fija)
+    $default  reduce usando la regla 82 (it_cota_fija)

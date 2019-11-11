@@ -18,6 +18,7 @@ DR_MIN [a-z]
 DR_LETRA {DR_MAY}|{DR_MIN}
 DR_CR " "|"\t"|"\n"
 
+DR_PUNTO \.
 DR_ASIGNACION :=
 DR_SECUENCIAL ;
 DR_SEPARADOR ,
@@ -50,10 +51,10 @@ DR_ID_BOOLEANO (B|b)({DR_LETRA}|{DR_DIGIT})*
 DR_LOD {DR_LETRA}|{DR_DIGIT}
 
 /*Literales enteros*/
-DR_LE	[\+-]?{DR_DIGIT}+([eE]{DR_DIGIT}+)?
+DR_LE	{DR_DIGIT}+([eE]{DR_DIGIT}+)?
 
 /*Literales reales*/
-DR_LR	 [\+-]?{DR_DIGIT}+(\.{DR_DIGIT}+)?([eE]-*{DR_DIGIT}+)?
+DR_LR	 {DR_DIGIT}+(\.{DR_DIGIT}+)?([eE]-*{DR_DIGIT}+)?
 
 /*Literal cadena*/
 DR_CADENA	"\'"([^\']|("/""\'"))*"\'"
@@ -74,6 +75,7 @@ DR_PALABRA_FVAR fvar
 DR_PALABRA_HACER hacer
 DR_PALABRA_HASTA hasta
 DR_PALABRA_MIENTRAS mientras
+DR_PALABRA_FMIENTRAS fmientras
 DR_PALABRA_MOD mod
 DR_PALABRA_NO no
 DR_PALABRA_O o
@@ -109,7 +111,9 @@ DR_PALABRA_FFUNCION ffuncion
 
 
 %%
-
+{DR_PUNTO} {printf("Se ha leido %s\n",yytext);return (BPUNTO);}
+{DR_SUMA} {printf("Se ha leido %s\n",yytext);return (BSUMA);}
+{DR_NEGATIVO} {printf("Se ha leido %s\n",yytext);return (BMENOS);}
 {DR_PARENTESIS_CIERRE} {printf("Se ha leido %s\n",yytext);return (BPARENTESIS_CIERRE);}
 {DR_PARENTESIS_APERTURA} {printf("Se ha leido %s\n",yytext);return (BPARENTESIS_APERTURA);}
 {DR_PALABRA_FPARA} {printf("Se ha leido %s\n",yytext);return (BPARA);}
@@ -121,6 +125,7 @@ DR_PALABRA_FFUNCION ffuncion
 {DR_PALABRA_HACER} {printf("Se ha leido %s\n",yytext);return (BHACER);}
 {DR_PALABRA_HASTA} {printf("Se ha leido %s\n",yytext);return (BHASTA);}
 {DR_PALABRA_MIENTRAS} {printf("Se ha leido %s\n",yytext);return (BMIENTRAS);}
+{DR_PALABRA_FMIENTRAS} {printf("Se ha leido %s\n",yytext);return (BFMIENTRAS);}
 {DR_PALABRA_MOD} {printf("Se ha leido %s\n",yytext);return (BMOD);}
 {DR_PALABRA_NO} {printf("Se ha leido %s\n",yytext);return (BNO);};
 {DR_PALABRA_O} {printf("Se ha leido %s\n",yytext);return (BO);}
@@ -169,8 +174,6 @@ DR_PALABRA_FFUNCION ffuncion
 {DR_MAYOR_IGUAL} {printf("Se ha leido %s\n",yytext);return (BOPREL);}
 {DR_MENOR_IGUAL} {printf("Se ha leido %s\n",yytext);return (BOPREL);}
 {DR_DIFERENTE} {printf("Se ha leido %s\n",yytext);return (BOPREL);}
-{DR_SUMA} {printf("Se ha leido %s\n",yytext);return (BSUMA);}
-{DR_NEGATIVO} {printf("Se ha leido %s\n",yytext);return (BMENOS);}
 {DR_MULTIPLICACION} {printf("Se ha leido %s\n",yytext);return (BPOR);} 
 {DR_DIVISION} {printf("Se ha leido %s\n",yytext);return (BDIV);}
 {DR_MOD} {printf("Se ha leido %s\n",yytext);return (BMOD);}
