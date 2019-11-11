@@ -166,7 +166,7 @@ lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos {prin
 	|  {printf("empty por lista_campos\n");};
 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte {printf("BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	|  {printf("empty por lista_d_cte\n");};
-lista_d_var: lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
+lista_d_var: lista_id BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
 	|  {printf("empty por lista_d_var\n");};
 lista_id: BIDENTIFICADOR BCOMA lista_id {printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
 	| BIDENTIFICADOR {printf("empty por lista_id\n");};
