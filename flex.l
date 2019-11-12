@@ -168,8 +168,7 @@ DR_PALABRA_FFUNCION ffuncion
 {DR_TIPO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BIGUAL);}
 {DR_ARRAY} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BCORCHETE_APERTURA);}
 {DR_FIN_ARRAY} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BCORCHETE_CIERRE);}
-{DR_IGUAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BIGUALIGUAL
-);}
+{DR_IGUAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BIGUAL);}
 {DR_MAYOR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BOPREL);}
 {DR_MENOR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BOPREL);}
 {DR_MAYOR_IGUAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BOPREL);}
