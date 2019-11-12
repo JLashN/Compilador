@@ -1,13 +1,17 @@
 all: a.out
 	@echo "Todo en orden"
 
-a.out: intermedio
-	@gcc y.tab.c lex.yy.o -lfl -lm
+a.out: intermedio tabladesimbolos
+	@gcc y.tab.c lex.yy.o TablaDeSimbolos.o -lfl -lm
 	@echo "Creado a.out"
 
 intermedio: lex.yy.c bisonte
 	@gcc -c lex.yy.c
 	@echo "Compilado el archivo lex.yy.c"
+
+tabladesimbolos:
+	@gcc -c table/TablaDeSimbolos.c
+	@echo "Compilada la tabla de simbolos"
 
 lex.yy.c:
 	@flex flex.l

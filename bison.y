@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include "table/TablaDeSimbolos.h"
 void yyerror(const char* s);
 int yylex();
 static FILE* yyin;
@@ -51,7 +52,7 @@ static FILE* yyin;
 %token <valor_texto> BDIV
 %token <valor_texto> BPARENTESIS_APERTURA
 %token <valor_texto> BPARENTESIS_CIERRE
-%token <valor_texto> BLITERAL_NUMERICO
+%token <valor_doble> BLITERAL_NUMERICO
 %token <valor_texto> BY
 %token <valor_texto> BO
 %token <valor_texto> BNO

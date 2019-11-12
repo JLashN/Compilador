@@ -190,9 +190,9 @@ DR_PALABRA_FFUNCION ffuncion
 
 {DR_LC}	{printf("Se ha leido un caracter %s\n", yytext ); return (BLITERAL_CARACTER);}
 
-{DR_LE} {printf("Se ha leido un literal entero con valor %d\n", deCadenaAEntero(yytext)); return (BLITERAL_NUMERICO);}
+{DR_LE} {printf("Se ha leido un literal entero con valor %d\n", deCadenaAEntero(yytext)); yylval.valor_doble = deCadenaAEntero(yytext); return (BLITERAL_NUMERICO);}
 
-{DR_LR}	{printf("Se ha leido un literal real con valor %f\n", deCadenaAFloat(yytext)); return (BLITERAL_NUMERICO);}
+{DR_LR}	{printf("Se ha leido un literal real con valor %f\n", deCadenaAFloat(yytext)); yylval.valor_doble = deCadenaAFloat(yytext); return (BLITERAL_NUMERICO);}
 
 {DR_ID} {printf("Se ha leido un identificador\n"); return BIDENTIFICADOR;}
 {DR_ID_BOOLEANO} {printf("Se ha leido un identificador booleano\n"); return (BIDENTIFICADORB);}

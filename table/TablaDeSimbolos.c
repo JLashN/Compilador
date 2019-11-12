@@ -24,10 +24,10 @@ typedef struct Lista {
 void inicializacion (TablaDeSimbolos *lista){
 	lista->inicio = NULL;
 	lista->ultimo = NULL;
-	contador = 0;
+	lista->contador = 0;
 }
 
-void insertar_variable(Lista *lista,char* nombre, Tipo tipo){
+void insertar_variable(TablaDeSimbolos *lista,char* nombre, Tipo tipo){
 	int identificador;
 	if (lista->ultimo == NULL){
 		identificador = 0;
@@ -53,7 +53,7 @@ void insertar_variable(Lista *lista,char* nombre, Tipo tipo){
 
 }
 
-void leerlista(Lista *lista){
+void leerlista(TablaDeSimbolos *lista){
 	Elemento *aux = lista->inicio;
 	while (aux != NULL){
 
@@ -65,17 +65,3 @@ void leerlista(Lista *lista){
 
 }
 
-
-int main(){
-	TablaDeSimbolos lista;
-	inicializacion(&lista);
-	char prueba1[20] = "Hola";
-	Tipo tipo = booleano;
-	char prueba2[20] = "Adios";
-	insertar_variable(&lista,prueba1,tipo);
-	insertar_variable(&lista,prueba2,tipo);
-	insertar_variable(&lista,prueba1,tipo);
-	insertar_variable(&lista,prueba2,tipo);
-	leerlista(&lista);
-
-}
