@@ -30,4 +30,6 @@ clean:
 	@rm y.tab.c
 	@rm y.tab.h
 	@rm a.out
+	@rm TablaDeSimbolos.o
+
 	@echo "Todo limpio"
