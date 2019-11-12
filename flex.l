@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "y.tab.h"
+#include "table/TablaDeSimbolos.h"
 
 int deCadenaAEntero(char* cadena);
 

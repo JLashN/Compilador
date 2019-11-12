@@ -6,6 +6,7 @@
 void yyerror(const char* s);
 int yylex();
 static FILE* yyin;
+TablaDeSimbolos lista;
 %}
 
 %union {
@@ -13,6 +14,7 @@ static FILE* yyin;
 	char* valor_texto;
 	double valor_doble;
 	char valor_letra;
+	Tipo tipo;
 }
 
 %token <valor_texto> BALGORITMO
@@ -102,7 +104,7 @@ static FILE* yyin;
 %type <valor_texto> declaracion_const
 %type <valor_texto> declaracion_var
 %type <valor_texto> lista_d_tipo
-%type <valor_texto> d_tipo
+%type <tipo> d_tipo
 %type <valor_texto> expresion_t
 %type <valor_texto> lista_campos
 %type <valor_texto> lista_d_cte
@@ -139,45 +141,78 @@ static FILE* yyin;
 %%
 
 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO {printf("BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO por desc_algoritmo\n");};
+
+//declaraciones
+
 cabecera_alg: decl_globales decl_a_f decl_ent_sal BCOMENTARIO {printf("decl_globales decl_a_f decl_ent_sal BCOMENTARIO por cabecera_alg\n");};
+
 bloque_alg: bloque BCOMENTARIO {printf("bloque BCOMENTARIO por bloque_alg\n");};
+
 decl_globales: declaracion_tipo decl_globales {printf("declaracion_tipo decl_globales por decl_globales\n");}
 	| declaracion_const decl_globales {printf("declaracion_const decl_globales por decl_globales\n");}
 	|  {printf("empty por decl_globales\n");};
+
 decl_a_f: accion_d decl_a_f {printf("accion_d decl_a_f por decl_a_f\n");}
 	| funcion_d decl_a_f {printf("funcion_d decl_a_f por decl_a_f\n");}
 	|  {printf("empty por decl_a_f\n");};
+
 bloque: declaraciones instrucciones {printf("declaraciones instrucciones por bloque\n");};
+
 declaraciones: declaracion_tipo declaraciones {printf("declaracion_tipo declaraciones por declaraciones\n");}
 	| declaracion_const declaraciones {printf("declaracion_const declaraciones por declaraciones\n");}
 	| declaracion_var declaraciones {printf("declaracion_var declaraciones por declaraciones\n");}
 	|  {printf("empty por declaraciones\n");};
+
 declaracion_tipo: BTIPO lista_d_tipo BFTIPO BPUNTO_Y_COMA {printf("BTIPO lista_d_tipo BFTIPO BPUNTO_Y_COMA por declaracion_tipo\n");};
+
 declaracion_const: BCONST lista_d_cte BFCONST BPUNTO_Y_COMA {printf("BCONST lista_d_cte BFCONST BPUNTO_Y_COMA por declaracion_const\n");};
+
 declaracion_var: BVAR lista_d_var BFVAR BPUNTO_Y_COMA {printf("BVAR lista_d_var BFVAR BPUNTO_Y_COMA por declaracion_var\n");};
+
 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo {printf("BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo por lista_d_tipo\n");}
 	|  {printf("empty por lista_d_tipo\n");};
+
 d_tipo: BTUPLA lista_campos BFTUPLA {printf("BTUPLA lista_campos BFTUPLA por d_tipo\n");}
 	| BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo {printf("BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo por d_tipo\n");}
 	| BIDENTIFICADOR {printf("BIDENTIFICADOR por d_tipo\n");}
 	| expresion_t BPUNTOSS expresion_t {printf("expresion_t BPUNTOSS expresion_t por d_tipo\n");}
 	| BREF d_tipo {printf("BREF d_tipo por d_tipo\n");}
-	| BTIPO_BASE {printf("BTIPO_BASE por d_tipo\n");};
+	| BTIPO_BASE {
+		Tipo tipo;
+		if (strcmp($1,"entero") == 0){
+			tipo = ENTERO;
+		}else if(strcmp($1,"booleano") == 0){
+			tipo = BOOLEANO;
+		}else{
+			tipo = REAL;
+		}
+		$$ = tipo;
+		printf("BTIPO_BASE por d_tipo\n");};
+
 expresion_t: expresion {printf("expresion por expresion_t\n");}
 	| BLITERAL_CARACTER {printf("BLITERAL_CARACTER por expresion_t\n");};
+
 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos {printf("BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos por lista_campos\n");}
 	|  {printf("empty por lista_campos\n");};
+
 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte {printf("BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	|  {printf("empty por lista_d_cte\n");};
-lista_d_var: lista_id BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
+
+lista_d_var: lista_id BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
 	|  {printf("empty por lista_d_var\n");};
-lista_id: BIDENTIFICADOR BCOMA lista_id {printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
-	| BIDENTIFICADOR {printf("empty por lista_id\n");};
+
+lista_id:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&lista,$1,$3); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
+	| BIDENTIFICADOR BCOMA lista_id {insertar_variable(&lista,$1,$3);printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+
 decl_ent_sal: decl_ent {printf("decl_ent por decl_ent_sal\n");}
 	| decl_ent decl_sal {printf("decl_ent decl_sal por decl_ent_sal\n");}
 	| decl_sal {printf("decl_sal por decl_ent_sal\n");};
+
 decl_ent: BENT lista_d_var {printf("BENT lista_d_var por decl_ent\n");};
+
 decl_sal: BSAL lista_d_var {printf("BSAL lista_d_var por decl_sal\n");};
+
+// Empiezan las expresiones
 expresion: exp_a {printf("exp_a por expresion\n");}
 	| exp_b {printf("exp_b por expresion\n");}
 	| funcion_ll {printf("funcion_ll por expresion\n");};
@@ -240,6 +275,7 @@ l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 %%
  
 int main() {
+	inicializacion(&lista);
 	yyin = stdin;
 
 	do {

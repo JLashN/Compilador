@@ -4,7 +4,7 @@
 
 #define LEN_TOKEN 50
 
-typedef enum Tipo{booleano, entero, real}Tipo;
+typedef enum Tipo{BOOLEANO, ENTERO, REAL}Tipo;
 
 typedef struct Elemento {
 	int id;
@@ -19,7 +19,6 @@ typedef struct Lista {
 	Elemento *ultimo;
 	int contador;
 }TablaDeSimbolos;
-
 
 void inicializacion (TablaDeSimbolos *lista){
 	lista->inicio = NULL;

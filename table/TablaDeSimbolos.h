@@ -1,6 +1,6 @@
 #ifndef JLML_TABLADESIMBOLOS_H
 #define JLML_TABLADESIMBOLOS_H
-typedef enum Tipo{booleano, entero, real}Tipo;
+typedef enum Tipo{BOOLEANO, ENTERO, REAL}Tipo;
 
 typedef struct Elemento {
 	int id;
@@ -16,8 +16,8 @@ typedef struct Lista {
 	int contador;
 }TablaDeSimbolos;
 
-void insertar_variable(TablaDeSimbolos *lista,char* nombre, Tipo tipo);
-void inicializacion (TablaDeSimbolos *lista);
-void leerlista(TablaDeSimbolos *lista);
+void insertar_variable(TablaDeSimbolos *,char* , Tipo);
+void inicializacion (TablaDeSimbolos *);
+void leerlista(TablaDeSimbolos *);
 
 #endif
