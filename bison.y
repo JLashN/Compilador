@@ -10,6 +10,7 @@ static FILE* yyin;
 	long valor_entero;
 	char* valor_texto;
 	double valor_doble;
+	char valor_letra;
 }
 
 %token <valor_texto> BALGORITMO
