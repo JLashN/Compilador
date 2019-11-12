@@ -26,6 +26,7 @@ clean:
 	@rm lex.yy.o
 	@rm lex.yy.c
 	@rm y.output
+	@rm TablaDeSimbolos.o
 	@rm y.tab.c
 	@rm y.tab.h
 	@rm a.out

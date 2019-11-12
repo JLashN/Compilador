@@ -111,35 +111,35 @@ DR_PALABRA_FFUNCION ffuncion
 
 
 %%
-{DR_PUNTO} {printf("Se ha leido %s\n",yytext);return (BPUNTO);}
-{DR_SUMA} {printf("Se ha leido %s\n",yytext);return (BSUMA);}
-{DR_NEGATIVO} {printf("Se ha leido %s\n",yytext);return (BMENOS);}
-{DR_PARENTESIS_CIERRE} {printf("Se ha leido %s\n",yytext);return (BPARENTESIS_CIERRE);}
-{DR_PARENTESIS_APERTURA} {printf("Se ha leido %s\n",yytext);return (BPARENTESIS_APERTURA);}
-{DR_PALABRA_FPARA} {printf("Se ha leido %s\n",yytext);return (BPARA);}
-{DR_PALABRA_FSI} {printf("Se ha leido %s\n",yytext);return (BFSI);}
-{DR_PALABRA_FTIPO} {printf("Se ha leido %s\n",yytext);return (BFTIPO);}
-{DR_PALABRA_FTUPLA} {printf("Se ha leido %s\n",yytext);return (BFTUPLA);}
-{DR_PALABRA_FUNCION} {printf("Se ha leido %s\n",yytext);return (BFUNCION);}
-{DR_PALABRA_FVAR} {printf("Se ha leido %s\n",yytext);return (BFVAR);}
-{DR_PALABRA_HACER} {printf("Se ha leido %s\n",yytext);return (BHACER);}
-{DR_PALABRA_HASTA} {printf("Se ha leido %s\n",yytext);return (BHASTA);}
-{DR_PALABRA_MIENTRAS} {printf("Se ha leido %s\n",yytext);return (BMIENTRAS);}
-{DR_PALABRA_FMIENTRAS} {printf("Se ha leido %s\n",yytext);return (BFMIENTRAS);}
-{DR_PALABRA_MOD} {printf("Se ha leido %s\n",yytext);return (BMOD);}
-{DR_PALABRA_NO} {printf("Se ha leido %s\n",yytext);return (BNO);};
-{DR_PALABRA_O} {printf("Se ha leido %s\n",yytext);return (BO);}
-{DR_PALABRA_PARA} {printf("Se ha leido %s\n",yytext);return (BPARA);}
-{DR_PALABRA_REAL} {printf("Se ha leido %s\n",yytext);return (BTIPO_BASE);}
-{DR_PALABRA_REF} {printf("Se ha leido %s\n",yytext);return (BREF);}
-{DR_PALABRA_SAL} {printf("Se ha leido %s\n",yytext);return (BSAL);}
-{DR_PALABRA_SI} {printf("Se ha leido %s\n",yytext);return (BSI);}
-{DR_PALABRA_TABLA} {printf("Se ha leido %s\n",yytext);return (BTABLA);}
-{DR_PALABRA_TIPO} {printf("Se ha leido %s\n",yytext);return (BTIPO);}
-{DR_PALABRA_TUPLA} {printf("Se ha leido %s\n",yytext);return (BTUPLA);}
-{DR_PALABRA_VAR} {printf("Se ha leido %s\n",yytext);return (BVAR);}
-{DR_PALABRA_VERDADERO} {printf("Se ha leido %s\n",yytext);return (BVERDADERO);}
-{DR_PALABRA_Y} {printf("Se ha leido %s\n",yytext);return (BY);}
+{DR_PUNTO} {printf("Se ha leido %s\n",yytext); yylval.valor_texto = strdup(yytext); return (BPUNTO);}
+{DR_SUMA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BSUMA);}
+{DR_NEGATIVO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMENOS);}
+{DR_PARENTESIS_CIERRE} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BPARENTESIS_CIERRE);}
+{DR_PARENTESIS_APERTURA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BPARENTESIS_APERTURA);}
+{DR_PALABRA_FPARA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BPARA);}
+{DR_PALABRA_FSI} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFSI);}
+{DR_PALABRA_FTIPO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFTIPO);}
+{DR_PALABRA_FTUPLA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFTUPLA);}
+{DR_PALABRA_FUNCION} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFUNCION);}
+{DR_PALABRA_FVAR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFVAR);}
+{DR_PALABRA_HACER} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BHACER);}
+{DR_PALABRA_HASTA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BHASTA);}
+{DR_PALABRA_MIENTRAS} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMIENTRAS);}
+{DR_PALABRA_FMIENTRAS} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFMIENTRAS);}
+{DR_PALABRA_MOD} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMOD);}
+{DR_PALABRA_NO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BNO);};
+{DR_PALABRA_O} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BO);}
+{DR_PALABRA_PARA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BPARA);}
+{DR_PALABRA_REAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BTIPO_BASE);}
+{DR_PALABRA_REF} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BREF);}
+{DR_PALABRA_SAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BSAL);}
+{DR_PALABRA_SI} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BSI);}
+{DR_PALABRA_TABLA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BTABLA);}
+{DR_PALABRA_TIPO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BTIPO);}
+{DR_PALABRA_TUPLA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BTUPLA);}
+{DR_PALABRA_VAR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BVAR);}
+{DR_PALABRA_VERDADERO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BVERDADERO);}
+{DR_PALABRA_Y} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BY);}
 {DR_PALABRA_ACCION} {printf("Se ha leido %s\n",yytext);return (BACCION);} 
 {DR_PALABRA_ALGORITMO} {printf("Se ha leido %s\n",yytext);return (BALGORITMO);}
 {DR_PALABRA_BOOLEANO} {printf("Se ha leido %s\n",yytext);return (BTIPO_BASE);}
