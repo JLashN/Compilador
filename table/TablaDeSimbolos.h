@@ -16,7 +16,7 @@ typedef struct Lista {
 	int contador;
 }TablaDeSimbolos;
 
-void insertar_variable(TablaDeSimbolos *,char* , Tipo);
+void insertar_variable(TablaDeSimbolos *,char* , char*);
 void inicializacion (TablaDeSimbolos *);
 void leerlista(TablaDeSimbolos *);
 

@@ -6,7 +6,9 @@
 void yyerror(const char* s);
 int yylex();
 static FILE* yyin;
-TablaDeSimbolos lista;
+TablaDeSimbolos listavariables;
+TablaDeSimbolos listaconstantes;
+
 %}
 
 %union {
@@ -14,7 +16,6 @@ TablaDeSimbolos lista;
 	char* valor_texto;
 	double valor_doble;
 	char valor_letra;
-	Tipo tipo;
 }
 
 %token <valor_texto> BALGORITMO
@@ -56,6 +57,7 @@ TablaDeSimbolos lista;
 %token <valor_texto> BPARENTESIS_APERTURA
 %token <valor_texto> BPARENTESIS_CIERRE
 %token <valor_doble> BLITERAL_NUMERICO
+%token <valor_texto> BLITERAL_CADENA
 %token <valor_texto> BY
 %token <valor_texto> BO
 %token <valor_texto> BNO
@@ -104,7 +106,7 @@ TablaDeSimbolos lista;
 %type <valor_texto> declaracion_const
 %type <valor_texto> declaracion_var
 %type <valor_texto> lista_d_tipo
-%type <tipo> d_tipo
+%type <valor_texto> d_tipo
 %type <valor_texto> expresion_t
 %type <valor_texto> lista_campos
 %type <valor_texto> lista_d_cte
@@ -178,15 +180,7 @@ d_tipo: BTUPLA lista_campos BFTUPLA {printf("BTUPLA lista_campos BFTUPLA por d_t
 	| expresion_t BPUNTOSS expresion_t {printf("expresion_t BPUNTOSS expresion_t por d_tipo\n");}
 	| BREF d_tipo {printf("BREF d_tipo por d_tipo\n");}
 	| BTIPO_BASE {
-		Tipo tipo;
-		if (strcmp($1,"entero") == 0){
-			tipo = ENTERO;
-		}else if(strcmp($1,"booleano") == 0){
-			tipo = BOOLEANO;
-		}else{
-			tipo = REAL;
-		}
-		$$ = tipo;
+		$$ = $1;
 		printf("BTIPO_BASE por d_tipo\n");};
 
 expresion_t: expresion {printf("expresion por expresion_t\n");}
@@ -195,14 +189,16 @@ expresion_t: expresion {printf("expresion por expresion_t\n");}
 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos {printf("BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos por lista_campos\n");}
 	|  {printf("empty por lista_campos\n");};
 
-lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte {printf("BIDENTIFICADOR BIGUAL BLITERAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_NUMERICO BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"real"); printf("BIDENTIFICADOR BIGUAL BLITERAL_NUMERICO BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"caracter"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"cadena"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	|  {printf("empty por lista_d_cte\n");};
 
 lista_d_var: lista_id BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
 	|  {printf("empty por lista_d_var\n");};
 
-lista_id:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&lista,$1,$3); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
-	| BIDENTIFICADOR BCOMA lista_id {insertar_variable(&lista,$1,$3);printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+lista_id:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
+	| BIDENTIFICADOR BCOMA lista_id {insertar_variable(&listavariables,$1,$3); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
 
 decl_ent_sal: decl_ent {printf("decl_ent por decl_ent_sal\n");}
 	| decl_ent decl_sal {printf("decl_ent decl_sal por decl_ent_sal\n");}
@@ -275,13 +271,16 @@ l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 %%
  
 int main() {
-	inicializacion(&lista);
+	inicializacion(&listavariables);
+	inicializacion(&listaconstantes);
+
 	yyin = stdin;
 
 	do {
 		yyparse();
 	} while(!feof(yyin));
-
+	leerlista(&listaconstantes);
+	leerlista(&listavariables);
 	return 0;
 }
 

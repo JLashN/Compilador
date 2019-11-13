@@ -1,11 +1,11 @@
 all: a.out
 	@echo "Todo en orden"
 
-a.out: intermedio tabladesimbolos
+a.out: intermedio
 	@gcc y.tab.c lex.yy.o TablaDeSimbolos.o -lfl -lm
 	@echo "Creado a.out"
 
-intermedio: lex.yy.c bisonte
+intermedio: lex.yy.c bisonte tabladesimbolos
 	@gcc -c lex.yy.c
 	@echo "Compilado el archivo lex.yy.c"
 
@@ -22,14 +22,18 @@ bisonte:
 
 run: a.out
 	@cat prueba.txt | ./a.out
-clean:
-	@rm lex.yy.o
+clean: cleanArchivosFlex
+	@rm a.out
+	@echo "Todo limpio"
+cleanArchivosFlex: cleanArchivosBison cleanTablaDeSimbolos
 	@rm lex.yy.c
+	@rm lex.yy.o
+	@echo "Borrados archivos de flex"
+cleanArchivosBison:
 	@rm y.output
-	@rm TablaDeSimbolos.o
 	@rm y.tab.c
 	@rm y.tab.h
-	@rm a.out
+	@echo "Borrados archivos de bison"
+cleanTablaDeSimbolos:
 	@rm TablaDeSimbolos.o
-
-	@echo "Todo limpio"
+	@echo "Borrados archivos de la tabla de simbolos"

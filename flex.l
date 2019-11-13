@@ -5,7 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "y.tab.h"
-#include "table/TablaDeSimbolos.h"
 
 int deCadenaAEntero(char* cadena);
 
@@ -146,7 +145,7 @@ DR_PALABRA_FFUNCION ffuncion
 {DR_PALABRA_BOOLEANO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BTIPO_BASE);}
 {DR_PALABRA_CADENA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BTIPO_BASE);}
 {DR_PALABRA_CARACTER} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BTIPO_BASE);}
-{DR_PALABRA_CONST} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BTIPO_BASE);}
+{DR_PALABRA_CONST} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BCONST);}
 {DR_PALABRA_CONTINUAR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BCONTINUAR);}
 {DR_PALABRA_DE} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BDE);}
 {DR_PALABRA_DEV} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BDEV);}
@@ -187,7 +186,7 @@ DR_PALABRA_FFUNCION ffuncion
 
 {DR_COMENTARIO}	{printf("Se ha leido un comentario %s\n", yytext);yylval.valor_texto = strdup(yytext); return (BCOMENTARIO);}
 
-{DR_CADENA}	{printf("Se ha leido una cadena %s\n", yytext);}
+{DR_CADENA}	{printf("Se ha leido una cadena %s\n", yytext); yylval.valor_texto = strdup(yytext); return (BLITERAL_CADENA); }
 
 {DR_LC}	{printf("Se ha leido un caracter %s\n", yytext );yylval.valor_texto = strdup(yytext); return (BLITERAL_CARACTER);}
 

@@ -4,7 +4,7 @@
 
 #define LEN_TOKEN 50
 
-typedef enum Tipo{BOOLEANO, ENTERO, REAL}Tipo;
+typedef enum Tipo{BOOLEANO, ENTERO, REAL, CARACTER, CADENA}Tipo;
 
 typedef struct Elemento {
 	int id;
@@ -17,21 +17,29 @@ typedef struct Elemento {
 typedef struct Lista {
 	Elemento *inicio;
 	Elemento *ultimo;
-	int contador;
 }TablaDeSimbolos;
 
 void inicializacion (TablaDeSimbolos *lista){
 	lista->inicio = NULL;
 	lista->ultimo = NULL;
-	lista->contador = 0;
 }
 
-void insertar_variable(TablaDeSimbolos *lista,char* nombre, Tipo tipo){
+void insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux){
 	int identificador;
 	if (lista->ultimo == NULL){
 		identificador = 0;
 	}else{
 		identificador = lista->ultimo->id+1;
+	}
+	Tipo tipo;
+	if (strcmp(tipoaux,"entero") == 0){
+		tipo = ENTERO;
+	}else if(strcmp(tipoaux,"booleano") == 0){
+		tipo = BOOLEANO;
+	}else if(strcmp(tipoaux,"cadena") == 0){
+		tipo = CADENA;
+	}else{
+		tipo = CARACTER;
 	}
 
 	Elemento *aux = (Elemento*)malloc(sizeof(Elemento));
@@ -56,8 +64,10 @@ void leerlista(TablaDeSimbolos *lista){
 	Elemento *aux = lista->inicio;
 	while (aux != NULL){
 
-		printf("%s\n",aux->nombre);
-		printf("%d\n",aux->id);
+		printf("El nombre de la variable es %s\n",aux->nombre);
+		printf("El id de la variable es %d\n",aux->id);
+		printf("El tipo de la variable es %d\n",aux->tipo);
+
 		aux = aux->siguiente;
 
 	}

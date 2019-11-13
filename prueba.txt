@@ -1,9 +1,17 @@
 algoritmo sumacomb;
-ent n, m: entero;
+
+ent n, m: real;
 sal suma: entero;
+
 {Prec: n= N AND m = M AND M >= N >0}
+const
+A=0;
+C="A";
+D='A';
+fconst;
 var
 i, comb: entero;
+i2, comb2: real;
 fvar;
 i:= 0;
 suma:= 0;
