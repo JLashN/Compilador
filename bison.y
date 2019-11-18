@@ -189,7 +189,8 @@ expresion_t: expresion {printf("expresion por expresion_t\n");}
 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos {printf("BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos por lista_campos\n");}
 	|  {printf("empty por lista_campos\n");};
 
-lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_NUMERICO BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"real"); printf("BIDENTIFICADOR BIGUAL BLITERAL_NUMERICO BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+lista_d_cte: BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"booleano"); printf("BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_NUMERICO BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"real"); printf("BIDENTIFICADOR BIGUAL BLITERAL_NUMERICO BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	| BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"caracter"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	| BIDENTIFICADOR BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"cadena"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	|  {printf("empty por lista_d_cte\n");};

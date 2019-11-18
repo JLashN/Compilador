@@ -34,7 +34,10 @@ void insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux){
 	Tipo tipo;
 	if (strcmp(tipoaux,"entero") == 0){
 		tipo = ENTERO;
-	}else if(strcmp(tipoaux,"booleano") == 0){
+	}else if(strcmp(tipoaux,"real") == 0){
+		tipo = REAL;
+	}
+	else if(strcmp(tipoaux,"booleano") == 0){
 		tipo = BOOLEANO;
 	}else if(strcmp(tipoaux,"cadena") == 0){
 		tipo = CADENA;

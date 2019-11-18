@@ -5,6 +5,7 @@ sal suma: entero;
 
 {Prec: n= N AND m = M AND M >= N >0}
 const
+b1=verdadero;
 A=0;
 C="A";
 D='A';
