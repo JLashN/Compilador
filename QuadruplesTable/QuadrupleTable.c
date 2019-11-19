@@ -33,8 +33,8 @@ void gen(TablaDeCuadruplas *tablaQ,TablaDeSimbolos *tablaS, int operacion, int o
 
 	(tablaQ->tabla)[row][0] = getIdOperacion(operacion);
 
-	//(tablaQ->tabla)[row][1] = ;
-	//(tablaQ->tabla)[row][2] = ;
+	(tablaQ->tabla)[row][1] = operador1;
+	(tablaQ->tabla)[row][2] = operador2;
 	(tablaQ->tabla)[row][3] = destino;
 	row++;
 }
