@@ -1,6 +1,6 @@
 #ifndef JLML_TABLADESIMBOLOS_H
 #define JLML_TABLADESIMBOLOS_H
-typedef enum Tipo{BOOLEANO, ENTERO, REAL}Tipo;
+typedef enum Tipo{BOOLEANO, ENTERO, REAL, CARACTER, CADENA}Tipo;
 
 typedef struct Elemento {
 	int id;
