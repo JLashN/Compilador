@@ -11,27 +11,31 @@ void inicializacionQ(TablaDeCuadruplas *tabla){
 	tabla->nextQuad = 0;
 }
 
-
-void gen(TablaDeCuadruplas *tablaQ,TablaDeSimbolos *tablaS, char* operacion, char* operador1, char* operador2, char* destino){
-	int row = tablaQ->nextQuad;
-
-	if(strcmp(operacion,"suma")){ 
-		(tablaQ->tabla)[row][0] = 0;
+int getIdOperacion(){
+	if(strcmp(operacion,"nulo")){ 
+		return 0;		
+	}else if(strcmp(operacion,"suma")){ 
+		return 1;
 	} else if(strcmp(operacion,"menos")){ 
-		(tablaQ->tabla)[row][0] = 1;	
+		return 2;	
 	} else if(strcmp(operacion,"por")){ 
-		(tablaQ->tabla)[row][0] = 2;
+		return = 3;
 	} else if(strcmp(operacion,"entre")){ 
-		(tablaQ->tabla)[row][0] = 3;
+		return 4;
 	} else //(strcmp(operacion,"div"))
 	{ 
-		(tablaQ->tabla)[row][0] = 4;
+		return 5;
 	}
+}
 
+void gen(TablaDeCuadruplas *tablaQ,TablaDeSimbolos *tablaS, int operacion, int operador1, int operador2, int destino){
+	int row = tablaQ->nextQuad;
 
-	//(tablaQ->tabla)[row][1] = buscarId(&tablaS);
-	(tablaQ->tabla)[row][2] = 1;
-	(tablaQ->tabla)[row][3] = 1;
+	(tablaQ->tabla)[row][0] = getIdOperacion(operacion);
+
+	//(tablaQ->tabla)[row][1] = ;
+	//(tablaQ->tabla)[row][2] = ;
+	(tablaQ->tabla)[row][3] = destino;
 	row++;
 }
 
