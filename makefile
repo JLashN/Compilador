@@ -1,6 +1,3 @@
-run: all
-	cat prueba.txt | ./a.out
-
 all: a.out
 	@echo "Todo en orden"
 
@@ -40,3 +37,5 @@ cleanArchivosBison:
 cleanTablaDeSimbolos:
 	@rm TablaDeSimbolos.o
 	@echo "Borrados archivos de la tabla de simbolos"
+
+

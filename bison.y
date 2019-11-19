@@ -3,12 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include "SymbolTable/TablaDeSimbolos.h"
+#include "QuadruplesTable/QuadrupleTable.h"
 void yyerror(const char* s);
 int yylex();
 static FILE* yyin;
 TablaDeSimbolos listavariables;
 TablaDeSimbolos listaconstantes;
+tablaDeCuadruplas listainstrucciones;
 
+typedef struct E {
+	int place;
+	Tipo type;
+} E;
 %}
 
 %union {
@@ -16,6 +22,7 @@ TablaDeSimbolos listaconstantes;
 	char* valor_texto;
 	double valor_doble;
 	char valor_letra;
+	E e;
 }
 
 %token <valor_texto> BALGORITMO
@@ -56,7 +63,6 @@ TablaDeSimbolos listaconstantes;
 %token <valor_texto> BDIV
 %token <valor_texto> BPARENTESIS_APERTURA
 %token <valor_texto> BPARENTESIS_CIERRE
-%token <valor_doble> BLITERAL_NUMERICO
 %token <valor_texto> BLITERAL_CADENA
 %token <valor_texto> BY
 %token <valor_texto> BO
@@ -83,6 +89,9 @@ TablaDeSimbolos listaconstantes;
 %token <valor_texto> BFACCION
 %token <valor_texto> BES
 %token <valor_texto> BIDENTIFICADORB
+%token <valor_entero> BLITERAL_ENTERO
+%token <valor_doble> BLITERAL_REAL
+
 
 %left BSUMA BMENOS
 %left BPOR BENTRE BMOD BDIV
@@ -114,13 +123,13 @@ TablaDeSimbolos listaconstantes;
 %type <valor_texto> lista_id
 %type <valor_texto> decl_ent_sal
 %type <valor_texto> expresion
-%type <valor_texto> exp_a
+%type <e> exp_a
 %type <valor_texto> exp_b
 %type <valor_texto> operando
 %type <valor_texto> operando_booleano
 %type <valor_texto> instrucciones
 %type <valor_texto> instruccion
-%type <valor_texto> asignacion
+%type <e> asignacion
 %type <valor_texto> alternativa
 %type <valor_texto> lista_opciones
 %type <valor_texto> iteracion
@@ -190,7 +199,8 @@ lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos {prin
 	|  {printf("empty por lista_campos\n");};
 
 lista_d_cte: BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"booleano"); printf("BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
-	| BIDENTIFICADOR BIGUAL BLITERAL_NUMERICO BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"real"); printf("BIDENTIFICADOR BIGUAL BLITERAL_NUMERICO BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"entero"); printf("BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"real"); printf("BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	| BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"caracter"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	| BIDENTIFICADOR BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"cadena"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	|  {printf("empty por lista_d_cte\n");};
@@ -215,15 +225,32 @@ expresion: exp_a {printf("exp_a por expresion\n");}
 	| funcion_ll {printf("funcion_ll por expresion\n");};
 exp_a: exp_a BSUMA exp_a {printf("exp_a BSUMA exp_a por exp_a\n");}
 	| exp_a BMENOS exp_a {printf("exp_a BMENOS exp_a por exp_a\n");}
-	| exp_a BPOR exp_a {printf("exp_a BPOR exp_a por exp_a\n");}
+	| exp_a BPOR exp_a {
+ 		$$.place = insertar_variable(&listavariables,NULL,$1.type);
+
+
+
+
+	printf("exp_a BPOR exp_a por exp_a\n");}
 	| exp_a BENTRE exp_a {printf("exp_a BENTRE exp_a por exp_a\n");}
 	| exp_a BMOD exp_a {printf("exp_a BMOD exp_a por exp_a\n");}
 	| exp_a BDIV exp_a {printf("exp_a BDIV exp_a por exp_a\n");}
-	| BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE {printf("BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE por exp_a\n");}
-	| operando {printf("operando por exp_a\n");}
-	| BLITERAL_NUMERICO {printf("BLITERAL_NUMERICO por exp_a\n");}
- 	| BMENOS exp_a %prec UMINUS {printf("BMENOS exp_a por exp_a\n");}
-	| BSUMA exp_a {printf("BMAS exp_a por exp_a\n");};	
+	| BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE {$$.type = $2.type; $$.place = $2.place; printf("BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE por exp_a\n");}
+	| operando {$$.type = obtenerObjeto(&listavariables,$1)->tipo; $$.place = obtenerObjeto(&listavariables,$1)->id; printf("operando por exp_a\n");}
+	| BLITERAL_REAL {printf("BLITERAL_REAL por exp_a\n");}
+	| BLITERAL_ENTERO {printf("BLITERAL_ENTERO por exp_a\n");}
+ 	| BMENOS exp_a %prec UMINUS {
+ 		$$.place = insertar_variable(&listavariables,NULL,$1.type);
+ 		$$.type = $1.type;
+ 		if ($1.type == ENTERO){
+ 			gen(&listainstrucciones,"menosunarioreal",$1.place,0,$$.place);
+ 		}else if($1.type == REAL){
+ 			gen(&listainstrucciones,"menosunarioentero",$1.place,0,$$.place);
+ 		}
+
+
+ 	printf("BMENOS exp_a por exp_a\n");}
+	| BSUMA exp_a {$$.type = $2.type; $$.place = $2.place; printf("BMAS exp_a por exp_a\n");};	
 exp_b: exp_b BY exp_b {printf("exp_b BY exp_b por exp_b\n");}
 	| exp_b BO exp_b {printf("exp_b BO exp_b por exp_b\n");}
 	| BNO exp_b %prec UBNO {printf("BNO exp_b por exp_b\n");}
@@ -232,7 +259,7 @@ exp_b: exp_b BY exp_b {printf("exp_b BY exp_b por exp_b\n");}
 	| BFALSO {printf("BFALSO por exp_b\n");}
 	| BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE {printf("BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE por exp_b\n");}
 	| exp_a BOPREL exp_a {printf("exp_a BOPREL exp_a por exp_b\n");};
-operando: BIDENTIFICADOR {printf("BIDENTIFICADOR por operando\n");}
+operando: BIDENTIFICADOR {$$ = $1; printf("BIDENTIFICADOR por operando\n");}
 	| operando BPUNTO operando {printf("operando BPUNTO operando por operando\n");}
 	| operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE {printf("operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE por operando\n");}
 	| operando BREF {printf("operando BREF por operando\n");};
@@ -274,13 +301,13 @@ l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 int main() {
 	inicializacion(&listavariables);
 	inicializacion(&listaconstantes);
+	incializacionQ(&listainstrucciones);
 
 	yyin = stdin;
 
 	do {
 		yyparse();
 	} while(!feof(yyin));
-	leerlista(&listaconstantes);
 	leerlista(&listavariables);
 	return 0;
 }

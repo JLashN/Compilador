@@ -17,14 +17,16 @@ typedef struct Elemento {
 typedef struct Lista {
 	Elemento *inicio;
 	Elemento *ultimo;
+	int ultimaVariableTemporal;
 }TablaDeSimbolos;
 
 void inicializacion (TablaDeSimbolos *lista){
 	lista->inicio = NULL;
 	lista->ultimo = NULL;
+	lista->ultimaVariableTemporal = 0;
 }
 
-void insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux){
+int insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux){
 	int identificador;
 	if (lista->ultimo == NULL){
 		identificador = 0;
@@ -45,6 +47,12 @@ void insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux){
 		tipo = CARACTER;
 	}
 
+	if (nombre==NULL){
+		nombre = (char*)malloc(LEN_TOKEN*sizeof(nombre));
+		nombre[0] = 't'
+		itoa(lista->ultimaVariableTemporal,&(nombre[1]),16)
+	}
+
 	Elemento *aux = (Elemento*)malloc(sizeof(Elemento));
 	aux->siguiente = NULL;
 	aux->anterior = lista->ultimo;
@@ -60,6 +68,7 @@ void insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux){
 		lista->ultimo->siguiente = aux;
 		lista->ultimo = aux;	
 	}
+	return identificador;
 
 }
 
@@ -77,3 +86,32 @@ void leerlista(TablaDeSimbolos *lista){
 
 }
 
+
+void modifica_tipo_TS(TablaDeSimbolos *lista, int id, Tipo tipo){
+	Elemento *aux = lista->inicio;
+	while (aux != NULL){
+
+		if (aux->id == id){
+			aux->tipo = tipo;
+			break;
+		}
+
+		aux = aux->siguiente;
+
+	}
+}
+
+Elemento* obtenerObjeto(TablaDeSimbolos *lista, char* nombre){
+	Elemento *aux = lista->inicio;
+	while (aux != NULL){
+
+		if (strcmp(aux->nombre,nombre)==0){
+			return aux;
+		}
+
+		aux = aux->siguiente;
+
+	}
+	return NULL;
+
+}
