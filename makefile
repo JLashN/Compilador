@@ -1,3 +1,6 @@
+run: all
+	cat prueba.txt | ./a.out
+
 all: a.out
 	@echo "Todo en orden"
 
@@ -10,7 +13,7 @@ intermedio: lex.yy.c bisonte tabladesimbolos
 	@echo "Compilado el archivo lex.yy.c"
 
 tabladesimbolos:
-	@gcc -c table/TablaDeSimbolos.c
+	@gcc -c SymbolTable/TablaDeSimbolos.c
 	@echo "Compilada la tabla de simbolos"
 
 lex.yy.c:

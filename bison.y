@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "table/TablaDeSimbolos.h"
+#include "SymbolTable/TablaDeSimbolos.h"
 void yyerror(const char* s);
 int yylex();
 static FILE* yyin;
