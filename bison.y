@@ -226,11 +226,23 @@ expresion: exp_a {printf("exp_a por expresion\n");}
 exp_a: exp_a BSUMA exp_a {printf("exp_a BSUMA exp_a por exp_a\n");}
 	| exp_a BMENOS exp_a {printf("exp_a BMENOS exp_a por exp_a\n");}
 	| exp_a BPOR exp_a {
- 		$$.place = insertar_variable(&listavariables,NULL,$1.type);
-
-
-
-
+		if(($1.type == ENTERO) && ($2.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,ENTERO);
+			$$.type = ENTERO;
+			gen(&listainstrucciones,"porentero",$1.place,$3.place,$$.place);
+		} else if(($1.type == ENTERO) && ($2.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,REAL);
+			$$.type = REAL;
+			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($2.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,REAL);
+			$$.type = REAL;
+			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($2.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,REAL);
+			$$.type = REAL;
+			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
+		}
 	printf("exp_a BPOR exp_a por exp_a\n");}
 	| exp_a BENTRE exp_a {printf("exp_a BENTRE exp_a por exp_a\n");}
 	| exp_a BMOD exp_a {printf("exp_a BMOD exp_a por exp_a\n");}
