@@ -198,18 +198,30 @@ expresion_t: expresion {printf("expresion por expresion_t\n");}
 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos {printf("BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos por lista_campos\n");}
 	|  {printf("empty por lista_campos\n");};
 
-lista_d_cte: BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"booleano"); printf("BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
-	| BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"entero"); printf("BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
-	| BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"real"); printf("BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
-	| BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"caracter"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
-	| BIDENTIFICADOR BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"cadena"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+lista_d_cte: BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"booleano","constante"); printf("BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"entero","constante"); printf("BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"real","constante"); printf("BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"caracter","constante"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
+	| BIDENTIFICADOR BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte {insertar_variable(&listaconstantes,$1,"cadena","constante"); printf("BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte por lista_d_cte\n");}
 	|  {printf("empty por lista_d_cte\n");};
+
+lista_d_var_entrada: lista_id_entrada BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
+	|  {printf("empty por lista_d_var\n");};
+
+lista_d_var_salida: lista_id_salida BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
+	|  {printf("empty por lista_d_var\n");};
 
 lista_d_var: lista_id BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BIDENTIFICADOR BPUNTO_Y_COMA lista_d_var por lista_d_var\n");}
 	|  {printf("empty por lista_d_var\n");};
 
-lista_id:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
-	| BIDENTIFICADOR BCOMA lista_id {insertar_variable(&listavariables,$1,$3); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+lista_id_entrada:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"entrada"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
+	| BIDENTIFICADOR BCOMA lista_id_entrada {insertar_variable(&listavariables,$1,$3,"entrada"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+
+lista_id_salida:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"salida"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
+	| BIDENTIFICADOR BCOMA lista_id_salida {insertar_variable(&listavariables,$1,$3,"salida"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+
+lista_id:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"entorno"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
+	| BIDENTIFICADOR BCOMA lista_id {insertar_variable(&listavariables,$1,$3,"entorno"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
 
 decl_ent_sal: decl_ent {printf("decl_ent por decl_ent_sal\n");}
 	| decl_ent decl_sal {printf("decl_ent decl_sal por decl_ent_sal\n");}
@@ -227,19 +239,19 @@ exp_a: exp_a BSUMA exp_a {printf("exp_a BSUMA exp_a por exp_a\n");}
 	| exp_a BMENOS exp_a {printf("exp_a BMENOS exp_a por exp_a\n");}
 	| exp_a BPOR exp_a {
 		if(($1.type == ENTERO) && ($2.type == ENTERO)){
-			$$.place = insertar_variable(&listavariables,NULL,ENTERO);
+			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
 			$$.type = ENTERO;
 			gen(&listainstrucciones,"porentero",$1.place,$3.place,$$.place);
 		} else if(($1.type == ENTERO) && ($2.type == REAL)){
-			$$.place = insertar_variable(&listavariables,NULL,REAL);
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
 			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
 		} else if(($1.type == REAL) && ($2.type == ENTERO)){
-			$$.place = insertar_variable(&listavariables,NULL,REAL);
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
 			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
 		} else if(($1.type == REAL) && ($2.type == REAL)){
-			$$.place = insertar_variable(&listavariables,NULL,REAL);
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
 			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
 		}
@@ -252,11 +264,12 @@ exp_a: exp_a BSUMA exp_a {printf("exp_a BSUMA exp_a por exp_a\n");}
 	| BLITERAL_REAL {printf("BLITERAL_REAL por exp_a\n");}
 	| BLITERAL_ENTERO {printf("BLITERAL_ENTERO por exp_a\n");}
  	| BMENOS exp_a %prec UMINUS {
- 		$$.place = insertar_variable(&listavariables,NULL,$1.type);
- 		$$.type = $1.type;
+		$$.type = $1.type;
  		if ($1.type == ENTERO){
+	 		$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
  			gen(&listainstrucciones,"menosunarioreal",$1.place,0,$$.place);
  		}else if($1.type == REAL){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
  			gen(&listainstrucciones,"menosunarioentero",$1.place,0,$$.place);
  		}
 
