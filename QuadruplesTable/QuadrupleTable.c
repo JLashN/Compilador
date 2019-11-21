@@ -14,17 +14,26 @@ void inicializacionQ(TablaDeCuadruplas *tabla){
 int getIdOperacion(){
 	if(strcmp(operacion,"nulo")){ 
 		return 0;		
-	}else if(strcmp(operacion,"suma")){ 
+	}else if(strcmp(operacion,"sumaentero")){ 
 		return 1;
-	} else if(strcmp(operacion,"menos")){ 
+	} else if(strcmp(operacion,"menosentero")){ 
 		return 2;	
-	} else if(strcmp(operacion,"por")){ 
-		return = 3;
-	} else if(strcmp(operacion,"entre")){ 
+	} else if(strcmp(operacion,"porentero")){ 
+		return 3;
+	} else if(strcmp(operacion,"entreentero")){ 
 		return 4;
-	} else //(strcmp(operacion,"div"))
-	{ 
+	} else if(strcmp(operacion,"diventero")){ 
 		return 5;
+	}else if(strcmp(operacion,"sumareal")){ 
+		return 6;
+	} else if(strcmp(operacion,"menosreal")){ 
+		return 7;	
+	} else if(strcmp(operacion,"porreal")){ 
+		return 8;
+	} else if(strcmp(operacion,"entrereal")){ 
+		return 9;
+	} else if(strcmp(operacion,"divreal")){
+		return 10;
 	}
 }
 
