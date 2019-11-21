@@ -235,29 +235,101 @@ decl_sal: BSAL lista_d_var {printf("BSAL lista_d_var por decl_sal\n");};
 expresion: exp_a {printf("exp_a por expresion\n");}
 	| exp_b {printf("exp_b por expresion\n");}
 	| funcion_ll {printf("funcion_ll por expresion\n");};
-exp_a: exp_a BSUMA exp_a {printf("exp_a BSUMA exp_a por exp_a\n");}
-	| exp_a BMENOS exp_a {printf("exp_a BMENOS exp_a por exp_a\n");}
+exp_a: exp_a BSUMA exp_a {
+	if(($1.type == ENTERO) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
+			$$.type = ENTERO;
+			gen(&listainstrucciones,"sumaentero",$1.place,$3.place,$$.place);
+		} else if(($1.type == ENTERO) && ($3.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"sumareal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"sumareal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($3.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"sumareal",$1.place,$3.place,$$.place);
+		}
+	printf("exp_a BSUMA exp_a por exp_a\n");}
+	| exp_a BMENOS exp_a {
+		if(($1.type == ENTERO) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
+			$$.type = ENTERO;
+			gen(&listainstrucciones,"menosentero",$1.place,$3.place,$$.place);
+		} else if(($1.type == ENTERO) && ($3.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"menosreal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"menosreal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($3.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"menosreal",$1.place,$3.place,$$.place);
+		}
+	printf("exp_a BMENOS exp_a por exp_a\n");}
 	| exp_a BPOR exp_a {
-		if(($1.type == ENTERO) && ($2.type == ENTERO)){
+		if(($1.type == ENTERO) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
 			$$.type = ENTERO;
 			gen(&listainstrucciones,"porentero",$1.place,$3.place,$$.place);
-		} else if(($1.type == ENTERO) && ($2.type == REAL)){
+		} else if(($1.type == ENTERO) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
 			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
-		} else if(($1.type == REAL) && ($2.type == ENTERO)){
+		} else if(($1.type == REAL) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
 			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
-		} else if(($1.type == REAL) && ($2.type == REAL)){
+		} else if(($1.type == REAL) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
 			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
 		}
 	printf("exp_a BPOR exp_a por exp_a\n");}
-	| exp_a BENTRE exp_a {printf("exp_a BENTRE exp_a por exp_a\n");}
-	| exp_a BMOD exp_a {printf("exp_a BMOD exp_a por exp_a\n");}
+	| exp_a BENTRE exp_a {
+		if(($1.type == ENTERO) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
+			$$.type = ENTERO;
+			gen(&listainstrucciones,"entreentero",$1.place,$3.place,$$.place);
+		} else if(($1.type == ENTERO) && ($3.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"entrereal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"entrereal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($3.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"entrereal",$1.place,$3.place,$$.place);
+		}
+		printf("exp_a BENTRE exp_a por exp_a\n");}
+	| exp_a BMOD exp_a {
+		if(($1.type == ENTERO) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
+			$$.type = ENTERO;
+			gen(&listainstrucciones,"modentero",$1.place,$3.place,$$.place);
+		} else if(($1.type == ENTERO) && ($3.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"modreal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"modreal",$1.place,$3.place,$$.place);
+		} else if(($1.type == REAL) && ($3.type == REAL)){
+			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
+			$$.type = REAL;
+			gen(&listainstrucciones,"modreal",$1.place,$3.place,$$.place);
+		}
+		printf("exp_a BMOD exp_a por exp_a\n");}
 	| exp_a BDIV exp_a {printf("exp_a BDIV exp_a por exp_a\n");}
 	| BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE {$$.type = $2.type; $$.place = $2.place; printf("BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE por exp_a\n");}
 	| operando {$$.type = obtenerObjeto(&listavariables,$1)->tipo; $$.place = obtenerObjeto(&listavariables,$1)->id; printf("operando por exp_a\n");}
