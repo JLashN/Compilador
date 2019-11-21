@@ -22,7 +22,7 @@ int getIdOperacion(){
 		return 3;
 	} else if(strcmp(operacion,"entreentero")){ 
 		return 4;
-	} else if(strcmp(operacion,"diventero")){ 
+	} else if(strcmp(operacion,"modentero")){ 
 		return 5;
 	}else if(strcmp(operacion,"sumareal")){ 
 		return 6;
@@ -32,7 +32,7 @@ int getIdOperacion(){
 		return 8;
 	} else if(strcmp(operacion,"entrereal")){ 
 		return 9;
-	} else if(strcmp(operacion,"divreal")){
+	} else if(strcmp(operacion,"modreal")){
 		return 10;
 	}
 }
