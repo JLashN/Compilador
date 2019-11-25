@@ -1,5 +1,0 @@
-#ifndef JLML_DECLARACIONES_H
-#define JLML_DECLARACIONES_H
-
-
-#endif
