@@ -56,7 +56,7 @@ void gen(TablaDeCuadruplas *tablaQ,TablaDeSimbolos *tablaS, char* operacion, int
 	tablaQ->nextQuad = row;
 }
 
-void leerLista(TablaDeCuadruplas *tablaQ){
+void leerListaQ(TablaDeCuadruplas *tablaQ){
 
 	for(int i = 0; i < 100; i++){
 		for(int j = 0; j < 4; j++){		

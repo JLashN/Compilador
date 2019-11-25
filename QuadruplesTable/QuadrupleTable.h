@@ -8,8 +8,8 @@ typedef struct tablaDeCuadruplas{
 
 
 
-void gen(tablaDeCuadruplas *,char* , char* , char* , char*); //operacion, op1, op2, destino
-void inicializacion (tablaDeCuadruplas *);
-void leerlista(tablaDeCuadruplas *);
+void gen(tablaDeCuadruplas *,char* , int , int , int); //operacion, op1, op2, destino
+void inicializacionQ (tablaDeCuadruplas *);
+void leerlistaQ(tablaDeCuadruplas *);
 void getIdOperacion(char*);
 #endif

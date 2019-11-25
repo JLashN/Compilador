@@ -2,7 +2,7 @@ all: a.out
 	@echo "Todo en orden"
 
 a.out: intermedio
-	@gcc y.tab.c lex.yy.o TablaDeSimbolos.o -lfl -lm
+	@gcc y.tab.c lex.yy.o TablaDeSimbolos.o QuadrupleTable.o -lfl -lm
 	@echo "Creado a.out"
 
 intermedio: lex.yy.c bisonte tabladesimbolos tabladecuadruplas

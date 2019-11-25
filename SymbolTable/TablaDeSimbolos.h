@@ -18,7 +18,7 @@ typedef struct Lista {
 	int ultimaVariableTemporal;
 }TablaDeSimbolos;
 
-void insertar_variable(TablaDeSimbolos *,char* , char*,char*);
+int insertar_variable(TablaDeSimbolos *,char* , char*,char*);
 void inicializacion (TablaDeSimbolos *);
 void leerlista(TablaDeSimbolos *);
 Elemento* obtenerObjeto(TablaDeSimbolos *, char* );
