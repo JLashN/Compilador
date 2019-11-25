@@ -13,9 +13,6 @@ tabladesimbolos:
 	@gcc -c SymbolTable/TablaDeSimbolos.c
 	@echo "Compilada la tabla de simbolos"
 
-tabladecuadruplas:
-	@gcc -c QuadruplesTable/QuadrupleTable.c
-	@echo "Compilada la tabla de cuadruplas"
 
 lex.yy.c:
 	@flex flex.l

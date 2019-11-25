@@ -22,6 +22,21 @@ typedef struct Lista {
 	int ultimaVariableTemporal;
 }TablaDeSimbolos;
 
+Elemento* obtenerObjeto(TablaDeSimbolos *lista, char* nombre){
+	Elemento *aux = lista->inicio;
+	while (aux != NULL){
+
+		if (strcmp(aux->nombre,nombre)==0){
+			return aux;
+		}
+
+		aux = aux->siguiente;
+
+	}
+	return NULL;
+
+}
+
 void inicializacion (TablaDeSimbolos *lista){
 	lista->inicio = NULL;
 	lista->ultimo = NULL;
@@ -31,7 +46,13 @@ void inicializacion (TablaDeSimbolos *lista){
 int insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux, char* tipoentorno){
 	int identificador;
 
-	Elemento* e = obtenerObjeto(lista,nombre);
+	Elemento* e;
+	if(nombre == NULL){
+		e = NULL;
+	} else {
+		e = obtenerObjeto(lista,nombre);
+	}
+
 	if (e==NULL){
 		if (lista->ultimo == NULL){
 			identificador = 0;
@@ -52,7 +73,7 @@ int insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux, char* 
 			tipo = CARACTER;
 		}
 
-		TipoEntorno te;
+		TipoVariable te;
 		if (strcmp(tipoentorno,"entrada") == 0){
 			te = ENTRADA;
 		}else if(strcmp(tipoentorno,"salida") == 0){
@@ -72,7 +93,7 @@ int insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux, char* 
 			do{
 				nombre = (char*)malloc(LEN_TOKEN*sizeof(nombre));
 				nombre[0] = 't';
-				itoa(lista->ultimaVariableTemporal,&(nombre[1]),16);
+				sprintf(&nombre[1],"%d",lista->ultimaVariableTemporal);
 				(lista->ultimaVariableTemporal)++;
 			}while (obtenerObjeto(lista,nombre)!=NULL);
 		}
@@ -121,18 +142,15 @@ void leerlista(TablaDeSimbolos *lista){
 	}
 
 }
+/*
+void main(){
 
-Elemento* obtenerObjeto(TablaDeSimbolos *lista, char* nombre){
-	Elemento *aux = lista->inicio;
-	while (aux != NULL){
-
-		if (strcmp(aux->nombre,nombre)==0){
-			return aux;
-		}
-
-		aux = aux->siguiente;
-
-	}
-	return NULL;
-
+	TablaDeSimbolos lista;
+	inicializacion(&lista);
+	insertar_variable(&lista,"t0","entero","salida");
+	insertar_variable(&lista,"nombre2","entero","salida");
+	insertar_variable(&lista,"nombre3","real","entrada");
+	insertar_variable(&lista,NULL,"entero","salida");
+	leerlista(&lista);
 }
+*/
