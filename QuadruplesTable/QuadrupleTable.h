@@ -11,5 +11,5 @@ typedef struct tablaDeCuadruplas{
 void gen(tablaDeCuadruplas *,char* , char* , char* , char*); //operacion, op1, op2, destino
 void inicializacion (tablaDeCuadruplas *);
 void leerlista(tablaDeCuadruplas *);
-
+void getIdOperacion(char*);
 #endif
