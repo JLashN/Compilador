@@ -11,17 +11,16 @@ TablaDeSimbolos listavariables;
 TablaDeSimbolos listaconstantes;
 tablaDeCuadruplas listainstrucciones;
 
-
 %}
 
 %code requires {
 #include "SymbolTable/TablaDeSimbolos.h"
+
 	typedef struct E {
 		int place;
 		Tipo type;
 	} E;
 }
-
 %union {
 	long valor_entero;
 	char* valor_texto;
@@ -158,7 +157,6 @@ tablaDeCuadruplas listainstrucciones;
 
 
 
-
 %%
 
 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO {printf("BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO por desc_algoritmo\n");};
@@ -246,11 +244,9 @@ expresion: exp_a {printf("exp_a por expresion\n");}
 	| exp_b {printf("exp_b por expresion\n");}
 	| funcion_ll {printf("funcion_ll por expresion\n");};
 exp_a: exp_a BSUMA exp_a {
-			printf("llego asta aki");
 	if(($1.type == ENTERO) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
 			$$.type = ENTERO;
-			printf("llego asta aki2");
 			gen(&listainstrucciones,"sumaentero",$1.place,$3.place,$$.place);
 		} else if(($1.type == ENTERO) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
@@ -274,11 +270,15 @@ exp_a: exp_a BSUMA exp_a {
 		} else if(($1.type == ENTERO) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
-			gen(&listainstrucciones,"menosreal",$1.place,$3.place,$$.place);
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$1.place,0,temp);
+			gen(&listainstrucciones,"menosreal",temp,$3.place,$$.place);
 		} else if(($1.type == REAL) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
-			gen(&listainstrucciones,"menosreal",$1.place,$3.place,$$.place);
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$3.place,0,temp);
+			gen(&listainstrucciones,"menosreal",$1.place,temp,$$.place);
 		} else if(($1.type == REAL) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
@@ -293,11 +293,15 @@ exp_a: exp_a BSUMA exp_a {
 		} else if(($1.type == ENTERO) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
-			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$1.place,0,temp);
+			gen(&listainstrucciones,"porreal",temp,$3.place,$$.place);
 		} else if(($1.type == REAL) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
-			gen(&listainstrucciones,"porreal",$1.place,$3.place,$$.place);
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$3.place,0,temp);
+			gen(&listainstrucciones,"porreal",$1.place,temp,$$.place);
 		} else if(($1.type == REAL) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
@@ -312,11 +316,15 @@ exp_a: exp_a BSUMA exp_a {
 		} else if(($1.type == ENTERO) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
-			gen(&listainstrucciones,"entrereal",$1.place,$3.place,$$.place);
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$1.place,0,temp);
+			gen(&listainstrucciones,"entrereal",temp,$3.place,$$.place);
 		} else if(($1.type == REAL) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
-			gen(&listainstrucciones,"entrereal",$1.place,$3.place,$$.place);
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$3.place,0,temp);
+			gen(&listainstrucciones,"entrereal",$1.place,temp,$$.place);
 		} else if(($1.type == REAL) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
@@ -331,30 +339,59 @@ exp_a: exp_a BSUMA exp_a {
 		} else if(($1.type == ENTERO) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
-			gen(&listainstrucciones,"modreal",$1.place,$3.place,$$.place);
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$1.place,0,temp);
+			gen(&listainstrucciones,"modreal",temp,$3.place,$$.place);
 		} else if(($1.type == REAL) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
-			gen(&listainstrucciones,"modreal",$1.place,$3.place,$$.place);
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$3.place,0,temp);
+			gen(&listainstrucciones,"modreal",$1.place,temp,$$.place);
 		} else if(($1.type == REAL) && ($3.type == REAL)){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
 			$$.type = REAL;
 			gen(&listainstrucciones,"modreal",$1.place,$3.place,$$.place);
 		}
 		printf("exp_a BMOD exp_a por exp_a\n");}
-	| exp_a BDIV exp_a {printf("exp_a BDIV exp_a por exp_a\n");}
+	| exp_a BDIV exp_a {
+		$$.type = ENTERO;
+		if(($1.type == ENTERO) && ($3.type == ENTERO)){
+			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
+			gen(&listainstrucciones,"entreentero",$1.place,$3.place,$$.place);
+		} else if(($1.type == ENTERO) && ($3.type == REAL)){
+			int temp2 = insertar_variable(&listavariables,NULL,"real","temporal");
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$1.place,0,temp);
+			gen(&listainstrucciones,"modreal",temp,$3.place,temp2);
+			gen(&listainstrucciones,"truncar",temp2,0,$$.place);
+
+		} else if(($1.type == REAL) && ($3.type == ENTERO)){
+			int temp2 = insertar_variable(&listavariables,NULL,"real","temporal");
+			int temp = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"inttoreal",$3.place,0,temp);
+			gen(&listainstrucciones,"modreal",$1.place,temp,temp2);
+			gen(&listainstrucciones,"truncar",temp2,0,$$.place);
+
+		} else if(($1.type == REAL) && ($3.type == REAL)){
+			int temp2 = insertar_variable(&listavariables,NULL,"real","temporal");
+			gen(&listainstrucciones,"modreal",$1.place,$3.place,temp2);
+			gen(&listainstrucciones,"truncar",temp2,0,$$.place);
+		}	
+		
+		printf("exp_a BDIV exp_a por exp_a\n");}
 	| BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE {$$.type = $2.type; $$.place = $2.place; printf("BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE por exp_a\n");}
 	| operando {$$.type = obtenerObjeto(&listavariables,$1)->tipo; $$.place = obtenerObjeto(&listavariables,$1)->id; printf("operando por exp_a\n");}
 	| BLITERAL_REAL {printf("BLITERAL_REAL por exp_a\n");}
 	| BLITERAL_ENTERO {printf("BLITERAL_ENTERO por exp_a\n");}
  	| BMENOS exp_a %prec UMINUS {
-		$$.type = $2.type;
- 		if ($2.type == ENTERO){
+		$$.type = $1.type;
+ 		if ($1.type == ENTERO){
 	 		$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
- 			gen(&listainstrucciones,"menosunarioreal",$2.place,0,$$.place);
- 		}else if($2.type == REAL){
+ 			gen(&listainstrucciones,"menosunarioreal",$1.place,0,$$.place);
+ 		}else if($1.type == REAL){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
- 			gen(&listainstrucciones,"menosunarioentero",$2.place,0,$$.place);
+ 			gen(&listainstrucciones,"menosunarioentero",$1.place,0,$$.place);
  		}
 
 
@@ -380,7 +417,17 @@ instruccion: BCONTINUAR {printf("BCONTINUAR por instruccion\n");}
 	| alternativa {printf("alternativa por instruccion\n");}
 	| iteracion {printf("iteracion por instruccion\n");}; 
 	//| accion_ll {};
-asignacion: operando BDOS_PUNTOS_IGUAL expresion{printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
+asignacion: operando BDOS_PUNTOS_IGUAL expresion{
+	if (obtenerObjeto(&listavariables,$1)->tipo == $3.type){
+		gen(&listainstrucciones,"asignacion",$3.place,0,$1);
+	}else if((obtenerObjeto(&listavariables,$1)->tipo == REAL) && ($3.type == ENTERO)){
+		int idtemporal = insertar_variable(&listavariables,NULL,"real","temporal");
+		gen(&listainstrucciones,"inttoreal",$3.place,0,idtemporal);
+		gen(&listainstrucciones,"asignacion",idtemporal,0,$1);
+	}else if((obtenerObjeto(&listavariables,$1)->tipo == ENTERO) && ($3.type == REAL)){
+		return -1;
+	}
+	printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
 	| expresion {printf("expresion por asignacion\n");};
 alternativa: BSI expresion BENTONCES instrucciones lista_opciones BFSI {printf("BSI expresion BENTONCES instrucciones lista_opciones BFSI por alternativa\n");};
 lista_opciones: BSINO expresion BENTONCES instrucciones lista_opciones {printf("BSINO expresion BENTONCES instrucciones lista_opciones por lista_opciones\n");}
@@ -410,7 +457,7 @@ l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 int main() {
 	inicializacion(&listavariables);
 	inicializacion(&listaconstantes);
-	inicializacionQ(&listainstrucciones);
+	incializacionQ(&listainstrucciones);
 
 	yyin = stdin;
 
