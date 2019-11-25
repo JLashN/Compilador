@@ -47,6 +47,7 @@ int getIdOperacion(char* operacion){
 void gen(TablaDeCuadruplas *tablaQ,TablaDeSimbolos *tablaS, char* operacion, int operador1, int operador2, int destino){
 	int row = tablaQ->nextQuad;
 
+
 	(tablaQ->tabla)[row][0] = getIdOperacion(operacion);
 	(tablaQ->tabla)[row][1] = operador1;
 	(tablaQ->tabla)[row][2] = operador2;

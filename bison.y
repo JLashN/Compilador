@@ -126,7 +126,7 @@ tablaDeCuadruplas listainstrucciones;
 %type <valor_texto> lista_d_var
 %type <valor_texto> lista_id
 %type <valor_texto> decl_ent_sal
-%type <valor_texto> expresion
+%type <e> expresion
 %type <e> exp_a
 %type <valor_texto> exp_b
 %type <valor_texto> operando
@@ -240,7 +240,7 @@ decl_ent: BENT lista_d_var_entrada {printf("BENT lista_d_var por decl_ent\n");};
 decl_sal: BSAL lista_d_var_salida {printf("BSAL lista_d_var por decl_sal\n");};
 
 // Empiezan las expresiones
-expresion: exp_a {printf("exp_a por expresion\n");}
+expresion: exp_a {$$.type = $1.type; $$.place=$1.place;printf("exp_a por expresion\n");}
 	| exp_b {printf("exp_b por expresion\n");}
 	| funcion_ll {printf("funcion_ll por expresion\n");};
 exp_a: exp_a BSUMA exp_a {
@@ -385,13 +385,13 @@ exp_a: exp_a BSUMA exp_a {
 	| BLITERAL_REAL {printf("BLITERAL_REAL por exp_a\n");}
 	| BLITERAL_ENTERO {printf("BLITERAL_ENTERO por exp_a\n");}
  	| BMENOS exp_a %prec UMINUS {
-		$$.type = $1.type;
- 		if ($1.type == ENTERO){
+		$$.type = $2.type;
+ 		if ($2.type == ENTERO){
 	 		$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
- 			gen(&listainstrucciones,"menosunarioreal",$1.place,0,$$.place);
- 		}else if($1.type == REAL){
+ 			gen(&listainstrucciones,"menosunarioreal",$2.place,0,$$.place);
+ 		}else if($2.type == REAL){
 			$$.place = insertar_variable(&listavariables,NULL,"real","temporal");
- 			gen(&listainstrucciones,"menosunarioentero",$1.place,0,$$.place);
+ 			gen(&listainstrucciones,"menosunarioentero",$2.place,0,$$.place);
  		}
 
 
@@ -419,13 +419,13 @@ instruccion: BCONTINUAR {printf("BCONTINUAR por instruccion\n");}
 	//| accion_ll {};
 asignacion: operando BDOS_PUNTOS_IGUAL expresion{
 	if (obtenerObjeto(&listavariables,$1)->tipo == $3.type){
-		gen(&listainstrucciones,"asignacion",$3.place,0,$1);
+		gen(&listainstrucciones,"asignacion",$3.place,0,obtenerObjeto(&listavariables,$1)->id);
 	}else if((obtenerObjeto(&listavariables,$1)->tipo == REAL) && ($3.type == ENTERO)){
 		int idtemporal = insertar_variable(&listavariables,NULL,"real","temporal");
 		gen(&listainstrucciones,"inttoreal",$3.place,0,idtemporal);
-		gen(&listainstrucciones,"asignacion",idtemporal,0,$1);
+		gen(&listainstrucciones,"asignacion",idtemporal,0,obtenerObjeto(&listavariables,$1)->id);
 	}else if((obtenerObjeto(&listavariables,$1)->tipo == ENTERO) && ($3.type == REAL)){
-		return -1;
+		exit(-1);
 	}
 	printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
 	| expresion {printf("expresion por asignacion\n");};
@@ -457,7 +457,7 @@ l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 int main() {
 	inicializacion(&listavariables);
 	inicializacion(&listaconstantes);
-	incializacionQ(&listainstrucciones);
+	inicializacionQ(&listainstrucciones);
 
 	yyin = stdin;
 

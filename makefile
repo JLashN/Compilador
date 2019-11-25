@@ -39,7 +39,7 @@ cleanArchivosBison:
 	@rm y.tab.h
 	@echo "Borrados archivos de bison"
 cleanTablaDeSimbolos:
-	@rm TablaDeSimbolos.o
+	@rm TablaDeSimbolos.o QuadrupleTable.o
 	@echo "Borrados archivos de la tabla de simbolos"
 
 
