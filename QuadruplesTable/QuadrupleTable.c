@@ -44,7 +44,59 @@ int getIdOperacion(char* operacion){
 	}
 }
 
-void gen(TablaDeCuadruplas *tablaQ,TablaDeSimbolos *tablaS, char* operacion, int operador1, int operador2, int destino){
+char* getNombreOperacion(int operacion){
+	switch (operacion)
+	{
+	case 0:
+		return "nulo";
+		break;
+	case 1:
+		return "sumaentero";
+		break;
+	case 2:
+		return "menosentero";
+		break;
+	case 3:
+		return "porentero";
+		break;
+	case 4:
+		return "entreentero";
+		break;
+	case 5:
+		return "modentero";
+		break;
+	case 6:
+		return "sumareal";
+		break;
+	case 7:
+		return "menosreal";
+		break;
+	case 8:
+		return "porreal";
+		break;
+	case 9:
+		return "entrereal";
+		break;
+	case 10:
+		return "modreal";
+		break;
+	case 11:
+		return "asignacion";
+		break;
+	case 12:
+		return "inttoreal";
+		break;
+	case 13:
+		return "truncar";
+		break;
+	
+	default:
+		return NULL;
+		break;
+	}
+}
+
+void gen(TablaDeCuadruplas *tablaQ, char* operacion, int operador1, int operador2, int destino){
 	int row = tablaQ->nextQuad;
 
 
@@ -57,11 +109,27 @@ void gen(TablaDeCuadruplas *tablaQ,TablaDeSimbolos *tablaS, char* operacion, int
 	tablaQ->nextQuad = row;
 }
 
-void leerListaQ(TablaDeCuadruplas *tablaQ){
+void leerlistaQ(TablaDeCuadruplas *tablaQ, TablaDeSimbolos *tablaS){
 
-	for(int i = 0; i < 100; i++){
-		for(int j = 0; j < 4; j++){		
-			printf("%d",(tablaQ->tabla)[i][j]);
+	for(int i = 0; i < tablaQ->nextQuad; i++){
+		printf("%s ",getNombreOperacion((tablaQ->tabla)[i][0]));
+		if ((tablaQ->tabla)[i][1] == -1){
+			printf("nulo ");
+		}else{
+			printf("%s ",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][1])->nombre);
+
+		}
+		if ((tablaQ->tabla)[i][2] == -1){
+			printf("nulo ");
+		}else{
+			printf("%s ",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][2])->nombre);
+			
+		}
+		if ((tablaQ->tabla)[i][3] == -1){
+			printf("nulo");
+		}else{
+			printf("%s",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][3])->nombre);
+			
 		}
 		printf("\n");
 	}

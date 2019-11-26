@@ -1,15 +1,16 @@
 #ifndef JLML_TABLADECUADRUPLAS_H
 #define JLML_TABLADECUADRUPLAS_H
 
-typedef struct tablaDeCuadruplas{
+typedef struct TablaDeCuadruplas{
 	int tabla[100][4];
 	int nextQuad;
-} tablaDeCuadruplas;
+} TablaDeCuadruplas;
 
 
 
-void gen(tablaDeCuadruplas *,char* , int , int , int); //operacion, op1, op2, destino
-void inicializacionQ (tablaDeCuadruplas *);
-void leerlistaQ(tablaDeCuadruplas *);
+void gen(TablaDeCuadruplas *,char* , int , int , int); //operacion, op1, op2, destino
+void inicializacionQ (TablaDeCuadruplas *);
 void getIdOperacion(char*);
+char* getNombreOperacion(int);
+void leerlistaQ(TablaDeCuadruplas *, TablaDeSimbolos *);
 #endif

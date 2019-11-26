@@ -16,7 +16,7 @@ i2, comb2: real;
 fvar;
 i:= comb;
 suma:= comb;
-comb:= m;
+comb2:= i;
 mientras i <n hacer
 suma := suma + comb;
 comb := comb * (m - i-i) div (i + i);

@@ -37,6 +37,21 @@ Elemento* obtenerObjeto(TablaDeSimbolos *lista, char* nombre){
 
 }
 
+Elemento* obtenerObjetoPorId(TablaDeSimbolos *lista, int id){
+	Elemento *aux = lista->inicio;
+	while (aux != NULL){
+
+		if (aux->id==id){
+			return aux;
+		}
+
+		aux = aux->siguiente;
+
+	}
+	return NULL;
+
+}
+
 void inicializacion (TablaDeSimbolos *lista){
 	lista->inicio = NULL;
 	lista->ultimo = NULL;

@@ -22,5 +22,6 @@ int insertar_variable(TablaDeSimbolos *,char* , char*,char*);
 void inicializacion (TablaDeSimbolos *);
 void leerlista(TablaDeSimbolos *);
 Elemento* obtenerObjeto(TablaDeSimbolos *, char* );
+Elemento* obtenerObjetoPorId(TablaDeSimbolos *lista, int id);
 
 #endif
