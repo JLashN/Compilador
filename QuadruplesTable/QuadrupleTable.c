@@ -3,7 +3,7 @@
 #include <string.h>
 
 typedef struct TablaDeCuadruplas{
-	int tabla[100][4];
+	int tabla[300][4];
 	int nextQuad;
 } TablaDeCuadruplas;
 
@@ -41,6 +41,18 @@ int getIdOperacion(char* operacion){
 		return 12;
 	} else if (strcmp(operacion,"truncar") == 0){
 		return 13;
+	} else if (strcmp(operacion,"ifmayor") == 0){
+		return 14;
+	} else if (strcmp(operacion,"ifmenor") == 0){
+		return 15;
+	} else if (strcmp(operacion,"ifdiferente") == 0){
+		return 16;
+	} else if (strcmp(operacion,"ifigual") == 0){
+		return 17;
+	} else if (strcmp(operacion,"ifmayorigual") == 0){
+		return 18;
+	} else if (strcmp(operacion,"ifmenorigual") == 0){
+		return 19;
 	}
 }
 

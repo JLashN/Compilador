@@ -169,11 +169,11 @@ DR_PALABRA_FFUNCION ffuncion
 {DR_ARRAY} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BCORCHETE_APERTURA);}
 {DR_FIN_ARRAY} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BCORCHETE_CIERRE);}
 {DR_IGUAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BIGUAL);}
-{DR_MAYOR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BOPREL);}
-{DR_MENOR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BOPREL);}
-{DR_MAYOR_IGUAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BOPREL);}
-{DR_MENOR_IGUAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BOPREL);}
-{DR_DIFERENTE} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BOPREL);}
+{DR_MAYOR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMAYOR);}
+{DR_MENOR} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMENOR);}
+{DR_MAYOR_IGUAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMAYORIGUAL);}
+{DR_MENOR_IGUAL} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMENORIGUAL);}
+{DR_DIFERENTE} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BDIFERENTE);}
 {DR_MULTIPLICACION} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BPOR);} 
 {DR_DIVISION} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BDIV);}
 {DR_MOD} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMOD);}

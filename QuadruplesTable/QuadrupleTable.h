@@ -2,7 +2,7 @@
 #define JLML_TABLADECUADRUPLAS_H
 
 typedef struct TablaDeCuadruplas{
-	int tabla[100][4];
+	int tabla[300][4];
 	int nextQuad;
 } TablaDeCuadruplas;
 

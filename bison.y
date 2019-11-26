@@ -15,11 +15,17 @@ TablaDeCuadruplas listainstrucciones;
 
 %code requires {
 #include "SymbolTable/TablaDeSimbolos.h"
+#include "booleanos/booleanos.h"
 
 	typedef struct E {
 		int place;
 		Tipo type;
 	} E;
+
+	typedef struct B {
+		Patched *t;
+		Patched *f;
+	} B;
 }
 %union {
 	long valor_entero;
@@ -27,6 +33,8 @@ TablaDeCuadruplas listainstrucciones;
 	double valor_doble;
 	char valor_letra;
 	E e;
+	B b;
+	int quad;
 }
 
 %token <valor_texto> BALGORITMO
@@ -73,7 +81,6 @@ TablaDeCuadruplas listainstrucciones;
 %token <valor_texto> BNO
 %token <valor_texto> BVERDADERO
 %token <valor_texto> BFALSO
-%token <valor_texto> BOPREL
 %token <valor_texto> BCONTINUAR
 %token <valor_texto> BDOS_PUNTOS_IGUAL
 %token <valor_texto> BSI
@@ -95,7 +102,12 @@ TablaDeCuadruplas listainstrucciones;
 %token <valor_texto> BIDENTIFICADORB
 %token <valor_entero> BLITERAL_ENTERO
 %token <valor_doble> BLITERAL_REAL
-
+%token <valor_texto> BIGUAL
+%token <valor_texto> BMAYOR
+%token <valor_texto> BMENOR
+%token <valor_texto> BMAYORIGUAL
+%token <valor_texto> BMENORIGUAL
+%token <valor_texto> BDIFERENTE
 
 %left BSUMA BMENOS
 %left BPOR BENTRE BMOD BDIV
@@ -128,7 +140,7 @@ TablaDeCuadruplas listainstrucciones;
 %type <valor_texto> decl_ent_sal
 %type <e> expresion
 %type <e> exp_a
-%type <valor_texto> exp_b
+%type <b> exp_b
 %type <valor_texto> operando
 %type <valor_texto> operando_booleano
 %type <valor_texto> instrucciones
@@ -154,6 +166,8 @@ TablaDeCuadruplas listainstrucciones;
 %type <valor_texto> lista_id_salida
 %type <valor_texto> lista_d_var_entrada
 %type <valor_texto> lista_d_var_salida
+%type <quad> M
+%type <valor_texto> asignacion_booleana
 
 
 
@@ -241,8 +255,14 @@ decl_sal: BSAL lista_d_var_salida {printf("BSAL lista_d_var por decl_sal\n");};
 
 // Empiezan las expresiones
 expresion: exp_a {$$.type = $1.type; $$.place=$1.place;printf("exp_a por expresion\n");}
-	| exp_b {printf("exp_b por expresion\n");}
 	| funcion_ll {printf("funcion_ll por expresion\n");};
+
+asignacion_booleana: operando BDOS_PUNTOS_IGUAL exp_b{
+	backpatchP($3.f,listainstrucciones.nextQuad);
+	//gen(&listainstrucciones,"asignacionbooleana",$1.place,$3.place,$$.place);
+	//Por terminar
+	printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
+	| expresion {printf("expresion por asignacion\n");};
 exp_a: exp_a BSUMA exp_a {
 	if(($1.type == ENTERO) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
@@ -397,14 +417,63 @@ exp_a: exp_a BSUMA exp_a {
 
  	printf("BMENOS exp_a por exp_a\n");}
 	| BSUMA exp_a {$$.type = $2.type; $$.place = $2.place; printf("BMAS exp_a por exp_a\n");};	
-exp_b: exp_b BY exp_b {printf("exp_b BY exp_b por exp_b\n");}
-	| exp_b BO exp_b {printf("exp_b BO exp_b por exp_b\n");}
-	| BNO exp_b %prec UBNO {printf("BNO exp_b por exp_b\n");}
+exp_b: exp_b BY M exp_b {
+		backpatchP(&listainstrucciones,$1.t,$3.quad);
+		$$.f = mergeP($1.f,$4.f);
+		$$.t = $4.t;
+	
+	printf("exp_b BY exp_b por exp_b\n");}
+	| exp_b BO M exp_b {printf("exp_b BO exp_b por exp_b\n");}
+		backpatchP(&listainstrucciones,$1.f,$3.quad);
+		$$.t = mergeP($1.t,$4.t);
+		$$.f = $4.f;
+	| BNO exp_b %prec UBNO {
+		$$.t = $2.f;
+		$$.f = $2.t;		
+		printf("BNO exp_b por exp_b\n");}
 	| operando_booleano {printf("operando_booleano por exp_b\n");}
 	| BVERDADERO {printf("BVERDADERO por exp_b\n");}
 	| BFALSO {printf("BFALSO por exp_b\n");}
-	| BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE {printf("BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE por exp_b\n");}
-	| exp_a BOPREL exp_a {printf("exp_a BOPREL exp_a por exp_b\n");};
+	| BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE {
+		$$.t = $2.t;
+		$$.f = $2.f;
+		printf("BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE por exp_b\n");}
+	| exp_a BIGUAL exp_a {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"ifigual",$1.place,$3.place,-1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);
+		printf("exp_a BOPREL exp_a por exp_b\n");}
+	| exp_a BMAYOR exp_a {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"ifmayor",$1.place,$3.place,-1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);
+		printf("exp_a BOPREL exp_a por exp_b\n");}
+	| exp_a BMENOR exp_a {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"ifmenor",$1.place,$3.place,-1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);
+		printf("exp_a BOPREL exp_a por exp_b\n");}
+	| exp_a BDIFERENTE exp_a {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"ifdiferente",$1.place,$3.place,-1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);
+		printf("exp_a BOPREL exp_a por exp_b\n");}
+	| exp_a BMAYORIGUAL exp_a {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"ifmayorigual",$1.place,$3.place,-1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);
+		printf("exp_a BOPREL exp_a por exp_b\n");}
+	| exp_a BMENORIGUAL exp_a {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"ifmenorigual",$1.place,$3.place,-1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);
+		printf("exp_a BOPREL exp_a por exp_b\n");};
 operando: BIDENTIFICADOR {$$ = $1; printf("BIDENTIFICADOR por operando\n");}
 	| operando BPUNTO operando {printf("operando BPUNTO operando por operando\n");}
 	| operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE {printf("operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE por operando\n");}
@@ -451,9 +520,10 @@ d_p_form: BEND lista_id BDOS_PUNTOS d_tipo {printf("BEND lista_id BDOS_PUNTOS d_
 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE {printf("BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE por funcion_ll\n");};
 l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 	| expresion {printf("expresion por l_ll\n");};
- 
+
+M: {$$.quad = listainstrucciones.nextQuad; printf("M por empty")};
 %%
- 
+
 int main() {
 	inicializacion(&listavariables);
 	inicializacion(&listaconstantes);
