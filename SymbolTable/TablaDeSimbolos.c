@@ -108,8 +108,9 @@ int insertar_variable(TablaDeSimbolos *lista,char* nombre, char* tipoaux, char* 
 			if (tipo == BOOLEANO){
 				do{
 					nombre = (char*)malloc(LEN_TOKEN*sizeof(nombre));
-					nombre[0] = 'bt';
-					sprintf(&nombre[1],"%d",lista->ultimaVariableTemporal);
+					nombre[0] = 'b';
+					nombre[1] = 't';
+					sprintf(&nombre[2],"%d",lista->ultimaVariableTemporal);
 					(lista->ultimaVariableTemporal)++;
 				}while (obtenerObjeto(lista,nombre)!=NULL);
 
