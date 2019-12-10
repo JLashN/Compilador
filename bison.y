@@ -443,9 +443,22 @@ exp_b: exp_b BY M exp_b {
 		$$.t = $2.f;
 		$$.f = $2.t;		
 		printf("BNO exp_b por exp_b\n");}
-	| operando_booleano {printf("operando_booleano por exp_b\n");}
-	| BVERDADERO {printf("BVERDADERO por exp_b\n");}
-	| BFALSO {printf("BFALSO por exp_b\n");}
+	| operando_booleano {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);		
+		printf("operando_booleano por exp_b\n");}
+	| BVERDADERO {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);			
+		
+		printf("BVERDADERO por exp_b\n");}
+	| BFALSO {
+		$$.t = makelistP(listainstrucciones.nextQuad);
+		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"goto",-1,-1,-1);		
+		printf("BFALSO por exp_b\n");}
 	| BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE {
 		$$.t = $2.t;
 		$$.f = $2.f;

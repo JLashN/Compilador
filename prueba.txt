@@ -5,7 +5,7 @@ sal suma: entero;
 
 {Prec: n= N AND m = M AND M >= N >0}
 const
-b1=verdadero;
+b7=verdadero;
 A=0;
 C="A";
 D='A';
@@ -13,10 +13,11 @@ fconst;
 var
 i, comb: entero;
 i2, comb2: real;
-b1: booleano;
+b1,b3,b4,b5: booleano;
 fvar;
 
-b1 := 5 < 6;
+b1 := i2 < comb2;
+b3 := (i>comb) y (i2<comb2);
 
 i:= comb;
 suma:= comb;
