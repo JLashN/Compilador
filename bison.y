@@ -444,19 +444,22 @@ exp_b: exp_b BY M exp_b {
 		$$.f = $2.t;		
 		printf("BNO exp_b por exp_b\n");}
 	| operando_booleano {
+		int t1 = insertar_variable(&listavariables,NULL,"booleano","temporal");
+		gen(&listainstrucciones,"asignaciontrue",-1,-1,t1);
 		$$.t = makelistP(listainstrucciones.nextQuad);
-		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		gen(&listainstrucciones,"ifigual",t1,obtenerObjeto(&listavariables,$1)->id,-1);
+		$$.f = makelistP(listainstrucciones.nextQuad);
 		gen(&listainstrucciones,"goto",-1,-1,-1);		
 		printf("operando_booleano por exp_b\n");}
 	| BVERDADERO {
 		$$.t = makelistP(listainstrucciones.nextQuad);
-		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		$$.f = makelistVaciaP();
 		gen(&listainstrucciones,"goto",-1,-1,-1);			
 		
 		printf("BVERDADERO por exp_b\n");}
 	| BFALSO {
-		$$.t = makelistP(listainstrucciones.nextQuad);
-		$$.f = makelistP(listainstrucciones.nextQuad + 1);
+		$$.t = makelistVaciaP();
+		$$.f = makelistP(listainstrucciones.nextQuad);
 		gen(&listainstrucciones,"goto",-1,-1,-1);		
 		printf("BFALSO por exp_b\n");}
 	| BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE {
@@ -503,7 +506,7 @@ operando: BIDENTIFICADOR {$$ = $1; printf("BIDENTIFICADOR por operando\n");}
 	| operando BPUNTO operando {printf("operando BPUNTO operando por operando\n");}
 	| operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE {printf("operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE por operando\n");}
 	| operando BREF {printf("operando BREF por operando\n");};
-operando_booleano: BIDENTIFICADORB {printf("BIDENTIFICADOR por operando_booleano\n");};
+operando_booleano: BIDENTIFICADORB {$$ = $1; printf("BIDENTIFICADOR por operando_booleano\n");};
 instrucciones: instruccion BPUNTO_Y_COMA instrucciones {printf("instruccion BPUNTO_Y_COMA instrucciones por instrucciones\n");}
 	| instruccion {printf("instruccion por instrucciones\n");};
 instruccion: BCONTINUAR {printf("BCONTINUAR por instruccion\n");}

@@ -173,12 +173,22 @@ void leerlistaQ(TablaDeCuadruplas *tablaQ, TablaDeSimbolos *tablaS){
 				printf("%s ",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][2])->nombre);
 				
 			}
-			if ((tablaQ->tabla)[i][3] == -1){
-				printf("nulo");
-			}else{
-				printf("%s",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][3])->nombre);
+			if (((tablaQ->tabla)[i][0] > 13) && ((tablaQ->tabla)[i][0] < 20)){
+				if ((tablaQ->tabla)[i][3] == -1){
+					printf("nulo");
+				}else{
+					printf("%d",(tablaQ->tabla)[i][3]);
+				}
 				
+			}else{
+				if ((tablaQ->tabla)[i][3] == -1){
+					printf("nulo");
+				}else{
+					printf("%s",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][3])->nombre);
+					
+				}
 			}
+	
 			printf("\n");
 		}else{
 			printf("%d\n",(tablaQ->tabla)[i][3]);

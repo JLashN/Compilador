@@ -9,6 +9,7 @@ typedef struct Patched {
 } Patched;
 
 Patched* makelistP(int);
+Patched* makelistVaciaP();
 Patched* mergeP(Patched*,Patched*);
 void backpatchP(TablaDeCuadruplas * , Patched * , int );
 

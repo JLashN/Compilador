@@ -18,6 +18,8 @@ fvar;
 
 b1 := i2 < comb2;
 b3 := (i>comb) y (i2<comb2);
+b3 := (i>=comb) o (i2<=comb2);
+
 
 i:= comb;
 suma:= comb;
