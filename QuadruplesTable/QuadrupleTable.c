@@ -53,6 +53,12 @@ int getIdOperacion(char* operacion){
 		return 18;
 	} else if (strcmp(operacion,"ifmenorigual") == 0){
 		return 19;
+	} else if (strcmp(operacion,"goto") == 0){
+		return 20;
+	} else if (strcmp(operacion,"asignaciontrue") == 0) {
+		return 21;
+	} else if (strcmp(operacion,"asignacionfalse") == 0) {
+		return 22;
 	}
 }
 
@@ -101,6 +107,34 @@ char* getNombreOperacion(int operacion){
 	case 13:
 		return "truncar";
 		break;
+	case 14:
+		return "ifmayor";
+		break;
+	case 15:
+		return "ifmenor";
+		break;
+	case 16:
+		return "ifdiferente";
+		break;
+	case 17:
+		return "ifigual";
+		break;
+	case 18:
+		return "ifmayorigual";
+		break;
+	case 19:
+		return "ifmenorigual";
+		break;
+	case 20:
+		return "goto";
+		break;
+	case 21:
+		return "asignaciontrue";
+		break;
+	case 22:
+		return "asignacionfalse";
+		break;
+
 	
 	default:
 		return NULL;
@@ -124,26 +158,31 @@ void gen(TablaDeCuadruplas *tablaQ, char* operacion, int operador1, int operador
 void leerlistaQ(TablaDeCuadruplas *tablaQ, TablaDeSimbolos *tablaS){
 
 	for(int i = 0; i < tablaQ->nextQuad; i++){
+		printf("%d: ",i);
 		printf("%s ",getNombreOperacion((tablaQ->tabla)[i][0]));
-		if ((tablaQ->tabla)[i][1] == -1){
-			printf("nulo ");
-		}else{
-			printf("%s ",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][1])->nombre);
+		if ((tablaQ->tabla)[i][0] != 20){ //Si es goto imprime el destino de la tabla de cuadruplas
+			if ((tablaQ->tabla)[i][1] == -1){
+				printf("nulo ");
+			}else{
+				printf("%s ",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][1])->nombre);
 
-		}
-		if ((tablaQ->tabla)[i][2] == -1){
-			printf("nulo ");
+			}
+			if ((tablaQ->tabla)[i][2] == -1){
+				printf("nulo ");
+			}else{
+				printf("%s ",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][2])->nombre);
+				
+			}
+			if ((tablaQ->tabla)[i][3] == -1){
+				printf("nulo");
+			}else{
+				printf("%s",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][3])->nombre);
+				
+			}
+			printf("\n");
 		}else{
-			printf("%s ",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][2])->nombre);
-			
+			printf("%d\n",(tablaQ->tabla)[i][3]);
 		}
-		if ((tablaQ->tabla)[i][3] == -1){
-			printf("nulo");
-		}else{
-			printf("%s",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][3])->nombre);
-			
-		}
-		printf("\n");
 	}
 }
 

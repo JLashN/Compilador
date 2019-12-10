@@ -203,6 +203,7 @@ declaracion_const: BCONST lista_d_cte BFCONST BPUNTO_Y_COMA {printf("BCONST list
 declaracion_var: BVAR lista_d_var BFVAR BPUNTO_Y_COMA {printf("BVAR lista_d_var BFVAR BPUNTO_Y_COMA por declaracion_var\n");};
 
 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo {printf("BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo por lista_d_tipo\n");}
+	BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo {printf("BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo por lista_d_tipo\n");}
 	|  {printf("empty por lista_d_tipo\n");};
 
 d_tipo: BTUPLA lista_campos BFTUPLA {printf("BTUPLA lista_campos BFTUPLA por d_tipo\n");}
@@ -210,6 +211,7 @@ d_tipo: BTUPLA lista_campos BFTUPLA {printf("BTUPLA lista_campos BFTUPLA por d_t
 	| BIDENTIFICADOR {printf("BIDENTIFICADOR por d_tipo\n");}
 	| expresion_t BPUNTOSS expresion_t {printf("expresion_t BPUNTOSS expresion_t por d_tipo\n");}
 	| BREF d_tipo {printf("BREF d_tipo por d_tipo\n");}
+	| BIDENTIFICADORB {printf("BIDENTIFICADORB por d_tipo\n");}
 	| BTIPO_BASE {
 		$$ = $1;
 		printf("BTIPO_BASE por d_tipo\n");};
@@ -237,13 +239,19 @@ lista_d_var: lista_id BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BI
 	|  {printf("empty por lista_d_var\n");};
 
 lista_id_entrada:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"entrada"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
-	| BIDENTIFICADOR BCOMA lista_id_entrada {insertar_variable(&listavariables,$1,$3,"entrada"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+	| BIDENTIFICADORB BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"entrada"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
+	| BIDENTIFICADOR BCOMA lista_id_entrada {insertar_variable(&listavariables,$1,$3,"entrada"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
+	| BIDENTIFICADORB BCOMA lista_id_entrada {insertar_variable(&listavariables,$1,$3,"entrada"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
 
 lista_id_salida:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"salida"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
-	| BIDENTIFICADOR BCOMA lista_id_salida {insertar_variable(&listavariables,$1,$3,"salida"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+	| BIDENTIFICADORB BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"salida"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
+	| BIDENTIFICADOR BCOMA lista_id_salida {insertar_variable(&listavariables,$1,$3,"salida"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
+	| BIDENTIFICADORB BCOMA lista_id_salida {insertar_variable(&listavariables,$1,$3,"salida"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
 
 lista_id:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"entorno"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
-	| BIDENTIFICADOR BCOMA lista_id {insertar_variable(&listavariables,$1,$3,"entorno"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+	| BIDENTIFICADORB BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"entorno"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
+	| BIDENTIFICADOR BCOMA lista_id {insertar_variable(&listavariables,$1,$3,"entorno"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
+	| BIDENTIFICADORB BCOMA lista_id {insertar_variable(&listavariables,$1,$3,"entorno"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
 
 decl_ent_sal: decl_ent {printf("decl_ent por decl_ent_sal\n");}
 	| decl_ent decl_sal {printf("decl_ent decl_sal por decl_ent_sal\n");}
@@ -503,12 +511,12 @@ asignacion: operando BDOS_PUNTOS_IGUAL expresion{
 	}
 	printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
 	| expresion {printf("expresion por asignacion\n");};
-alternativa: BSI expresion BENTONCES instrucciones lista_opciones BFSI {printf("BSI expresion BENTONCES instrucciones lista_opciones BFSI por alternativa\n");};
-lista_opciones: BSINO expresion BENTONCES instrucciones lista_opciones {printf("BSINO expresion BENTONCES instrucciones lista_opciones por lista_opciones\n");}
+alternativa: BSI exp_b BENTONCES instrucciones lista_opciones BFSI {printf("BSI expresion BENTONCES instrucciones lista_opciones BFSI por alternativa\n");};
+lista_opciones: BSINO exp_b BENTONCES instrucciones lista_opciones {printf("BSINO expresion BENTONCES instrucciones lista_opciones por lista_opciones\n");}
 	|  {printf("empty por lista_opciones\n");};
 iteracion: it_cota_fija {printf("it_cota_fija por iteracion\n");}
 	| it_cota_exp {printf("it_cota_exp por iteracion\n");};
-it_cota_exp: BMIENTRAS expresion BHACER instrucciones BFMIENTRAS {printf("BMIENTRAS expresion BHACER instrucciones BFMIENTRAS por it_cota_exp\n");};
+it_cota_exp: BMIENTRAS exp_b BHACER instrucciones BFMIENTRAS {printf("BMIENTRAS expresion BHACER instrucciones BFMIENTRAS por it_cota_exp\n");};
 it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA {printf("BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA por it_cota_fija\n");};
 accion_d: BACCION a_cabecera bloque BFACCION {printf("BACCION a_cabecera bloque BFACCION por accion_d\n");};
 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION {printf("BFUNCION f_cabecera bloque BDEV expresion BFFUNCION por funcion_d\n");};

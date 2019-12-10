@@ -1,5 +1,6 @@
 #ifndef JLML_TABLADECUADRUPLAS_H
 #define JLML_TABLADECUADRUPLAS_H
+#include "../SymbolTable/TablaDeSimbolos.h"
 
 typedef struct TablaDeCuadruplas{
 	int tabla[300][4];

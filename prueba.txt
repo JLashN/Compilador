@@ -13,11 +13,16 @@ fconst;
 var
 i, comb: entero;
 i2, comb2: real;
+b1: booleano;
 fvar;
+
+b1 := 5 < 6;
+
 i:= comb;
 suma:= comb;
 comb2:= i;
-mientras i <n hacer
+
+mientras i<n hacer
 suma := suma + comb;
 comb := comb * (m - i-i) div (i + i);
 i := i + comb
