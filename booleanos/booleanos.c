@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../QuadruplesTable/QuadrupleTable.h"
+#include "../SymbolTable/TablaDeSimbolos.h"
 
 typedef struct Patched {
 	int lista[100];

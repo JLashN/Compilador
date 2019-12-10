@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "SymbolTable/TablaDeSimbolos.h"
+#include "booleanos/booleanos.h"
 #include "QuadruplesTable/QuadrupleTable.h"
 void yyerror(const char* s);
 int yylex();
@@ -102,7 +103,6 @@ TablaDeCuadruplas listainstrucciones;
 %token <valor_texto> BIDENTIFICADORB
 %token <valor_entero> BLITERAL_ENTERO
 %token <valor_doble> BLITERAL_REAL
-%token <valor_texto> BIGUAL
 %token <valor_texto> BMAYOR
 %token <valor_texto> BMENOR
 %token <valor_texto> BMAYORIGUAL
@@ -257,12 +257,14 @@ decl_sal: BSAL lista_d_var_salida {printf("BSAL lista_d_var por decl_sal\n");};
 expresion: exp_a {$$.type = $1.type; $$.place=$1.place;printf("exp_a por expresion\n");}
 	| funcion_ll {printf("funcion_ll por expresion\n");};
 
-asignacion_booleana: operando BDOS_PUNTOS_IGUAL exp_b{
-	backpatchP($3.f,listainstrucciones.nextQuad);
-	//gen(&listainstrucciones,"asignacionbooleana",$1.place,$3.place,$$.place);
-	//Por terminar
-	printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
-	| expresion {printf("expresion por asignacion\n");};
+asignacion_booleana: operando_booleano BDOS_PUNTOS_IGUAL exp_b{
+	backpatchP(&listainstrucciones,$3.f,listainstrucciones.nextQuad);
+	gen(&listainstrucciones,"asignacionfalse",-1,-1,obtenerObjeto(&listavariables,$1)->id);
+	gen(&listainstrucciones,"goto",-1,-1,listainstrucciones.nextQuad+2); //EL goto siempre va a un registro de la tabla de cuadruplas
+	backpatchP(&listainstrucciones,$3.t,listainstrucciones.nextQuad);
+	gen(&listainstrucciones,"asignaciontrue",-1,-1,obtenerObjeto(&listavariables,$1)->id);
+	printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");};
+
 exp_a: exp_a BSUMA exp_a {
 	if(($1.type == ENTERO) && ($3.type == ENTERO)){
 			$$.place = insertar_variable(&listavariables,NULL,"entero","temporal");
@@ -418,15 +420,17 @@ exp_a: exp_a BSUMA exp_a {
  	printf("BMENOS exp_a por exp_a\n");}
 	| BSUMA exp_a {$$.type = $2.type; $$.place = $2.place; printf("BMAS exp_a por exp_a\n");};	
 exp_b: exp_b BY M exp_b {
-		backpatchP(&listainstrucciones,$1.t,$3.quad);
+		backpatchP(&listainstrucciones,$1.t,$3);
 		$$.f = mergeP($1.f,$4.f);
 		$$.t = $4.t;
 	
-	printf("exp_b BY exp_b por exp_b\n");}
-	| exp_b BO M exp_b {printf("exp_b BO exp_b por exp_b\n");}
-		backpatchP(&listainstrucciones,$1.f,$3.quad);
+		printf("exp_b BY exp_b por exp_b\n");}
+	| exp_b BO M exp_b {
+		backpatchP(&listainstrucciones,$1.f,$3);
 		$$.t = mergeP($1.t,$4.t);
 		$$.f = $4.f;
+		printf("exp_b BO exp_b por exp_b\n");
+	}
 	| BNO exp_b %prec UBNO {
 		$$.t = $2.f;
 		$$.f = $2.t;		
@@ -483,6 +487,7 @@ instrucciones: instruccion BPUNTO_Y_COMA instrucciones {printf("instruccion BPUN
 	| instruccion {printf("instruccion por instrucciones\n");};
 instruccion: BCONTINUAR {printf("BCONTINUAR por instruccion\n");}
 	| asignacion {printf("asignacion por instruccion\n");}
+	| asignacion_booleana {printf("asignacion booleana por instruccion\n");}
 	| alternativa {printf("alternativa por instruccion\n");}
 	| iteracion {printf("iteracion por instruccion\n");}; 
 	//| accion_ll {};
@@ -521,7 +526,7 @@ funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE {printf(
 l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 	| expresion {printf("expresion por l_ll\n");};
 
-M: {$$.quad = listainstrucciones.nextQuad; printf("M por empty")};
+M: {$$ = listainstrucciones.nextQuad; printf("M por empty");};
 %%
 
 int main() {

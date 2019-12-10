@@ -5,7 +5,7 @@ a.out: intermedio
 	@gcc y.tab.c lex.yy.o TablaDeSimbolos.o QuadrupleTable.o -lfl -lm
 	@echo "Creado a.out"
 
-intermedio: lex.yy.c bisonte tabladesimbolos tabladecuadruplas
+intermedio: lex.yy.c bisonte tabladesimbolos tabladecuadruplas booleanos
 	@gcc -c lex.yy.c
 	@echo "Compilado el archivo lex.yy.c"
 
@@ -20,6 +20,10 @@ tabladecuadruplas:
 lex.yy.c:
 	@flex flex.l
 	@echo "Creado archivo de c a partir de flex"
+
+booleanos:
+	@gcc -c booleanos/booleanos.c
+	@echo "Compilado el archivo de booleanos"
 
 bisonte:
 	@bison -yd -v bison.y
