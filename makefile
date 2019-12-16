@@ -29,7 +29,7 @@ bisonte:
 	@bison -yd -v bison.y
 
 run: a.out
-	@cat prueba.txt | ./compilador
+	@cat ejemplos/prueba.txt | ./compilador
 clean: cleanArchivosFlex
 	@rm compilador
 	@echo "Todo limpio"

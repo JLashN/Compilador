@@ -1,0 +1,12 @@
+algoritmo intercambio;
+ent c,a:entero;
+sal c,a:entero;
+{Prec: a= A AND c = C}
+var
+aux: entero;
+fvar;
+aux:= a;
+a:= c;
+c:= aux
+{Post: c=A AND a = C}
+falgoritmo.
