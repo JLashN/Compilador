@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "../SymbolTable/TablaDeSimbolos.h"
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct TablaDeCuadruplas{
 	int tabla[300][4];
@@ -155,7 +156,7 @@ void gen(TablaDeCuadruplas *tablaQ, char* operacion, int operador1, int operador
 	tablaQ->nextQuad = row;
 }
 
-void leerlistaQ(TablaDeCuadruplas *tablaQ, TablaDeSimbolos *tablaS){
+void leerlistaQ(TablaDeCuadruplas *tablaQ, TablaDeSimbolos *tablaS, FILE* desc){
 
 	for(int i = 0; i < tablaQ->nextQuad; i++){
 		printf("%d: ",i);
@@ -175,24 +176,23 @@ void leerlistaQ(TablaDeCuadruplas *tablaQ, TablaDeSimbolos *tablaS){
 			}
 			if (((tablaQ->tabla)[i][0] > 13) && ((tablaQ->tabla)[i][0] < 20)){
 				if ((tablaQ->tabla)[i][3] == -1){
-					printf("nulo");
+					fprintf(stdout,"nulo\n");
 				}else{
-					printf("%d",(tablaQ->tabla)[i][3]);
+					fprintf(stdout,"%d\n",(tablaQ->tabla)[i][3]);
 				}
 				
 			}else{
 				if ((tablaQ->tabla)[i][3] == -1){
-					printf("nulo");
+					fprintf(stdout,"nulo\n");
+
 				}else{
-					printf("%s",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][3])->nombre);
-					
+					fprintf(stdout,"%s\n",obtenerObjetoPorId(tablaS,(tablaQ->tabla)[i][3])->nombre);	
 				}
 			}
-	
-			printf("\n");
 		}else{
 			printf("%d\n",(tablaQ->tabla)[i][3]);
 		}
+
 	}
 }
 

@@ -19,6 +19,7 @@ b1 := i2 < comb2;
 b3 := (i>comb) y (i2<comb2);
 b3 := (i>=comb) o b3;
 
+comb2 := comb + comb2 * i - i2;
 
 i:= comb;
 suma:= comb;

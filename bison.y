@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "SymbolTable/TablaDeSimbolos.h"
 #include "booleanos/booleanos.h"
 #include "QuadruplesTable/QuadrupleTable.h"
@@ -553,18 +554,98 @@ l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 M: {$$ = listainstrucciones.nextQuad; printf("M por empty");};
 %%
 
-int main() {
+int main(int argc, char** argv) {
 	inicializacion(&listavariables);
 	inicializacion(&listaconstantes);
 	inicializacionQ(&listainstrucciones);
+	FILE *aux,*compilado,*variables,*parseado;
+	int f1 = 0,f2 = 0,f3 = 0,f4 = 0; //Flags para saber que opciones se han hecho
+	char opt;
+	while ((opt = getopt(argc, argv, ":i:o:t:v:h")) != -1) {
+        switch (opt) {
+			case 'i':
+				f1 = 1;
+				stdin = fopen (optarg,"r+");
+				if (stdin==NULL) {fputs ("File error\n",stderr); exit (1);}
+				break;
+			case 'o':
+				f2 = 1;
+				compilado = fopen(optarg,"w+");
+				break;
+			case 't':
+				f3 = 1;
+				variables = fopen(optarg,"w+");
+				break;
+			case 'v':
+				f4 = 1;
+				parseado = fopen(optarg,"w+");
+				break;
+			case 'h':
+				printf("Compilador de lenguaje inventado por fitxi\n");
+				printf("\t./compilador [-iotvh] ...\n");
+				printf("Opciones\n");
+				printf("\t-i: Permite el compilado de un archivo cuyo nombre se le pasa a continuación.\n");
+				printf("\t\tMODO DE USO: ./compilador -i prueba.txt\n");
+				printf("\t-o: Escribe el codigo compilado en un archivo cuyo nombre se le pasa a continuación.\n");
+				printf("\t\tMODO DE USO: ./compilador -i prueba.txt -o compilado.txt\n");
+				printf("\t-t: Guarda la tabla de simbolos en un archivo cuyo nombre se le pasa a continuación.\n");
+				printf("\t\tMODO DE USO: ./compilador -i prueba.txt -t tabladesimbolos.txt\n");
+				printf("\t-v: Registra el comportamiento del parser en un archivo cuyo nombre se le pasa a continuación.\n");
+				printf("\t\tMODO DE USO: ./compilador -i prueba.txt -v parseado.txt\n");
+				printf("\t-h: Imprime la ayuda del compilador.\n");
+				printf("\t\tMODO DE USO: ./compilador -h\n");
+
+				printf("Gracias por usar nuestro compilador :)\n");
+				return 0;
+
+			default:
+				exit(EXIT_FAILURE);
+        }
+    }
 
 	yyin = stdin;
+
+	if (f4 == 1){
+		aux = stdout;
+		stdout = parseado;
+	}
 
 	do {
 		yyparse();
 	} while(!feof(yyin));
-	//leerlista(&listavariables);
+
+	if (f4 == 1){
+		stdout = aux;
+	}
+
+	if (f3 == 1){
+		aux = stdout;
+		stdout = variables;
+		leerlista(&listavariables);
+		stdout = aux;
+	}
+
+	if (f2 == 1){
+		aux = stdout;
+		stdout = compilado;
+	}
 	leerlistaQ(&listainstrucciones,&listavariables);
+	if (f2 == 1){
+		stdout = aux;
+	}
+
+	if (f1 == 1){
+		fclose(stdin);
+	}
+	if (f2 == 1){
+		fclose(compilado);
+	}
+	if (f3 == 1){
+		fclose(variables);
+	}
+	if (f4 == 1){
+		fclose(parseado);
+	}
 	return 0;
 }
 

@@ -2,7 +2,7 @@ all: a.out
 	@echo "Todo en orden"
 
 a.out: intermedio booleanos tabladesimbolos tabladecuadruplas
-	@gcc y.tab.c lex.yy.o booleanos.o TablaDeSimbolos.o QuadrupleTable.o -lfl -lm
+	@gcc y.tab.c lex.yy.o booleanos.o TablaDeSimbolos.o QuadrupleTable.o -lfl -lm -o compilador
 	@echo "Creado a.out"
 
 intermedio: lex.yy.c bisonte tabladesimbolos tabladecuadruplas
@@ -29,9 +29,9 @@ bisonte:
 	@bison -yd -v bison.y
 
 run: a.out
-	@cat prueba.txt | ./a.out
+	@cat prueba.txt | ./compilador
 clean: cleanArchivosFlex
-	@rm a.out
+	@rm compilador
 	@echo "Todo limpio"
 cleanArchivosFlex: cleanArchivosBison cleanTablaDeSimbolos cleanBooleanos
 	@rm lex.yy.c

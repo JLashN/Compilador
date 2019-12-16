@@ -1,2 +1,0 @@
-bison -v
-No se pueden declarar variables del tipo t($DIGITO)*
