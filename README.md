@@ -31,6 +31,13 @@ Para probar estas características de nuestro compilador proporcionamos los fich
 Se proporciona un makefile que compila las librerías necesarias.
 
 # Comandos
+make 
+make clean
+./compilador.out : lee de la entrada estandar(teclado)
+Opciones:
+./compilador.out [-i in_fichero_a_compilar ] [-o out_fichero_compilado(tabla de cuadruplas)] [-t out_tabla_de_simbolos] [-v out_reducciones] [-h muestra_instrucciones_de_uso] 
+  
+
 
 # Participación
 La carga de trabajo se ha dsitribuido en función de nuestras aptitudes y conocimientos, por lo que se ha repartido de la siguiente manera:
