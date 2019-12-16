@@ -37,7 +37,8 @@ make clean
 Opciones:
 ./compilador.out [-i in_fichero_a_compilar ] [-o out_fichero_compilado(tabla de cuadruplas)] [-t out_tabla_de_simbolos] [-v out_reducciones] [-h muestra_instrucciones_de_uso] 
   
-
+# Ejemplos
+Los ejemplos para probar el compilador se encuentran en el directorio 'ejemplos/'.
 
 # Participación
 La carga de trabajo se ha dsitribuido en función de nuestras aptitudes y conocimientos, por lo que se ha repartido de la siguiente manera:
