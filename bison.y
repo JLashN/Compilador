@@ -563,10 +563,10 @@ it_cota_exp: BMIENTRAS M exp_b BHACER M instrucciones N M BFMIENTRAS {
 	backpatchP(&listainstrucciones,$3.f,$8);
 	backpatchP(&listainstrucciones,$7,$2);
 	printf("BMIENTRAS expresion BHACER instrucciones BFMIENTRAS por it_cota_exp\n");};
-it_cota_fija: BPARA M aux_cota_fija BHACER M instrucciones N M BFPARA {
-	backpatchP(&listainstrucciones,$3.t,$5);
-	backpatchP(&listainstrucciones,$3.f,$8);
-	backpatchP(&listainstrucciones,$7,$2);
+it_cota_fija: BPARA aux_cota_fija BHACER M instrucciones N M BFPARA {
+	backpatchP(&listainstrucciones,$2.t,$4);
+	backpatchP(&listainstrucciones,$2.f,$7);
+	backpatchP(&listainstrucciones,$6,$4-4);
 	printf("BPARA aux_cota_fija BHASTA expresion BHACER instrucciones BFPARA por it_cota_fija\n");};
 aux_cota_fija: asignacion BHASTA expresion {
 	int idtemporal;
