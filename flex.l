@@ -111,12 +111,12 @@ DR_PALABRA_FFUNCION ffuncion
 
 
 %%
+{DR_PALABRA_FPARA} {printf("Se ha leido fpara\n");yylval.valor_texto = strdup(yytext);return (BFPARA);}
 {DR_PUNTO} {printf("Se ha leido %s\n",yytext); yylval.valor_texto = strdup(yytext); return (BPUNTO);}
 {DR_SUMA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BSUMA);}
 {DR_NEGATIVO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BMENOS);}
 {DR_PARENTESIS_CIERRE} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BPARENTESIS_CIERRE);}
 {DR_PARENTESIS_APERTURA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BPARENTESIS_APERTURA);}
-{DR_PALABRA_FPARA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BPARA);}
 {DR_PALABRA_FSI} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFSI);}
 {DR_PALABRA_FTIPO} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFTIPO);}
 {DR_PALABRA_FTUPLA} {printf("Se ha leido %s\n",yytext);yylval.valor_texto = strdup(yytext);return (BFTUPLA);}

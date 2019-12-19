@@ -147,7 +147,7 @@ TablaDeCuadruplas listainstrucciones;
 %type <valor_texto> operando_booleano
 %type <valor_texto> instrucciones
 %type <valor_texto> instruccion
-%type <e> asignacion
+%type <valor_texto> asignacion
 %type <next> alternativa
 %type <next> lista_opciones
 %type <valor_texto> iteracion
@@ -170,6 +170,7 @@ TablaDeCuadruplas listainstrucciones;
 %type <valor_texto> lista_d_var_salida
 %type <quad> M
 %type <next> N
+%type <b> aux_cota_fija
 %type <valor_texto> asignacion_booleana
 
 
@@ -530,6 +531,7 @@ asignacion: operando BDOS_PUNTOS_IGUAL expresion{
 	}else if((obtenerObjeto(&listavariables,$1)->tipo == ENTERO) && ($3.type == REAL)){
 		exit(-1);
 	}
+	$$ = $1;
 	printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
 	| expresion {printf("expresion por asignacion\n");};
 alternativa: BSI exp_b BENTONCES M instrucciones N M lista_opciones M BFSI {
@@ -561,10 +563,27 @@ it_cota_exp: BMIENTRAS M exp_b BHACER M instrucciones N M BFMIENTRAS {
 	backpatchP(&listainstrucciones,$3.f,$8);
 	backpatchP(&listainstrucciones,$7,$2);
 	printf("BMIENTRAS expresion BHACER instrucciones BFMIENTRAS por it_cota_exp\n");};
-it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA {
-	
-	
-	printf("BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA por it_cota_fija\n");};
+it_cota_fija: BPARA M aux_cota_fija BHACER M instrucciones N M BFPARA {
+	backpatchP(&listainstrucciones,$3.t,$5);
+	backpatchP(&listainstrucciones,$3.f,$8);
+	backpatchP(&listainstrucciones,$7,$2);
+	printf("BPARA aux_cota_fija BHASTA expresion BHACER instrucciones BFPARA por it_cota_fija\n");};
+aux_cota_fija: asignacion BHASTA expresion {
+	int idtemporal;
+	if ($3.type == ENTERO){
+		idtemporal = insertar_variable(&listavariables,NULL,"entero","temporal");
+	}else{
+		idtemporal = insertar_variable(&listavariables,NULL,"real","temporal");
+	}
+	gen(&listainstrucciones,"asignacion",$3.place,-1,idtemporal);
+	gen(&listainstrucciones,"ifmayor",obtenerObjeto(&listavariables,$1)->id , idtemporal, (listainstrucciones.nextQuad)+3);
+	gen(&listainstrucciones,"i++",-1,-1,obtenerObjeto(&listavariables,$1)->id);
+	$$.t = makelistP(listainstrucciones.nextQuad);
+	gen(&listainstrucciones,"goto",-1,-1,-1);
+	$$.f = makelistP(listainstrucciones.nextQuad);
+	gen(&listainstrucciones,"goto",-1,-1,-1);
+	printf("asignacion BHASTA expresion por aux_cota_fija\n");
+};
 accion_d: BACCION a_cabecera bloque BFACCION {printf("BACCION a_cabecera bloque BFACCION por accion_d\n");};
 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION {printf("BFUNCION f_cabecera bloque BDEV expresion BFFUNCION por funcion_d\n");};
 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA {printf("BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA por a_cabecera\n");};

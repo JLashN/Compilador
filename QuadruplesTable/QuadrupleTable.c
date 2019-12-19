@@ -62,6 +62,8 @@ int getIdOperacion(char* operacion){
 		return 22;
 	} else if (strcmp(operacion,"fin") == 0){
 		return 23;
+	} else if (strcmp(operacion,"i++") == 0){
+		return 24;
 	}
 }
 
@@ -140,6 +142,9 @@ char* getNombreOperacion(int operacion){
 	case 23:
 		return "fin";
 		break;
+	case 24:
+		return "i++";
+		break;
 
 	
 	default:
@@ -170,7 +175,8 @@ void leerlistaQ(TablaDeCuadruplas *tablaQ, TablaDeSimbolos *tablaS, FILE* desc){
 			fprintf(stdout,"\n");
 			break;
 		}
-		if ((tablaQ->tabla)[i][0] != 20){ //Si es goto imprime el destino de la tabla de cuadruplas
+		if ((tablaQ->tabla)[i][0] != 20 && (tablaQ->tabla)[i][0] != 24){ //Si es goto imprime el destino de la tabla de cuadruplas
+																		 //Si es i++ simplemente imprime el destino al que se le suma 1
 			if ((tablaQ->tabla)[i][1] == -1){
 				printf("nulo ");
 			}else{
