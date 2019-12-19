@@ -25,10 +25,19 @@ i:= comb;
 suma:= comb;
 comb2:= i;
 
+si i<n ->
+    suma := suma + comb
+[] i>n ->
+    comb := comb * (m - i-i) div (i + i)
+[] i=n ->
+    i := i + comb
+fsi;
+
 mientras i<n hacer
-suma := suma + comb;
-comb := comb * (m - i-i) div (i + i);
-i := i + comb
+    suma := suma + comb;
+    comb := comb * (m - i-i) div (i + i);
+    i := i + comb
 fmientras
+
 {Post: n =N AND suma = SUMATORIO(i=1..N)(M sobre i)}
 falgoritmo.

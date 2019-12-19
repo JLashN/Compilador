@@ -49,4 +49,14 @@ cleanBooleanos:
 	@rm booleanos.o
 	@echo "Borrados booleanos"
 
+subir:
+	@git add .
+	@echo "Añadido todo"
+	@git commit -m "Subida automatica"
+	@echo "Hecho el commit"
+	@git pull
+	@echo "Descargados cambios si los había"
+	@git push
+	@echo "Subido"
+
 

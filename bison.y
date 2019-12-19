@@ -37,6 +37,7 @@ TablaDeCuadruplas listainstrucciones;
 	E e;
 	B b;
 	int quad;
+	Patched* next;
 }
 
 %token <valor_texto> BALGORITMO
@@ -147,11 +148,11 @@ TablaDeCuadruplas listainstrucciones;
 %type <valor_texto> instrucciones
 %type <valor_texto> instruccion
 %type <e> asignacion
-%type <valor_texto> alternativa
-%type <valor_texto> lista_opciones
+%type <next> alternativa
+%type <next> lista_opciones
 %type <valor_texto> iteracion
-%type <valor_texto> it_cota_exp
-%type <valor_texto> it_cota_fija
+%type <next> it_cota_exp
+%type <next> it_cota_fija
 %type <valor_texto> accion_d
 %type <valor_texto> funcion_d
 %type <valor_texto> a_cabecera
@@ -168,13 +169,16 @@ TablaDeCuadruplas listainstrucciones;
 %type <valor_texto> lista_d_var_entrada
 %type <valor_texto> lista_d_var_salida
 %type <quad> M
+%type <next> N
 %type <valor_texto> asignacion_booleana
 
 
 
 %%
 
-desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO {printf("BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO por desc_algoritmo\n");};
+desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO {
+	gen(&listainstrucciones,"fin",-1,-1,-1);
+	printf("BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO por desc_algoritmo\n");};
 
 //declaraciones
 
@@ -528,13 +532,39 @@ asignacion: operando BDOS_PUNTOS_IGUAL expresion{
 	}
 	printf("operando BDOS_PUNTOS_IGUAL expresion por asignacion\n");}
 	| expresion {printf("expresion por asignacion\n");};
-alternativa: BSI exp_b BENTONCES instrucciones lista_opciones BFSI {printf("BSI expresion BENTONCES instrucciones lista_opciones BFSI por alternativa\n");};
-lista_opciones: BSINO exp_b BENTONCES instrucciones lista_opciones {printf("BSINO expresion BENTONCES instrucciones lista_opciones por lista_opciones\n");}
-	|  {printf("empty por lista_opciones\n");};
+alternativa: BSI exp_b BENTONCES M instrucciones N M lista_opciones M BFSI {
+	backpatchP(&listainstrucciones,$2.t,$4);
+	if ($8 != NULL){
+		backpatchP(&listainstrucciones,$2.f,$7);
+		$$ = mergeP($8,$6);
+		backpatchP(&listainstrucciones,$$,$9);
+	}else{
+		$$ = mergeP($2.f,$6);
+		backpatchP(&listainstrucciones,$$,$7);
+	}
+	
+	printf("BSI expresion BENTONCES instrucciones lista_opciones BFSI por alternativa\n");};
+lista_opciones: BSINO exp_b BENTONCES M instrucciones N M lista_opciones {
+	backpatchP(&listainstrucciones,$2.t,$4);
+	backpatchP(&listainstrucciones,$2.f,$7);
+	if ($8 != NULL){
+		$$ = mergeP($6,$8);
+	}else{
+		$$ = mergeP($2.f,$6);
+	}	
+	printf("BSINO expresion BENTONCES instrucciones lista_opciones por lista_opciones\n");}
+	|  {$$ = NULL; printf("empty por lista_opciones\n");};
 iteracion: it_cota_fija {printf("it_cota_fija por iteracion\n");}
 	| it_cota_exp {printf("it_cota_exp por iteracion\n");};
-it_cota_exp: BMIENTRAS exp_b BHACER instrucciones BFMIENTRAS {printf("BMIENTRAS expresion BHACER instrucciones BFMIENTRAS por it_cota_exp\n");};
-it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA {printf("BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA por it_cota_fija\n");};
+it_cota_exp: BMIENTRAS M exp_b BHACER M instrucciones N M BFMIENTRAS {
+	backpatchP(&listainstrucciones,$3.t,$5);
+	backpatchP(&listainstrucciones,$3.f,$8);
+	backpatchP(&listainstrucciones,$7,$2);
+	printf("BMIENTRAS expresion BHACER instrucciones BFMIENTRAS por it_cota_exp\n");};
+it_cota_fija: BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA {
+	
+	
+	printf("BPARA BIDENTIFICADOR BDOS_PUNTOS_IGUAL expresion BHASTA expresion BHACER instrucciones BFPARA por it_cota_fija\n");};
 accion_d: BACCION a_cabecera bloque BFACCION {printf("BACCION a_cabecera bloque BFACCION por accion_d\n");};
 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION {printf("BFUNCION f_cabecera bloque BDEV expresion BFFUNCION por funcion_d\n");};
 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA {printf("BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA por a_cabecera\n");};
@@ -551,7 +581,9 @@ funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE {printf(
 l_ll: expresion BCOMA l_ll {printf("expresion BCOMA l_ll por l_ll\n");}
 	| expresion {printf("expresion por l_ll\n");};
 
-M: {$$ = listainstrucciones.nextQuad; printf("M por empty");};
+M: {$$ = listainstrucciones.nextQuad; printf("M por empty\n");};
+
+N: {$$ = makelistP(listainstrucciones.nextQuad); gen(&listainstrucciones,"goto",-1,-1,-1); printf("N por empty\n");};
 %%
 
 int main(int argc, char** argv) {
