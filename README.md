@@ -19,26 +19,24 @@ Nuestro compilador reconoce:
 - Declaración de constantes de tipos entero, real, booleano, caracter y cadena de caracteres.
 - Asignaciones.
 - Expresiones aritméticas.
+- Alternativas y bucles.
 
-No hemos hecho control de flujo
-No hemos hecho arrays ni memoria dinámica
-El compilador no reconoce procedimientos ni funciones 
-...aunque la gramática está implementada.
+No hemos hecho arrays ni memoria dinámica ya que requería un tiempo del que no disponíamos.
+El compilador no reconoce procedimientos ni funciones.
 
 # Compilación
-El compilador consta de diferentes módulos: flex para reconocer los tokens, bison para la gramática, SymbolTable es la librería que implementa la tabla de símbolos y QuadruplesTable es la librería que inmplementa la tabla de cuádruplas.
-Para probar estas características de nuestro compilador proporcionamos los ficheros test1.txt, test2.txt y test3.txt.
+El compilador consta de diferentes módulos: flex para reconocer los tokens, bison para la gramática, SymbolTable es la librería que implementa la tabla de símbolos y QuadruplesTable es la librería que implementa la tabla de cuádruplas.
 Se proporciona un makefile que compila las librerías necesarias.
 
 # Comandos
 make 
 make clean
-./compilador.out : lee de la entrada estandar(teclado)
+./compilador : lee de la entrada estandar(teclado)
 Opciones:
-./compilador.out [-i in_fichero_a_compilar ] [-o out_fichero_compilado(tabla de cuadruplas)] [-t out_tabla_de_simbolos] [-v out_reducciones] [-h muestra_instrucciones_de_uso] 
+./compilador [-i in_fichero_a_compilar ] [-o out_fichero_compilado(tabla de cuadruplas)] [-t out_tabla_de_simbolos] [-v out_reducciones] [-h muestra_instrucciones_de_uso] 
   
 # Ejemplos
-Los ejemplos para probar el compilador se encuentran en el directorio 'ejemplos/'.
+Para probar las características de nuestro compilador proporcionamos los ficheros prueba.txt, testIntercambio.txt y testSumacomb.txt que se encuentran en el directorio 'ejemplos/'.
 
 # Participación
 La carga de trabajo se ha dsitribuido en función de nuestras aptitudes y conocimientos, por lo que se ha repartido de la siguiente manera:
