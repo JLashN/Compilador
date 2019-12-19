@@ -1,0 +1,185 @@
+Se ha leido algoritmo
+ Se ha leido ;
+
+
+Se ha leido ent
+ Se ha leido ,
+ Se ha leido :
+ Se ha leido real
+lista_id BDOS_PUNTOS d_tipo por lista_idSe ha leido ;
+
+Se ha leido sal
+ Se ha leido :
+ Se ha leido entero
+lista_id BDOS_PUNTOS d_tipo por lista_idSe ha leido ;
+
+
+Se ha leido un comentario {Prec: n= N AND m = M AND M >= N >0}
+
+Se ha leido const
+
+Se ha leido =
+Se ha leido un literal entero con valor 0
+Se ha leido ;
+
+Se ha leido =
+Se ha leido un caracter "A"
+Se ha leido ;
+
+Se ha leido =
+Se ha leido una cadena 'A'
+Se ha leido ;
+
+Se ha leido fconst
+Se ha leido ;
+
+Se ha leido var
+
+Se ha leido ,
+ Se ha leido :
+ Se ha leido entero
+lista_id BDOS_PUNTOS d_tipo por lista_idSe ha leido ;
+
+Se ha leido ,
+ Se ha leido :
+ Se ha leido real
+lista_id BDOS_PUNTOS d_tipo por lista_idSe ha leido ;
+
+Se ha leido ,
+Se ha leido ,
+Se ha leido ,
+Se ha leido :
+ Se ha leido booleano
+lista_id BDOS_PUNTOS d_tipo por lista_idSe ha leido ;
+
+Se ha leido fvar
+Se ha leido ;
+
+
+ Se ha leido :=
+  Se ha leido <
+ Se ha leido ;
+
+ Se ha leido :=
+ Se ha leido (
+Se ha leido >
+Se ha leido )
+ Se ha leido y
+ Se ha leido (
+Se ha leido <
+Se ha leido )
+Se ha leido ;
+
+ Se ha leido :=
+ Se ha leido (
+Se ha leido >=
+Se ha leido )
+ Se ha leido o
+ Se ha leido ;
+
+
+ Se ha leido :=
+  Se ha leido +
+  Se ha leido *
+  Se ha leido -
+ Se ha leido ;
+
+
+Se ha leido :=
+ Se ha leido ;
+
+Se ha leido :=
+ Se ha leido ;
+
+Se ha leido :=
+ Se ha leido ;
+
+
+Se ha leido si
+ Se ha leido <
+ Se ha leido ->
+
+     Se ha leido :=
+  Se ha leido +
+ 
+Se ha leido []
+ Se ha leido >
+ Se ha leido ->
+
+     Se ha leido :=
+  Se ha leido *
+ Se ha leido (
+ Se ha leido -
+ Se ha leido -
+Se ha leido )
+ Se ha leido div
+ Se ha leido (
+ Se ha leido +
+ Se ha leido )
+
+Se ha leido []
+ Se ha leido =
+ Se ha leido ->
+
+     Se ha leido :=
+  Se ha leido +
+ 
+Se ha leido fsi
+Se ha leido ;
+
+
+Se ha leido para
+  Se ha leido :=
+ Se ha leido (
+Se ha leido +
+Se ha leido )
+ Se ha leido *
+  Se ha leido hasta
+  Se ha leido +
+  Se ha leido hacer
+
+     Se ha leido :=
+  Se ha leido +
+ Se ha leido ;
+
+    Se ha leido :=
+ 
+Se ha leido ;
+
+
+Se ha leido mientras
+ Se ha leido <
+ Se ha leido hacer
+
+     Se ha leido :=
+  Se ha leido +
+ Se ha leido ;
+
+     Se ha leido :=
+  Se ha leido *
+ Se ha leido (
+ Se ha leido -
+ Se ha leido -
+Se ha leido )
+ Se ha leido div
+ Se ha leido (
+ Se ha leido +
+ Se ha leido )
+Se ha leido ;
+
+     Se ha leido :=
+  Se ha leido +
+ 
+Se ha leido fmientras
+Se ha leido ;
+
+
+
+Se ha leido :=
+ 
+
+Se ha leido un comentario {Post: n =N AND suma = SUMATORIO(i=1..N)(M sobre i)}
+
+Se ha leido falgoritmo
+Se ha leido .
+

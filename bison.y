@@ -247,7 +247,7 @@ lista_d_var: lista_id BPUNTO_Y_COMA lista_d_var {printf("lista_id BDOS_PUNTOS BI
 lista_id_entrada:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"entrada"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
 	| BIDENTIFICADORB BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"entrada"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
 	| BIDENTIFICADOR BCOMA lista_id_entrada {insertar_variable(&listavariables,$1,$3,"entrada"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");}
-	| BIDENTIFICADORB BCOMA lista_id_entrada {insertar_variable(&listavariables,$1,$3,"entrada"); printf("BIDENTIFICADOR BCOMA lista_id por lista_id\n");};
+	| BIDENTIFICADORB BCOMA lista_id_entrada {insertar_variable(&listavariables,$1,$3,"entrada"); printf("BIDENTIFICADORB BCOMA lista_id por lista_id\n");};
 
 lista_id_salida:  BIDENTIFICADOR BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"salida"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}
 	| BIDENTIFICADORB BDOS_PUNTOS d_tipo { insertar_variable(&listavariables,$1,$3,"salida"); $$ = $3; printf("lista_id BDOS_PUNTOS d_tipo por lista_id");}

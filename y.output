@@ -1,0 +1,3872 @@
+Terminals unused in grammar
+
+   BLITERAL
+
+
+Grammar
+
+    0 $accept: desc_algoritmo $end
+
+    1 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO
+
+    2 cabecera_alg: decl_globales decl_a_f decl_ent_sal BCOMENTARIO
+
+    3 bloque_alg: bloque BCOMENTARIO
+
+    4 decl_globales: declaracion_tipo decl_globales
+    5              | declaracion_const decl_globales
+    6              | %empty
+
+    7 decl_a_f: accion_d decl_a_f
+    8         | funcion_d decl_a_f
+    9         | %empty
+
+   10 bloque: declaraciones instrucciones
+
+   11 declaraciones: declaracion_tipo declaraciones
+   12              | declaracion_const declaraciones
+   13              | declaracion_var declaraciones
+   14              | %empty
+
+   15 declaracion_tipo: BTIPO lista_d_tipo BFTIPO BPUNTO_Y_COMA
+
+   16 declaracion_const: BCONST lista_d_cte BFCONST BPUNTO_Y_COMA
+
+   17 declaracion_var: BVAR lista_d_var BFVAR BPUNTO_Y_COMA
+
+   18 $@1: %empty
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo
+   20             | %empty
+
+   21 d_tipo: BTUPLA lista_campos BFTUPLA
+   22       | BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo
+   23       | BIDENTIFICADOR
+   24       | expresion_t BPUNTOSS expresion_t
+   25       | BREF d_tipo
+   26       | BIDENTIFICADORB
+   27       | BTIPO_BASE
+
+   28 expresion_t: expresion
+   29            | BLITERAL_CARACTER
+
+   30 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos
+   31             | %empty
+
+   32 lista_d_cte: BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte
+   33            | BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte
+   34            | BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte
+   35            | BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte
+   36            | BIDENTIFICADOR BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte
+   37            | %empty
+
+   38 lista_d_var_entrada: lista_id_entrada BPUNTO_Y_COMA lista_d_var_entrada
+   39                    | %empty
+
+   40 lista_d_var_salida: lista_id_salida BPUNTO_Y_COMA lista_d_var_salida
+   41                   | %empty
+
+   42 lista_d_var: lista_id BPUNTO_Y_COMA lista_d_var
+   43            | %empty
+
+   44 lista_id_entrada: BIDENTIFICADOR BDOS_PUNTOS d_tipo
+   45                 | BIDENTIFICADORB BDOS_PUNTOS d_tipo
+   46                 | BIDENTIFICADOR BCOMA lista_id_entrada
+   47                 | BIDENTIFICADORB BCOMA lista_id_entrada
+
+   48 lista_id_salida: BIDENTIFICADOR BDOS_PUNTOS d_tipo
+   49                | BIDENTIFICADORB BDOS_PUNTOS d_tipo
+   50                | BIDENTIFICADOR BCOMA lista_id_salida
+   51                | BIDENTIFICADORB BCOMA lista_id_salida
+
+   52 lista_id: BIDENTIFICADOR BDOS_PUNTOS d_tipo
+   53         | BIDENTIFICADORB BDOS_PUNTOS d_tipo
+   54         | BIDENTIFICADOR BCOMA lista_id
+   55         | BIDENTIFICADORB BCOMA lista_id
+
+   56 decl_ent_sal: decl_ent
+   57             | decl_ent decl_sal
+   58             | decl_sal
+
+   59 decl_ent: BENT lista_d_var_entrada
+
+   60 decl_sal: BSAL lista_d_var_salida
+
+   61 expresion: exp_a
+   62          | funcion_ll
+
+   63 asignacion_booleana: operando_booleano BDOS_PUNTOS_IGUAL exp_b
+
+   64 exp_a: exp_a BSUMA exp_a
+   65      | exp_a BMENOS exp_a
+   66      | exp_a BPOR exp_a
+   67      | exp_a BENTRE exp_a
+   68      | exp_a BMOD exp_a
+   69      | exp_a BDIV exp_a
+   70      | BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE
+   71      | operando
+   72      | BLITERAL_REAL
+   73      | BLITERAL_ENTERO
+   74      | BMENOS exp_a
+   75      | BSUMA exp_a
+
+   76 exp_b: exp_b BY M exp_b
+   77      | exp_b BO M exp_b
+   78      | BNO exp_b
+   79      | operando_booleano
+   80      | BVERDADERO
+   81      | BFALSO
+   82      | BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE
+   83      | exp_a BIGUAL exp_a
+   84      | exp_a BMAYOR exp_a
+   85      | exp_a BMENOR exp_a
+   86      | exp_a BDIFERENTE exp_a
+   87      | exp_a BMAYORIGUAL exp_a
+   88      | exp_a BMENORIGUAL exp_a
+
+   89 operando: BIDENTIFICADOR
+   90         | operando BPUNTO operando
+   91         | operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
+   92         | operando BREF
+
+   93 operando_booleano: BIDENTIFICADORB
+
+   94 instrucciones: instruccion BPUNTO_Y_COMA instrucciones
+   95              | instruccion
+
+   96 instruccion: BCONTINUAR
+   97            | asignacion
+   98            | asignacion_booleana
+   99            | alternativa
+  100            | iteracion
+
+  101 asignacion: operando BDOS_PUNTOS_IGUAL expresion
+  102           | expresion
+
+  103 alternativa: BSI exp_b BENTONCES M instrucciones N M lista_opciones M BFSI
+
+  104 lista_opciones: BSINO exp_b BENTONCES M instrucciones N M lista_opciones
+  105               | %empty
+
+  106 iteracion: it_cota_fija
+  107          | it_cota_exp
+
+  108 it_cota_exp: BMIENTRAS M exp_b BHACER M instrucciones N M BFMIENTRAS
+
+  109 it_cota_fija: BPARA aux_cota_fija BHACER M instrucciones N M BFPARA
+
+  110 aux_cota_fija: asignacion BHASTA expresion
+
+  111 accion_d: BACCION a_cabecera bloque BFACCION
+
+  112 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION
+
+  113 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
+
+  114 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+
+  115 d_par_form: d_p_form BPUNTO_Y_COMA d_par_form
+  116           | %empty
+
+  117 d_p_form: BEND lista_id BDOS_PUNTOS d_tipo
+  118         | BSAL lista_id BDOS_PUNTOS d_tipo
+  119         | BES lista_id BDOS_PUNTOS d_tipo
+
+  120 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
+
+  121 l_ll: expresion BCOMA l_ll
+  122     | expresion
+
+  123 M: %empty
+
+  124 N: %empty
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+BALGORITMO (258) 1
+BIDENTIFICADOR (259) 1 19 23 30 33 34 35 36 44 46 48 50 52 54 89 113
+    114 120
+BPUNTO_Y_COMA (260) 1 15 16 17 19 30 32 33 34 35 36 38 40 42 94 113
+    114 115
+BFALGORITMO (261) 1
+BPUNTO (262) 1 90
+BCOMENTARIO (263) 2 3
+BTIPO (264) 15
+BFTIPO (265) 15
+BCONST (266) 16
+BFCONST (267) 16
+BVAR (268) 17
+BFVAR (269) 17
+BIGUAL (270) 19 32 33 34 35 36 83
+BTUPLA (271) 21
+BFTUPLA (272) 21
+BTABLA (273) 22
+BCORCHETE_APERTURA (274) 22 91
+BDE (275) 22
+BEND (276) 117
+BLITERAL (277)
+BDEF (278) 114
+BREF (279) 25 92
+BTIPO_BASE (280) 27
+BPUNTOSS (281) 22 24
+BLITERAL_CARACTER (282) 29 35
+BCORCHETE_CIERRE (283) 22 91
+BDOS_PUNTOS (284) 30 44 45 48 49 52 53 117 118 119
+BCOMA (285) 46 47 50 51 54 55 121
+BENT (286) 59
+BSAL (287) 60 118
+BSUMA (288) 64 75
+BMENOS (289) 65 74
+BPOR (290) 66
+BENTRE (291) 67
+BMOD (292) 68
+BDIV (293) 69
+BPARENTESIS_APERTURA (294) 70 82 113 114 120
+BPARENTESIS_CIERRE (295) 70 82 113 114 120
+BLITERAL_CADENA (296) 36
+BY (297) 76
+BO (298) 77
+BNO (299) 78
+BVERDADERO (300) 80
+BFALSO (301) 81
+BCONTINUAR (302) 96
+BDOS_PUNTOS_IGUAL (303) 63 101
+BSI (304) 103
+BENTONCES (305) 103 104
+BMIENTRAS (306) 108
+BFSI (307) 103
+BSINO (308) 104
+BHACER (309) 108 109
+BFMIENTRAS (310) 108
+BPARA (311) 109
+BHASTA (312) 110
+BFPARA (313) 109
+BACCION (314) 111
+BFUNCION (315) 112
+BDEV (316) 112
+BFFUNCION (317) 112
+BFACCION (318) 111
+BES (319) 119
+BIDENTIFICADORB (320) 19 26 32 45 47 49 51 53 55 93
+BLITERAL_ENTERO (321) 33 73
+BLITERAL_REAL (322) 34 72
+BMAYOR (323) 84
+BMENOR (324) 85
+BMAYORIGUAL (325) 87
+BMENORIGUAL (326) 88
+BDIFERENTE (327) 86
+UMINUS (328)
+UBNO (329)
+
+
+Nonterminals, with rules where they appear
+
+$accept (75)
+    on left: 0
+desc_algoritmo (76)
+    on left: 1, on right: 0
+cabecera_alg (77)
+    on left: 2, on right: 1
+bloque_alg (78)
+    on left: 3, on right: 1
+decl_globales (79)
+    on left: 4 5 6, on right: 2 4 5
+decl_a_f (80)
+    on left: 7 8 9, on right: 2 7 8
+bloque (81)
+    on left: 10, on right: 3 111 112
+declaraciones (82)
+    on left: 11 12 13 14, on right: 10 11 12 13
+declaracion_tipo (83)
+    on left: 15, on right: 4 11
+declaracion_const (84)
+    on left: 16, on right: 5 12
+declaracion_var (85)
+    on left: 17, on right: 13
+lista_d_tipo (86)
+    on left: 19 20, on right: 15 19
+$@1 (87)
+    on left: 18, on right: 19
+d_tipo (88)
+    on left: 21 22 23 24 25 26 27, on right: 19 22 25 30 44 45 48 49
+    52 53 114 117 118 119
+expresion_t (89)
+    on left: 28 29, on right: 22 24
+lista_campos (90)
+    on left: 30 31, on right: 21 30
+lista_d_cte (91)
+    on left: 32 33 34 35 36 37, on right: 16 32 33 34 35 36
+lista_d_var_entrada (92)
+    on left: 38 39, on right: 38 59
+lista_d_var_salida (93)
+    on left: 40 41, on right: 40 60
+lista_d_var (94)
+    on left: 42 43, on right: 17 42 114
+lista_id_entrada (95)
+    on left: 44 45 46 47, on right: 38 46 47
+lista_id_salida (96)
+    on left: 48 49 50 51, on right: 40 50 51
+lista_id (97)
+    on left: 52 53 54 55, on right: 42 54 55 117 118 119
+decl_ent_sal (98)
+    on left: 56 57 58, on right: 2
+decl_ent (99)
+    on left: 59, on right: 56 57
+decl_sal (100)
+    on left: 60, on right: 57 58
+expresion (101)
+    on left: 61 62, on right: 28 91 101 102 110 112 121 122
+asignacion_booleana (102)
+    on left: 63, on right: 98
+exp_a (103)
+    on left: 64 65 66 67 68 69 70 71 72 73 74 75, on right: 61 64 65
+    66 67 68 69 70 74 75 83 84 85 86 87 88
+exp_b (104)
+    on left: 76 77 78 79 80 81 82 83 84 85 86 87 88, on right: 32 63
+    76 77 78 82 103 104 108
+operando (105)
+    on left: 89 90 91 92, on right: 71 90 91 92 101
+operando_booleano (106)
+    on left: 93, on right: 63 79
+instrucciones (107)
+    on left: 94 95, on right: 10 94 103 104 108 109
+instruccion (108)
+    on left: 96 97 98 99 100, on right: 94 95
+asignacion (109)
+    on left: 101 102, on right: 97 110
+alternativa (110)
+    on left: 103, on right: 99
+lista_opciones (111)
+    on left: 104 105, on right: 103 104
+iteracion (112)
+    on left: 106 107, on right: 100
+it_cota_exp (113)
+    on left: 108, on right: 107
+it_cota_fija (114)
+    on left: 109, on right: 106
+aux_cota_fija (115)
+    on left: 110, on right: 109
+accion_d (116)
+    on left: 111, on right: 7
+funcion_d (117)
+    on left: 112, on right: 8
+a_cabecera (118)
+    on left: 113, on right: 111
+f_cabecera (119)
+    on left: 114, on right: 112
+d_par_form (120)
+    on left: 115 116, on right: 113 115
+d_p_form (121)
+    on left: 117 118 119, on right: 115
+funcion_ll (122)
+    on left: 120, on right: 62
+l_ll (123)
+    on left: 121 122, on right: 120 121
+M (124)
+    on left: 123, on right: 76 77 103 104 108 109
+N (125)
+    on left: 124, on right: 103 104 108 109
+
+
+State 0
+
+    0 $accept: . desc_algoritmo $end
+
+    BALGORITMO  shift, and go to state 1
+
+    desc_algoritmo  go to state 2
+
+
+State 1
+
+    1 desc_algoritmo: BALGORITMO . BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO
+
+    BIDENTIFICADOR  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: desc_algoritmo . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 desc_algoritmo: BALGORITMO BIDENTIFICADOR . BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO
+
+    BPUNTO_Y_COMA  shift, and go to state 5
+
+
+State 4
+
+    0 $accept: desc_algoritmo $end .
+
+    $default  accept
+
+
+State 5
+
+    1 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA . cabecera_alg bloque_alg BFALGORITMO BPUNTO
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+
+    $default  reduce using rule 6 (decl_globales)
+
+    cabecera_alg       go to state 8
+    decl_globales      go to state 9
+    declaracion_tipo   go to state 10
+    declaracion_const  go to state 11
+
+
+State 6
+
+   15 declaracion_tipo: BTIPO . lista_d_tipo BFTIPO BPUNTO_Y_COMA
+
+    BIDENTIFICADOR  shift, and go to state 12
+
+    $default  reduce using rule 20 (lista_d_tipo)
+
+    lista_d_tipo  go to state 13
+
+
+State 7
+
+   16 declaracion_const: BCONST . lista_d_cte BFCONST BPUNTO_Y_COMA
+
+    BIDENTIFICADOR   shift, and go to state 14
+    BIDENTIFICADORB  shift, and go to state 15
+
+    $default  reduce using rule 37 (lista_d_cte)
+
+    lista_d_cte  go to state 16
+
+
+State 8
+
+    1 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg . bloque_alg BFALGORITMO BPUNTO
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+    BVAR    shift, and go to state 17
+
+    $default  reduce using rule 14 (declaraciones)
+
+    bloque_alg         go to state 18
+    bloque             go to state 19
+    declaraciones      go to state 20
+    declaracion_tipo   go to state 21
+    declaracion_const  go to state 22
+    declaracion_var    go to state 23
+
+
+State 9
+
+    2 cabecera_alg: decl_globales . decl_a_f decl_ent_sal BCOMENTARIO
+
+    BACCION   shift, and go to state 24
+    BFUNCION  shift, and go to state 25
+
+    $default  reduce using rule 9 (decl_a_f)
+
+    decl_a_f   go to state 26
+    accion_d   go to state 27
+    funcion_d  go to state 28
+
+
+State 10
+
+    4 decl_globales: declaracion_tipo . decl_globales
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+
+    $default  reduce using rule 6 (decl_globales)
+
+    decl_globales      go to state 29
+    declaracion_tipo   go to state 10
+    declaracion_const  go to state 11
+
+
+State 11
+
+    5 decl_globales: declaracion_const . decl_globales
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+
+    $default  reduce using rule 6 (decl_globales)
+
+    decl_globales      go to state 30
+    declaracion_tipo   go to state 10
+    declaracion_const  go to state 11
+
+
+State 12
+
+   19 lista_d_tipo: BIDENTIFICADOR . BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo
+
+    BIGUAL  shift, and go to state 31
+
+
+State 13
+
+   15 declaracion_tipo: BTIPO lista_d_tipo . BFTIPO BPUNTO_Y_COMA
+
+    BFTIPO  shift, and go to state 32
+
+
+State 14
+
+   33 lista_d_cte: BIDENTIFICADOR . BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte
+   34            | BIDENTIFICADOR . BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte
+   35            | BIDENTIFICADOR . BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte
+   36            | BIDENTIFICADOR . BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte
+
+    BIGUAL  shift, and go to state 33
+
+
+State 15
+
+   32 lista_d_cte: BIDENTIFICADORB . BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte
+
+    BIGUAL  shift, and go to state 34
+
+
+State 16
+
+   16 declaracion_const: BCONST lista_d_cte . BFCONST BPUNTO_Y_COMA
+
+    BFCONST  shift, and go to state 35
+
+
+State 17
+
+   17 declaracion_var: BVAR . lista_d_var BFVAR BPUNTO_Y_COMA
+
+    BIDENTIFICADOR   shift, and go to state 36
+    BIDENTIFICADORB  shift, and go to state 37
+
+    $default  reduce using rule 43 (lista_d_var)
+
+    lista_d_var  go to state 38
+    lista_id     go to state 39
+
+
+State 18
+
+    1 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg . BFALGORITMO BPUNTO
+
+    BFALGORITMO  shift, and go to state 40
+
+
+State 19
+
+    3 bloque_alg: bloque . BCOMENTARIO
+
+    BCOMENTARIO  shift, and go to state 41
+
+
+State 20
+
+   10 bloque: declaraciones . instrucciones
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BCONTINUAR            shift, and go to state 46
+    BSI                   shift, and go to state 47
+    BMIENTRAS             shift, and go to state 48
+    BPARA                 shift, and go to state 49
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion            go to state 53
+    asignacion_booleana  go to state 54
+    exp_a                go to state 55
+    operando             go to state 56
+    operando_booleano    go to state 57
+    instrucciones        go to state 58
+    instruccion          go to state 59
+    asignacion           go to state 60
+    alternativa          go to state 61
+    iteracion            go to state 62
+    it_cota_exp          go to state 63
+    it_cota_fija         go to state 64
+    funcion_ll           go to state 65
+
+
+State 21
+
+   11 declaraciones: declaracion_tipo . declaraciones
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+    BVAR    shift, and go to state 17
+
+    $default  reduce using rule 14 (declaraciones)
+
+    declaraciones      go to state 66
+    declaracion_tipo   go to state 21
+    declaracion_const  go to state 22
+    declaracion_var    go to state 23
+
+
+State 22
+
+   12 declaraciones: declaracion_const . declaraciones
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+    BVAR    shift, and go to state 17
+
+    $default  reduce using rule 14 (declaraciones)
+
+    declaraciones      go to state 67
+    declaracion_tipo   go to state 21
+    declaracion_const  go to state 22
+    declaracion_var    go to state 23
+
+
+State 23
+
+   13 declaraciones: declaracion_var . declaraciones
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+    BVAR    shift, and go to state 17
+
+    $default  reduce using rule 14 (declaraciones)
+
+    declaraciones      go to state 68
+    declaracion_tipo   go to state 21
+    declaracion_const  go to state 22
+    declaracion_var    go to state 23
+
+
+State 24
+
+  111 accion_d: BACCION . a_cabecera bloque BFACCION
+
+    BIDENTIFICADOR  shift, and go to state 69
+
+    a_cabecera  go to state 70
+
+
+State 25
+
+  112 funcion_d: BFUNCION . f_cabecera bloque BDEV expresion BFFUNCION
+
+    BIDENTIFICADOR  shift, and go to state 71
+
+    f_cabecera  go to state 72
+
+
+State 26
+
+    2 cabecera_alg: decl_globales decl_a_f . decl_ent_sal BCOMENTARIO
+
+    BENT  shift, and go to state 73
+    BSAL  shift, and go to state 74
+
+    decl_ent_sal  go to state 75
+    decl_ent      go to state 76
+    decl_sal      go to state 77
+
+
+State 27
+
+    7 decl_a_f: accion_d . decl_a_f
+
+    BACCION   shift, and go to state 24
+    BFUNCION  shift, and go to state 25
+
+    $default  reduce using rule 9 (decl_a_f)
+
+    decl_a_f   go to state 78
+    accion_d   go to state 27
+    funcion_d  go to state 28
+
+
+State 28
+
+    8 decl_a_f: funcion_d . decl_a_f
+
+    BACCION   shift, and go to state 24
+    BFUNCION  shift, and go to state 25
+
+    $default  reduce using rule 9 (decl_a_f)
+
+    decl_a_f   go to state 79
+    accion_d   go to state 27
+    funcion_d  go to state 28
+
+
+State 29
+
+    4 decl_globales: declaracion_tipo decl_globales .
+
+    $default  reduce using rule 4 (decl_globales)
+
+
+State 30
+
+    5 decl_globales: declaracion_const decl_globales .
+
+    $default  reduce using rule 5 (decl_globales)
+
+
+State 31
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL . d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 87
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 32
+
+   15 declaracion_tipo: BTIPO lista_d_tipo BFTIPO . BPUNTO_Y_COMA
+
+    BPUNTO_Y_COMA  shift, and go to state 91
+
+
+State 33
+
+   33 lista_d_cte: BIDENTIFICADOR BIGUAL . BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte
+   34            | BIDENTIFICADOR BIGUAL . BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte
+   35            | BIDENTIFICADOR BIGUAL . BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte
+   36            | BIDENTIFICADOR BIGUAL . BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte
+
+    BLITERAL_CARACTER  shift, and go to state 92
+    BLITERAL_CADENA    shift, and go to state 93
+    BLITERAL_ENTERO    shift, and go to state 94
+    BLITERAL_REAL      shift, and go to state 95
+
+
+State 34
+
+   32 lista_d_cte: BIDENTIFICADORB BIGUAL . exp_b BPUNTO_Y_COMA lista_d_cte
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 101
+    exp_b              go to state 102
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 35
+
+   16 declaracion_const: BCONST lista_d_cte BFCONST . BPUNTO_Y_COMA
+
+    BPUNTO_Y_COMA  shift, and go to state 104
+
+
+State 36
+
+   52 lista_id: BIDENTIFICADOR . BDOS_PUNTOS d_tipo
+   54         | BIDENTIFICADOR . BCOMA lista_id
+
+    BDOS_PUNTOS  shift, and go to state 105
+    BCOMA        shift, and go to state 106
+
+
+State 37
+
+   53 lista_id: BIDENTIFICADORB . BDOS_PUNTOS d_tipo
+   55         | BIDENTIFICADORB . BCOMA lista_id
+
+    BDOS_PUNTOS  shift, and go to state 107
+    BCOMA        shift, and go to state 108
+
+
+State 38
+
+   17 declaracion_var: BVAR lista_d_var . BFVAR BPUNTO_Y_COMA
+
+    BFVAR  shift, and go to state 109
+
+
+State 39
+
+   42 lista_d_var: lista_id . BPUNTO_Y_COMA lista_d_var
+
+    BPUNTO_Y_COMA  shift, and go to state 110
+
+
+State 40
+
+    1 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO . BPUNTO
+
+    BPUNTO  shift, and go to state 111
+
+
+State 41
+
+    3 bloque_alg: bloque BCOMENTARIO .
+
+    $default  reduce using rule 3 (bloque_alg)
+
+
+State 42
+
+   89 operando: BIDENTIFICADOR .
+  120 funcion_ll: BIDENTIFICADOR . BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
+
+    BPARENTESIS_APERTURA  shift, and go to state 112
+
+    $default  reduce using rule 89 (operando)
+
+
+State 43
+
+   75 exp_a: BSUMA . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 113
+    operando  go to state 90
+
+
+State 44
+
+   74 exp_a: BMENOS . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 114
+    operando  go to state 90
+
+
+State 45
+
+   70 exp_a: BPARENTESIS_APERTURA . exp_a BPARENTESIS_CIERRE
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 115
+    operando  go to state 90
+
+
+State 46
+
+   96 instruccion: BCONTINUAR .
+
+    $default  reduce using rule 96 (instruccion)
+
+
+State 47
+
+  103 alternativa: BSI . exp_b BENTONCES M instrucciones N M lista_opciones M BFSI
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 101
+    exp_b              go to state 116
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 48
+
+  108 it_cota_exp: BMIENTRAS . M exp_b BHACER M instrucciones N M BFMIENTRAS
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 117
+
+
+State 49
+
+  109 it_cota_fija: BPARA . aux_cota_fija BHACER M instrucciones N M BFPARA
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion      go to state 53
+    exp_a          go to state 55
+    operando       go to state 56
+    asignacion     go to state 118
+    aux_cota_fija  go to state 119
+    funcion_ll     go to state 65
+
+
+State 50
+
+   93 operando_booleano: BIDENTIFICADORB .
+
+    $default  reduce using rule 93 (operando_booleano)
+
+
+State 51
+
+   73 exp_a: BLITERAL_ENTERO .
+
+    $default  reduce using rule 73 (exp_a)
+
+
+State 52
+
+   72 exp_a: BLITERAL_REAL .
+
+    $default  reduce using rule 72 (exp_a)
+
+
+State 53
+
+  102 asignacion: expresion .
+
+    $default  reduce using rule 102 (asignacion)
+
+
+State 54
+
+   98 instruccion: asignacion_booleana .
+
+    $default  reduce using rule 98 (instruccion)
+
+
+State 55
+
+   61 expresion: exp_a .
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+
+    BSUMA   shift, and go to state 120
+    BMENOS  shift, and go to state 121
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 61 (expresion)
+
+
+State 56
+
+   71 exp_a: operando .
+   90 operando: operando . BPUNTO operando
+   91         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
+   92         | operando . BREF
+  101 asignacion: operando . BDOS_PUNTOS_IGUAL expresion
+
+    BPUNTO              shift, and go to state 126
+    BCORCHETE_APERTURA  shift, and go to state 127
+    BREF                shift, and go to state 128
+    BDOS_PUNTOS_IGUAL   shift, and go to state 129
+
+    $default  reduce using rule 71 (exp_a)
+
+
+State 57
+
+   63 asignacion_booleana: operando_booleano . BDOS_PUNTOS_IGUAL exp_b
+
+    BDOS_PUNTOS_IGUAL  shift, and go to state 130
+
+
+State 58
+
+   10 bloque: declaraciones instrucciones .
+
+    $default  reduce using rule 10 (bloque)
+
+
+State 59
+
+   94 instrucciones: instruccion . BPUNTO_Y_COMA instrucciones
+   95              | instruccion .
+
+    BPUNTO_Y_COMA  shift, and go to state 131
+
+    $default  reduce using rule 95 (instrucciones)
+
+
+State 60
+
+   97 instruccion: asignacion .
+
+    $default  reduce using rule 97 (instruccion)
+
+
+State 61
+
+   99 instruccion: alternativa .
+
+    $default  reduce using rule 99 (instruccion)
+
+
+State 62
+
+  100 instruccion: iteracion .
+
+    $default  reduce using rule 100 (instruccion)
+
+
+State 63
+
+  107 iteracion: it_cota_exp .
+
+    $default  reduce using rule 107 (iteracion)
+
+
+State 64
+
+  106 iteracion: it_cota_fija .
+
+    $default  reduce using rule 106 (iteracion)
+
+
+State 65
+
+   62 expresion: funcion_ll .
+
+    $default  reduce using rule 62 (expresion)
+
+
+State 66
+
+   11 declaraciones: declaracion_tipo declaraciones .
+
+    $default  reduce using rule 11 (declaraciones)
+
+
+State 67
+
+   12 declaraciones: declaracion_const declaraciones .
+
+    $default  reduce using rule 12 (declaraciones)
+
+
+State 68
+
+   13 declaraciones: declaracion_var declaraciones .
+
+    $default  reduce using rule 13 (declaraciones)
+
+
+State 69
+
+  113 a_cabecera: BIDENTIFICADOR . BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
+
+    BPARENTESIS_APERTURA  shift, and go to state 132
+
+
+State 70
+
+  111 accion_d: BACCION a_cabecera . bloque BFACCION
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+    BVAR    shift, and go to state 17
+
+    $default  reduce using rule 14 (declaraciones)
+
+    bloque             go to state 133
+    declaraciones      go to state 20
+    declaracion_tipo   go to state 21
+    declaracion_const  go to state 22
+    declaracion_var    go to state 23
+
+
+State 71
+
+  114 f_cabecera: BIDENTIFICADOR . BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+
+    BPARENTESIS_APERTURA  shift, and go to state 134
+
+
+State 72
+
+  112 funcion_d: BFUNCION f_cabecera . bloque BDEV expresion BFFUNCION
+
+    BTIPO   shift, and go to state 6
+    BCONST  shift, and go to state 7
+    BVAR    shift, and go to state 17
+
+    $default  reduce using rule 14 (declaraciones)
+
+    bloque             go to state 135
+    declaraciones      go to state 20
+    declaracion_tipo   go to state 21
+    declaracion_const  go to state 22
+    declaracion_var    go to state 23
+
+
+State 73
+
+   59 decl_ent: BENT . lista_d_var_entrada
+
+    BIDENTIFICADOR   shift, and go to state 136
+    BIDENTIFICADORB  shift, and go to state 137
+
+    $default  reduce using rule 39 (lista_d_var_entrada)
+
+    lista_d_var_entrada  go to state 138
+    lista_id_entrada     go to state 139
+
+
+State 74
+
+   60 decl_sal: BSAL . lista_d_var_salida
+
+    BIDENTIFICADOR   shift, and go to state 140
+    BIDENTIFICADORB  shift, and go to state 141
+
+    $default  reduce using rule 41 (lista_d_var_salida)
+
+    lista_d_var_salida  go to state 142
+    lista_id_salida     go to state 143
+
+
+State 75
+
+    2 cabecera_alg: decl_globales decl_a_f decl_ent_sal . BCOMENTARIO
+
+    BCOMENTARIO  shift, and go to state 144
+
+
+State 76
+
+   56 decl_ent_sal: decl_ent .
+   57             | decl_ent . decl_sal
+
+    BSAL  shift, and go to state 74
+
+    $default  reduce using rule 56 (decl_ent_sal)
+
+    decl_sal  go to state 145
+
+
+State 77
+
+   58 decl_ent_sal: decl_sal .
+
+    $default  reduce using rule 58 (decl_ent_sal)
+
+
+State 78
+
+    7 decl_a_f: accion_d decl_a_f .
+
+    $default  reduce using rule 7 (decl_a_f)
+
+
+State 79
+
+    8 decl_a_f: funcion_d decl_a_f .
+
+    $default  reduce using rule 8 (decl_a_f)
+
+
+State 80
+
+   23 d_tipo: BIDENTIFICADOR .
+   89 operando: BIDENTIFICADOR .
+  120 funcion_ll: BIDENTIFICADOR . BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE
+
+    BPARENTESIS_APERTURA  shift, and go to state 112
+
+    BPUNTO_Y_COMA  reduce using rule 23 (d_tipo)
+    BDOS_PUNTOS    reduce using rule 23 (d_tipo)
+    $default       reduce using rule 89 (operando)
+
+
+State 81
+
+   21 d_tipo: BTUPLA . lista_campos BFTUPLA
+
+    BIDENTIFICADOR  shift, and go to state 146
+
+    $default  reduce using rule 31 (lista_campos)
+
+    lista_campos  go to state 147
+
+
+State 82
+
+   22 d_tipo: BTABLA . BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo
+
+    BCORCHETE_APERTURA  shift, and go to state 148
+
+
+State 83
+
+   25 d_tipo: BREF . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 149
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 84
+
+   27 d_tipo: BTIPO_BASE .
+
+    $default  reduce using rule 27 (d_tipo)
+
+
+State 85
+
+   29 expresion_t: BLITERAL_CARACTER .
+
+    $default  reduce using rule 29 (expresion_t)
+
+
+State 86
+
+   26 d_tipo: BIDENTIFICADORB .
+
+    $default  reduce using rule 26 (d_tipo)
+
+
+State 87
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo . BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo
+
+    BPUNTO_Y_COMA  shift, and go to state 150
+
+
+State 88
+
+   24 d_tipo: expresion_t . BPUNTOSS expresion_t
+
+    BPUNTOSS  shift, and go to state 151
+
+
+State 89
+
+   28 expresion_t: expresion .
+
+    $default  reduce using rule 28 (expresion_t)
+
+
+State 90
+
+   71 exp_a: operando .
+   90 operando: operando . BPUNTO operando
+   91         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
+   92         | operando . BREF
+
+    BPUNTO              shift, and go to state 126
+    BCORCHETE_APERTURA  shift, and go to state 127
+    BREF                shift, and go to state 128
+
+    $default  reduce using rule 71 (exp_a)
+
+
+State 91
+
+   15 declaracion_tipo: BTIPO lista_d_tipo BFTIPO BPUNTO_Y_COMA .
+
+    $default  reduce using rule 15 (declaracion_tipo)
+
+
+State 92
+
+   35 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_CARACTER . BPUNTO_Y_COMA lista_d_cte
+
+    BPUNTO_Y_COMA  shift, and go to state 152
+
+
+State 93
+
+   36 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_CADENA . BPUNTO_Y_COMA lista_d_cte
+
+    BPUNTO_Y_COMA  shift, and go to state 153
+
+
+State 94
+
+   33 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_ENTERO . BPUNTO_Y_COMA lista_d_cte
+
+    BPUNTO_Y_COMA  shift, and go to state 154
+
+
+State 95
+
+   34 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_REAL . BPUNTO_Y_COMA lista_d_cte
+
+    BPUNTO_Y_COMA  shift, and go to state 155
+
+
+State 96
+
+   89 operando: BIDENTIFICADOR .
+
+    $default  reduce using rule 89 (operando)
+
+
+State 97
+
+   70 exp_a: BPARENTESIS_APERTURA . exp_a BPARENTESIS_CIERRE
+   82 exp_b: BPARENTESIS_APERTURA . exp_b BPARENTESIS_CIERRE
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 156
+    exp_b              go to state 157
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 98
+
+   78 exp_b: BNO . exp_b
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 101
+    exp_b              go to state 158
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 99
+
+   80 exp_b: BVERDADERO .
+
+    $default  reduce using rule 80 (exp_b)
+
+
+State 100
+
+   81 exp_b: BFALSO .
+
+    $default  reduce using rule 81 (exp_b)
+
+
+State 101
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   83 exp_b: exp_a . BIGUAL exp_a
+   84      | exp_a . BMAYOR exp_a
+   85      | exp_a . BMENOR exp_a
+   86      | exp_a . BDIFERENTE exp_a
+   87      | exp_a . BMAYORIGUAL exp_a
+   88      | exp_a . BMENORIGUAL exp_a
+
+    BIGUAL       shift, and go to state 159
+    BSUMA        shift, and go to state 120
+    BMENOS       shift, and go to state 121
+    BPOR         shift, and go to state 122
+    BENTRE       shift, and go to state 123
+    BMOD         shift, and go to state 124
+    BDIV         shift, and go to state 125
+    BMAYOR       shift, and go to state 160
+    BMENOR       shift, and go to state 161
+    BMAYORIGUAL  shift, and go to state 162
+    BMENORIGUAL  shift, and go to state 163
+    BDIFERENTE   shift, and go to state 164
+
+
+State 102
+
+   32 lista_d_cte: BIDENTIFICADORB BIGUAL exp_b . BPUNTO_Y_COMA lista_d_cte
+   76 exp_b: exp_b . BY M exp_b
+   77      | exp_b . BO M exp_b
+
+    BPUNTO_Y_COMA  shift, and go to state 165
+    BY             shift, and go to state 166
+    BO             shift, and go to state 167
+
+
+State 103
+
+   79 exp_b: operando_booleano .
+
+    $default  reduce using rule 79 (exp_b)
+
+
+State 104
+
+   16 declaracion_const: BCONST lista_d_cte BFCONST BPUNTO_Y_COMA .
+
+    $default  reduce using rule 16 (declaracion_const)
+
+
+State 105
+
+   52 lista_id: BIDENTIFICADOR BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 168
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 106
+
+   54 lista_id: BIDENTIFICADOR BCOMA . lista_id
+
+    BIDENTIFICADOR   shift, and go to state 36
+    BIDENTIFICADORB  shift, and go to state 37
+
+    lista_id  go to state 169
+
+
+State 107
+
+   53 lista_id: BIDENTIFICADORB BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 170
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 108
+
+   55 lista_id: BIDENTIFICADORB BCOMA . lista_id
+
+    BIDENTIFICADOR   shift, and go to state 36
+    BIDENTIFICADORB  shift, and go to state 37
+
+    lista_id  go to state 171
+
+
+State 109
+
+   17 declaracion_var: BVAR lista_d_var BFVAR . BPUNTO_Y_COMA
+
+    BPUNTO_Y_COMA  shift, and go to state 172
+
+
+State 110
+
+   42 lista_d_var: lista_id BPUNTO_Y_COMA . lista_d_var
+
+    BIDENTIFICADOR   shift, and go to state 36
+    BIDENTIFICADORB  shift, and go to state 37
+
+    $default  reduce using rule 43 (lista_d_var)
+
+    lista_d_var  go to state 173
+    lista_id     go to state 39
+
+
+State 111
+
+    1 desc_algoritmo: BALGORITMO BIDENTIFICADOR BPUNTO_Y_COMA cabecera_alg bloque_alg BFALGORITMO BPUNTO .
+
+    $default  reduce using rule 1 (desc_algoritmo)
+
+
+State 112
+
+  120 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA . l_ll BPARENTESIS_CIERRE
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion   go to state 174
+    exp_a       go to state 55
+    operando    go to state 90
+    funcion_ll  go to state 65
+    l_ll        go to state 175
+
+
+State 113
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   75      | BSUMA exp_a .
+
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 75 (exp_a)
+
+
+State 114
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   74      | BMENOS exp_a .
+
+    $default  reduce using rule 74 (exp_a)
+
+
+State 115
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   70      | BPARENTESIS_APERTURA exp_a . BPARENTESIS_CIERRE
+
+    BSUMA               shift, and go to state 120
+    BMENOS              shift, and go to state 121
+    BPOR                shift, and go to state 122
+    BENTRE              shift, and go to state 123
+    BMOD                shift, and go to state 124
+    BDIV                shift, and go to state 125
+    BPARENTESIS_CIERRE  shift, and go to state 176
+
+
+State 116
+
+   76 exp_b: exp_b . BY M exp_b
+   77      | exp_b . BO M exp_b
+  103 alternativa: BSI exp_b . BENTONCES M instrucciones N M lista_opciones M BFSI
+
+    BY         shift, and go to state 166
+    BO         shift, and go to state 167
+    BENTONCES  shift, and go to state 177
+
+
+State 117
+
+  108 it_cota_exp: BMIENTRAS M . exp_b BHACER M instrucciones N M BFMIENTRAS
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 101
+    exp_b              go to state 178
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 118
+
+  110 aux_cota_fija: asignacion . BHASTA expresion
+
+    BHASTA  shift, and go to state 179
+
+
+State 119
+
+  109 it_cota_fija: BPARA aux_cota_fija . BHACER M instrucciones N M BFPARA
+
+    BHACER  shift, and go to state 180
+
+
+State 120
+
+   64 exp_a: exp_a BSUMA . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 181
+    operando  go to state 90
+
+
+State 121
+
+   65 exp_a: exp_a BMENOS . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 182
+    operando  go to state 90
+
+
+State 122
+
+   66 exp_a: exp_a BPOR . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 183
+    operando  go to state 90
+
+
+State 123
+
+   67 exp_a: exp_a BENTRE . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 184
+    operando  go to state 90
+
+
+State 124
+
+   68 exp_a: exp_a BMOD . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 185
+    operando  go to state 90
+
+
+State 125
+
+   69 exp_a: exp_a BDIV . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 186
+    operando  go to state 90
+
+
+State 126
+
+   90 operando: operando BPUNTO . operando
+
+    BIDENTIFICADOR  shift, and go to state 96
+
+    operando  go to state 187
+
+
+State 127
+
+   91 operando: operando BCORCHETE_APERTURA . expresion BCORCHETE_CIERRE
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion   go to state 188
+    exp_a       go to state 55
+    operando    go to state 90
+    funcion_ll  go to state 65
+
+
+State 128
+
+   92 operando: operando BREF .
+
+    $default  reduce using rule 92 (operando)
+
+
+State 129
+
+  101 asignacion: operando BDOS_PUNTOS_IGUAL . expresion
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion   go to state 189
+    exp_a       go to state 55
+    operando    go to state 90
+    funcion_ll  go to state 65
+
+
+State 130
+
+   63 asignacion_booleana: operando_booleano BDOS_PUNTOS_IGUAL . exp_b
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 101
+    exp_b              go to state 190
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 131
+
+   94 instrucciones: instruccion BPUNTO_Y_COMA . instrucciones
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BCONTINUAR            shift, and go to state 46
+    BSI                   shift, and go to state 47
+    BMIENTRAS             shift, and go to state 48
+    BPARA                 shift, and go to state 49
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion            go to state 53
+    asignacion_booleana  go to state 54
+    exp_a                go to state 55
+    operando             go to state 56
+    operando_booleano    go to state 57
+    instrucciones        go to state 191
+    instruccion          go to state 59
+    asignacion           go to state 60
+    alternativa          go to state 61
+    iteracion            go to state 62
+    it_cota_exp          go to state 63
+    it_cota_fija         go to state 64
+    funcion_ll           go to state 65
+
+
+State 132
+
+  113 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA . d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA
+
+    BEND  shift, and go to state 192
+    BSAL  shift, and go to state 193
+    BES   shift, and go to state 194
+
+    $default  reduce using rule 116 (d_par_form)
+
+    d_par_form  go to state 195
+    d_p_form    go to state 196
+
+
+State 133
+
+  111 accion_d: BACCION a_cabecera bloque . BFACCION
+
+    BFACCION  shift, and go to state 197
+
+
+State 134
+
+  114 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA . lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+
+    BIDENTIFICADOR   shift, and go to state 36
+    BIDENTIFICADORB  shift, and go to state 37
+
+    $default  reduce using rule 43 (lista_d_var)
+
+    lista_d_var  go to state 198
+    lista_id     go to state 39
+
+
+State 135
+
+  112 funcion_d: BFUNCION f_cabecera bloque . BDEV expresion BFFUNCION
+
+    BDEV  shift, and go to state 199
+
+
+State 136
+
+   44 lista_id_entrada: BIDENTIFICADOR . BDOS_PUNTOS d_tipo
+   46                 | BIDENTIFICADOR . BCOMA lista_id_entrada
+
+    BDOS_PUNTOS  shift, and go to state 200
+    BCOMA        shift, and go to state 201
+
+
+State 137
+
+   45 lista_id_entrada: BIDENTIFICADORB . BDOS_PUNTOS d_tipo
+   47                 | BIDENTIFICADORB . BCOMA lista_id_entrada
+
+    BDOS_PUNTOS  shift, and go to state 202
+    BCOMA        shift, and go to state 203
+
+
+State 138
+
+   59 decl_ent: BENT lista_d_var_entrada .
+
+    $default  reduce using rule 59 (decl_ent)
+
+
+State 139
+
+   38 lista_d_var_entrada: lista_id_entrada . BPUNTO_Y_COMA lista_d_var_entrada
+
+    BPUNTO_Y_COMA  shift, and go to state 204
+
+
+State 140
+
+   48 lista_id_salida: BIDENTIFICADOR . BDOS_PUNTOS d_tipo
+   50                | BIDENTIFICADOR . BCOMA lista_id_salida
+
+    BDOS_PUNTOS  shift, and go to state 205
+    BCOMA        shift, and go to state 206
+
+
+State 141
+
+   49 lista_id_salida: BIDENTIFICADORB . BDOS_PUNTOS d_tipo
+   51                | BIDENTIFICADORB . BCOMA lista_id_salida
+
+    BDOS_PUNTOS  shift, and go to state 207
+    BCOMA        shift, and go to state 208
+
+
+State 142
+
+   60 decl_sal: BSAL lista_d_var_salida .
+
+    $default  reduce using rule 60 (decl_sal)
+
+
+State 143
+
+   40 lista_d_var_salida: lista_id_salida . BPUNTO_Y_COMA lista_d_var_salida
+
+    BPUNTO_Y_COMA  shift, and go to state 209
+
+
+State 144
+
+    2 cabecera_alg: decl_globales decl_a_f decl_ent_sal BCOMENTARIO .
+
+    $default  reduce using rule 2 (cabecera_alg)
+
+
+State 145
+
+   57 decl_ent_sal: decl_ent decl_sal .
+
+    $default  reduce using rule 57 (decl_ent_sal)
+
+
+State 146
+
+   30 lista_campos: BIDENTIFICADOR . BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos
+
+    BDOS_PUNTOS  shift, and go to state 210
+
+
+State 147
+
+   21 d_tipo: BTUPLA lista_campos . BFTUPLA
+
+    BFTUPLA  shift, and go to state 211
+
+
+State 148
+
+   22 d_tipo: BTABLA BCORCHETE_APERTURA . expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion_t  go to state 212
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 149
+
+   25 d_tipo: BREF d_tipo .
+
+    $default  reduce using rule 25 (d_tipo)
+
+
+State 150
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA . lista_d_tipo $@1 BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo
+
+    BIDENTIFICADOR  shift, and go to state 12
+
+    $default  reduce using rule 20 (lista_d_tipo)
+
+    lista_d_tipo  go to state 213
+
+
+State 151
+
+   24 d_tipo: expresion_t BPUNTOSS . expresion_t
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion_t  go to state 214
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 152
+
+   35 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA . lista_d_cte
+
+    BIDENTIFICADOR   shift, and go to state 14
+    BIDENTIFICADORB  shift, and go to state 15
+
+    $default  reduce using rule 37 (lista_d_cte)
+
+    lista_d_cte  go to state 215
+
+
+State 153
+
+   36 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA . lista_d_cte
+
+    BIDENTIFICADOR   shift, and go to state 14
+    BIDENTIFICADORB  shift, and go to state 15
+
+    $default  reduce using rule 37 (lista_d_cte)
+
+    lista_d_cte  go to state 216
+
+
+State 154
+
+   33 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA . lista_d_cte
+
+    BIDENTIFICADOR   shift, and go to state 14
+    BIDENTIFICADORB  shift, and go to state 15
+
+    $default  reduce using rule 37 (lista_d_cte)
+
+    lista_d_cte  go to state 217
+
+
+State 155
+
+   34 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA . lista_d_cte
+
+    BIDENTIFICADOR   shift, and go to state 14
+    BIDENTIFICADORB  shift, and go to state 15
+
+    $default  reduce using rule 37 (lista_d_cte)
+
+    lista_d_cte  go to state 218
+
+
+State 156
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   70      | BPARENTESIS_APERTURA exp_a . BPARENTESIS_CIERRE
+   83 exp_b: exp_a . BIGUAL exp_a
+   84      | exp_a . BMAYOR exp_a
+   85      | exp_a . BMENOR exp_a
+   86      | exp_a . BDIFERENTE exp_a
+   87      | exp_a . BMAYORIGUAL exp_a
+   88      | exp_a . BMENORIGUAL exp_a
+
+    BIGUAL              shift, and go to state 159
+    BSUMA               shift, and go to state 120
+    BMENOS              shift, and go to state 121
+    BPOR                shift, and go to state 122
+    BENTRE              shift, and go to state 123
+    BMOD                shift, and go to state 124
+    BDIV                shift, and go to state 125
+    BPARENTESIS_CIERRE  shift, and go to state 176
+    BMAYOR              shift, and go to state 160
+    BMENOR              shift, and go to state 161
+    BMAYORIGUAL         shift, and go to state 162
+    BMENORIGUAL         shift, and go to state 163
+    BDIFERENTE          shift, and go to state 164
+
+
+State 157
+
+   76 exp_b: exp_b . BY M exp_b
+   77      | exp_b . BO M exp_b
+   82      | BPARENTESIS_APERTURA exp_b . BPARENTESIS_CIERRE
+
+    BPARENTESIS_CIERRE  shift, and go to state 219
+    BY                  shift, and go to state 166
+    BO                  shift, and go to state 167
+
+
+State 158
+
+   76 exp_b: exp_b . BY M exp_b
+   77      | exp_b . BO M exp_b
+   78      | BNO exp_b .
+
+    $default  reduce using rule 78 (exp_b)
+
+
+State 159
+
+   83 exp_b: exp_a BIGUAL . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 220
+    operando  go to state 90
+
+
+State 160
+
+   84 exp_b: exp_a BMAYOR . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 221
+    operando  go to state 90
+
+
+State 161
+
+   85 exp_b: exp_a BMENOR . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 222
+    operando  go to state 90
+
+
+State 162
+
+   87 exp_b: exp_a BMAYORIGUAL . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 223
+    operando  go to state 90
+
+
+State 163
+
+   88 exp_b: exp_a BMENORIGUAL . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 224
+    operando  go to state 90
+
+
+State 164
+
+   86 exp_b: exp_a BDIFERENTE . exp_a
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a     go to state 225
+    operando  go to state 90
+
+
+State 165
+
+   32 lista_d_cte: BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA . lista_d_cte
+
+    BIDENTIFICADOR   shift, and go to state 14
+    BIDENTIFICADORB  shift, and go to state 15
+
+    $default  reduce using rule 37 (lista_d_cte)
+
+    lista_d_cte  go to state 226
+
+
+State 166
+
+   76 exp_b: exp_b BY . M exp_b
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 227
+
+
+State 167
+
+   77 exp_b: exp_b BO . M exp_b
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 228
+
+
+State 168
+
+   52 lista_id: BIDENTIFICADOR BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 52 (lista_id)
+
+
+State 169
+
+   54 lista_id: BIDENTIFICADOR BCOMA lista_id .
+
+    $default  reduce using rule 54 (lista_id)
+
+
+State 170
+
+   53 lista_id: BIDENTIFICADORB BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 53 (lista_id)
+
+
+State 171
+
+   55 lista_id: BIDENTIFICADORB BCOMA lista_id .
+
+    $default  reduce using rule 55 (lista_id)
+
+
+State 172
+
+   17 declaracion_var: BVAR lista_d_var BFVAR BPUNTO_Y_COMA .
+
+    $default  reduce using rule 17 (declaracion_var)
+
+
+State 173
+
+   42 lista_d_var: lista_id BPUNTO_Y_COMA lista_d_var .
+
+    $default  reduce using rule 42 (lista_d_var)
+
+
+State 174
+
+  121 l_ll: expresion . BCOMA l_ll
+  122     | expresion .
+
+    BCOMA  shift, and go to state 229
+
+    $default  reduce using rule 122 (l_ll)
+
+
+State 175
+
+  120 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll . BPARENTESIS_CIERRE
+
+    BPARENTESIS_CIERRE  shift, and go to state 230
+
+
+State 176
+
+   70 exp_a: BPARENTESIS_APERTURA exp_a BPARENTESIS_CIERRE .
+
+    $default  reduce using rule 70 (exp_a)
+
+
+State 177
+
+  103 alternativa: BSI exp_b BENTONCES . M instrucciones N M lista_opciones M BFSI
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 231
+
+
+State 178
+
+   76 exp_b: exp_b . BY M exp_b
+   77      | exp_b . BO M exp_b
+  108 it_cota_exp: BMIENTRAS M exp_b . BHACER M instrucciones N M BFMIENTRAS
+
+    BY      shift, and go to state 166
+    BO      shift, and go to state 167
+    BHACER  shift, and go to state 232
+
+
+State 179
+
+  110 aux_cota_fija: asignacion BHASTA . expresion
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion   go to state 233
+    exp_a       go to state 55
+    operando    go to state 90
+    funcion_ll  go to state 65
+
+
+State 180
+
+  109 it_cota_fija: BPARA aux_cota_fija BHACER . M instrucciones N M BFPARA
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 234
+
+
+State 181
+
+   64 exp_a: exp_a . BSUMA exp_a
+   64      | exp_a BSUMA exp_a .
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 64 (exp_a)
+
+
+State 182
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   65      | exp_a BMENOS exp_a .
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 65 (exp_a)
+
+
+State 183
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   66      | exp_a BPOR exp_a .
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+
+    $default  reduce using rule 66 (exp_a)
+
+
+State 184
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   67      | exp_a BENTRE exp_a .
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+
+    $default  reduce using rule 67 (exp_a)
+
+
+State 185
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   68      | exp_a BMOD exp_a .
+   69      | exp_a . BDIV exp_a
+
+    $default  reduce using rule 68 (exp_a)
+
+
+State 186
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   69      | exp_a BDIV exp_a .
+
+    $default  reduce using rule 69 (exp_a)
+
+
+State 187
+
+   90 operando: operando . BPUNTO operando
+   90         | operando BPUNTO operando .
+   91         | operando . BCORCHETE_APERTURA expresion BCORCHETE_CIERRE
+   92         | operando . BREF
+
+    BCORCHETE_APERTURA  shift, and go to state 127
+    BREF                shift, and go to state 128
+
+    $default  reduce using rule 90 (operando)
+
+
+State 188
+
+   91 operando: operando BCORCHETE_APERTURA expresion . BCORCHETE_CIERRE
+
+    BCORCHETE_CIERRE  shift, and go to state 235
+
+
+State 189
+
+  101 asignacion: operando BDOS_PUNTOS_IGUAL expresion .
+
+    $default  reduce using rule 101 (asignacion)
+
+
+State 190
+
+   63 asignacion_booleana: operando_booleano BDOS_PUNTOS_IGUAL exp_b .
+   76 exp_b: exp_b . BY M exp_b
+   77      | exp_b . BO M exp_b
+
+    BY  shift, and go to state 166
+    BO  shift, and go to state 167
+
+    $default  reduce using rule 63 (asignacion_booleana)
+
+
+State 191
+
+   94 instrucciones: instruccion BPUNTO_Y_COMA instrucciones .
+
+    $default  reduce using rule 94 (instrucciones)
+
+
+State 192
+
+  117 d_p_form: BEND . lista_id BDOS_PUNTOS d_tipo
+
+    BIDENTIFICADOR   shift, and go to state 36
+    BIDENTIFICADORB  shift, and go to state 37
+
+    lista_id  go to state 236
+
+
+State 193
+
+  118 d_p_form: BSAL . lista_id BDOS_PUNTOS d_tipo
+
+    BIDENTIFICADOR   shift, and go to state 36
+    BIDENTIFICADORB  shift, and go to state 37
+
+    lista_id  go to state 237
+
+
+State 194
+
+  119 d_p_form: BES . lista_id BDOS_PUNTOS d_tipo
+
+    BIDENTIFICADOR   shift, and go to state 36
+    BIDENTIFICADORB  shift, and go to state 37
+
+    lista_id  go to state 238
+
+
+State 195
+
+  113 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form . BPARENTESIS_CIERRE BPUNTO_Y_COMA
+
+    BPARENTESIS_CIERRE  shift, and go to state 239
+
+
+State 196
+
+  115 d_par_form: d_p_form . BPUNTO_Y_COMA d_par_form
+
+    BPUNTO_Y_COMA  shift, and go to state 240
+
+
+State 197
+
+  111 accion_d: BACCION a_cabecera bloque BFACCION .
+
+    $default  reduce using rule 111 (accion_d)
+
+
+State 198
+
+  114 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var . BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA
+
+    BPARENTESIS_CIERRE  shift, and go to state 241
+
+
+State 199
+
+  112 funcion_d: BFUNCION f_cabecera bloque BDEV . expresion BFFUNCION
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion   go to state 242
+    exp_a       go to state 55
+    operando    go to state 90
+    funcion_ll  go to state 65
+
+
+State 200
+
+   44 lista_id_entrada: BIDENTIFICADOR BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 243
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 201
+
+   46 lista_id_entrada: BIDENTIFICADOR BCOMA . lista_id_entrada
+
+    BIDENTIFICADOR   shift, and go to state 136
+    BIDENTIFICADORB  shift, and go to state 137
+
+    lista_id_entrada  go to state 244
+
+
+State 202
+
+   45 lista_id_entrada: BIDENTIFICADORB BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 245
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 203
+
+   47 lista_id_entrada: BIDENTIFICADORB BCOMA . lista_id_entrada
+
+    BIDENTIFICADOR   shift, and go to state 136
+    BIDENTIFICADORB  shift, and go to state 137
+
+    lista_id_entrada  go to state 246
+
+
+State 204
+
+   38 lista_d_var_entrada: lista_id_entrada BPUNTO_Y_COMA . lista_d_var_entrada
+
+    BIDENTIFICADOR   shift, and go to state 136
+    BIDENTIFICADORB  shift, and go to state 137
+
+    $default  reduce using rule 39 (lista_d_var_entrada)
+
+    lista_d_var_entrada  go to state 247
+    lista_id_entrada     go to state 139
+
+
+State 205
+
+   48 lista_id_salida: BIDENTIFICADOR BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 248
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 206
+
+   50 lista_id_salida: BIDENTIFICADOR BCOMA . lista_id_salida
+
+    BIDENTIFICADOR   shift, and go to state 140
+    BIDENTIFICADORB  shift, and go to state 141
+
+    lista_id_salida  go to state 249
+
+
+State 207
+
+   49 lista_id_salida: BIDENTIFICADORB BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 250
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 208
+
+   51 lista_id_salida: BIDENTIFICADORB BCOMA . lista_id_salida
+
+    BIDENTIFICADOR   shift, and go to state 140
+    BIDENTIFICADORB  shift, and go to state 141
+
+    lista_id_salida  go to state 251
+
+
+State 209
+
+   40 lista_d_var_salida: lista_id_salida BPUNTO_Y_COMA . lista_d_var_salida
+
+    BIDENTIFICADOR   shift, and go to state 140
+    BIDENTIFICADORB  shift, and go to state 141
+
+    $default  reduce using rule 41 (lista_d_var_salida)
+
+    lista_d_var_salida  go to state 252
+    lista_id_salida     go to state 143
+
+
+State 210
+
+   30 lista_campos: BIDENTIFICADOR BDOS_PUNTOS . d_tipo BPUNTO_Y_COMA lista_campos
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 253
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 211
+
+   21 d_tipo: BTUPLA lista_campos BFTUPLA .
+
+    $default  reduce using rule 21 (d_tipo)
+
+
+State 212
+
+   22 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t . BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo
+
+    BPUNTOSS  shift, and go to state 254
+
+
+State 213
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo . $@1 BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo
+
+    $default  reduce using rule 18 ($@1)
+
+    $@1  go to state 255
+
+
+State 214
+
+   24 d_tipo: expresion_t BPUNTOSS expresion_t .
+
+    $default  reduce using rule 24 (d_tipo)
+
+
+State 215
+
+   35 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_CARACTER BPUNTO_Y_COMA lista_d_cte .
+
+    $default  reduce using rule 35 (lista_d_cte)
+
+
+State 216
+
+   36 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_CADENA BPUNTO_Y_COMA lista_d_cte .
+
+    $default  reduce using rule 36 (lista_d_cte)
+
+
+State 217
+
+   33 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_ENTERO BPUNTO_Y_COMA lista_d_cte .
+
+    $default  reduce using rule 33 (lista_d_cte)
+
+
+State 218
+
+   34 lista_d_cte: BIDENTIFICADOR BIGUAL BLITERAL_REAL BPUNTO_Y_COMA lista_d_cte .
+
+    $default  reduce using rule 34 (lista_d_cte)
+
+
+State 219
+
+   82 exp_b: BPARENTESIS_APERTURA exp_b BPARENTESIS_CIERRE .
+
+    $default  reduce using rule 82 (exp_b)
+
+
+State 220
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   83 exp_b: exp_a BIGUAL exp_a .
+
+    BSUMA   shift, and go to state 120
+    BMENOS  shift, and go to state 121
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 83 (exp_b)
+
+
+State 221
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   84 exp_b: exp_a BMAYOR exp_a .
+
+    BSUMA   shift, and go to state 120
+    BMENOS  shift, and go to state 121
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 84 (exp_b)
+
+
+State 222
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   85 exp_b: exp_a BMENOR exp_a .
+
+    BSUMA   shift, and go to state 120
+    BMENOS  shift, and go to state 121
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 85 (exp_b)
+
+
+State 223
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   87 exp_b: exp_a BMAYORIGUAL exp_a .
+
+    BSUMA   shift, and go to state 120
+    BMENOS  shift, and go to state 121
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 87 (exp_b)
+
+
+State 224
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   88 exp_b: exp_a BMENORIGUAL exp_a .
+
+    BSUMA   shift, and go to state 120
+    BMENOS  shift, and go to state 121
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 88 (exp_b)
+
+
+State 225
+
+   64 exp_a: exp_a . BSUMA exp_a
+   65      | exp_a . BMENOS exp_a
+   66      | exp_a . BPOR exp_a
+   67      | exp_a . BENTRE exp_a
+   68      | exp_a . BMOD exp_a
+   69      | exp_a . BDIV exp_a
+   86 exp_b: exp_a BDIFERENTE exp_a .
+
+    BSUMA   shift, and go to state 120
+    BMENOS  shift, and go to state 121
+    BPOR    shift, and go to state 122
+    BENTRE  shift, and go to state 123
+    BMOD    shift, and go to state 124
+    BDIV    shift, and go to state 125
+
+    $default  reduce using rule 86 (exp_b)
+
+
+State 226
+
+   32 lista_d_cte: BIDENTIFICADORB BIGUAL exp_b BPUNTO_Y_COMA lista_d_cte .
+
+    $default  reduce using rule 32 (lista_d_cte)
+
+
+State 227
+
+   76 exp_b: exp_b BY M . exp_b
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 101
+    exp_b              go to state 256
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 228
+
+   77 exp_b: exp_b BO M . exp_b
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 101
+    exp_b              go to state 257
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 229
+
+  121 l_ll: expresion BCOMA . l_ll
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion   go to state 174
+    exp_a       go to state 55
+    operando    go to state 90
+    funcion_ll  go to state 65
+    l_ll        go to state 258
+
+
+State 230
+
+  120 funcion_ll: BIDENTIFICADOR BPARENTESIS_APERTURA l_ll BPARENTESIS_CIERRE .
+
+    $default  reduce using rule 120 (funcion_ll)
+
+
+State 231
+
+  103 alternativa: BSI exp_b BENTONCES M . instrucciones N M lista_opciones M BFSI
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BCONTINUAR            shift, and go to state 46
+    BSI                   shift, and go to state 47
+    BMIENTRAS             shift, and go to state 48
+    BPARA                 shift, and go to state 49
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion            go to state 53
+    asignacion_booleana  go to state 54
+    exp_a                go to state 55
+    operando             go to state 56
+    operando_booleano    go to state 57
+    instrucciones        go to state 259
+    instruccion          go to state 59
+    asignacion           go to state 60
+    alternativa          go to state 61
+    iteracion            go to state 62
+    it_cota_exp          go to state 63
+    it_cota_fija         go to state 64
+    funcion_ll           go to state 65
+
+
+State 232
+
+  108 it_cota_exp: BMIENTRAS M exp_b BHACER . M instrucciones N M BFMIENTRAS
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 260
+
+
+State 233
+
+  110 aux_cota_fija: asignacion BHASTA expresion .
+
+    $default  reduce using rule 110 (aux_cota_fija)
+
+
+State 234
+
+  109 it_cota_fija: BPARA aux_cota_fija BHACER M . instrucciones N M BFPARA
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BCONTINUAR            shift, and go to state 46
+    BSI                   shift, and go to state 47
+    BMIENTRAS             shift, and go to state 48
+    BPARA                 shift, and go to state 49
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion            go to state 53
+    asignacion_booleana  go to state 54
+    exp_a                go to state 55
+    operando             go to state 56
+    operando_booleano    go to state 57
+    instrucciones        go to state 261
+    instruccion          go to state 59
+    asignacion           go to state 60
+    alternativa          go to state 61
+    iteracion            go to state 62
+    it_cota_exp          go to state 63
+    it_cota_fija         go to state 64
+    funcion_ll           go to state 65
+
+
+State 235
+
+   91 operando: operando BCORCHETE_APERTURA expresion BCORCHETE_CIERRE .
+
+    $default  reduce using rule 91 (operando)
+
+
+State 236
+
+  117 d_p_form: BEND lista_id . BDOS_PUNTOS d_tipo
+
+    BDOS_PUNTOS  shift, and go to state 262
+
+
+State 237
+
+  118 d_p_form: BSAL lista_id . BDOS_PUNTOS d_tipo
+
+    BDOS_PUNTOS  shift, and go to state 263
+
+
+State 238
+
+  119 d_p_form: BES lista_id . BDOS_PUNTOS d_tipo
+
+    BDOS_PUNTOS  shift, and go to state 264
+
+
+State 239
+
+  113 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE . BPUNTO_Y_COMA
+
+    BPUNTO_Y_COMA  shift, and go to state 265
+
+
+State 240
+
+  115 d_par_form: d_p_form BPUNTO_Y_COMA . d_par_form
+
+    BEND  shift, and go to state 192
+    BSAL  shift, and go to state 193
+    BES   shift, and go to state 194
+
+    $default  reduce using rule 116 (d_par_form)
+
+    d_par_form  go to state 266
+    d_p_form    go to state 196
+
+
+State 241
+
+  114 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE . BDEF d_tipo BPUNTO_Y_COMA
+
+    BDEF  shift, and go to state 267
+
+
+State 242
+
+  112 funcion_d: BFUNCION f_cabecera bloque BDEV expresion . BFFUNCION
+
+    BFFUNCION  shift, and go to state 268
+
+
+State 243
+
+   44 lista_id_entrada: BIDENTIFICADOR BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 44 (lista_id_entrada)
+
+
+State 244
+
+   46 lista_id_entrada: BIDENTIFICADOR BCOMA lista_id_entrada .
+
+    $default  reduce using rule 46 (lista_id_entrada)
+
+
+State 245
+
+   45 lista_id_entrada: BIDENTIFICADORB BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 45 (lista_id_entrada)
+
+
+State 246
+
+   47 lista_id_entrada: BIDENTIFICADORB BCOMA lista_id_entrada .
+
+    $default  reduce using rule 47 (lista_id_entrada)
+
+
+State 247
+
+   38 lista_d_var_entrada: lista_id_entrada BPUNTO_Y_COMA lista_d_var_entrada .
+
+    $default  reduce using rule 38 (lista_d_var_entrada)
+
+
+State 248
+
+   48 lista_id_salida: BIDENTIFICADOR BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 48 (lista_id_salida)
+
+
+State 249
+
+   50 lista_id_salida: BIDENTIFICADOR BCOMA lista_id_salida .
+
+    $default  reduce using rule 50 (lista_id_salida)
+
+
+State 250
+
+   49 lista_id_salida: BIDENTIFICADORB BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 49 (lista_id_salida)
+
+
+State 251
+
+   51 lista_id_salida: BIDENTIFICADORB BCOMA lista_id_salida .
+
+    $default  reduce using rule 51 (lista_id_salida)
+
+
+State 252
+
+   40 lista_d_var_salida: lista_id_salida BPUNTO_Y_COMA lista_d_var_salida .
+
+    $default  reduce using rule 40 (lista_d_var_salida)
+
+
+State 253
+
+   30 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo . BPUNTO_Y_COMA lista_campos
+
+    BPUNTO_Y_COMA  shift, and go to state 269
+
+
+State 254
+
+   22 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS . expresion_t BCORCHETE_CIERRE BDE d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion_t  go to state 270
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 255
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 . BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo
+
+    BIDENTIFICADORB  shift, and go to state 271
+
+
+State 256
+
+   76 exp_b: exp_b . BY M exp_b
+   76      | exp_b BY M exp_b .
+   77      | exp_b . BO M exp_b
+
+    $default  reduce using rule 76 (exp_b)
+
+
+State 257
+
+   76 exp_b: exp_b . BY M exp_b
+   77      | exp_b . BO M exp_b
+   77      | exp_b BO M exp_b .
+
+    $default  reduce using rule 77 (exp_b)
+
+
+State 258
+
+  121 l_ll: expresion BCOMA l_ll .
+
+    $default  reduce using rule 121 (l_ll)
+
+
+State 259
+
+  103 alternativa: BSI exp_b BENTONCES M instrucciones . N M lista_opciones M BFSI
+
+    $default  reduce using rule 124 (N)
+
+    N  go to state 272
+
+
+State 260
+
+  108 it_cota_exp: BMIENTRAS M exp_b BHACER M . instrucciones N M BFMIENTRAS
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BCONTINUAR            shift, and go to state 46
+    BSI                   shift, and go to state 47
+    BMIENTRAS             shift, and go to state 48
+    BPARA                 shift, and go to state 49
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion            go to state 53
+    asignacion_booleana  go to state 54
+    exp_a                go to state 55
+    operando             go to state 56
+    operando_booleano    go to state 57
+    instrucciones        go to state 273
+    instruccion          go to state 59
+    asignacion           go to state 60
+    alternativa          go to state 61
+    iteracion            go to state 62
+    it_cota_exp          go to state 63
+    it_cota_fija         go to state 64
+    funcion_ll           go to state 65
+
+
+State 261
+
+  109 it_cota_fija: BPARA aux_cota_fija BHACER M instrucciones . N M BFPARA
+
+    $default  reduce using rule 124 (N)
+
+    N  go to state 274
+
+
+State 262
+
+  117 d_p_form: BEND lista_id BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 275
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 263
+
+  118 d_p_form: BSAL lista_id BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 276
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 264
+
+  119 d_p_form: BES lista_id BDOS_PUNTOS . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 277
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 265
+
+  113 a_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA d_par_form BPARENTESIS_CIERRE BPUNTO_Y_COMA .
+
+    $default  reduce using rule 113 (a_cabecera)
+
+
+State 266
+
+  115 d_par_form: d_p_form BPUNTO_Y_COMA d_par_form .
+
+    $default  reduce using rule 115 (d_par_form)
+
+
+State 267
+
+  114 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF . d_tipo BPUNTO_Y_COMA
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 278
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 268
+
+  112 funcion_d: BFUNCION f_cabecera bloque BDEV expresion BFFUNCION .
+
+    $default  reduce using rule 112 (funcion_d)
+
+
+State 269
+
+   30 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA . lista_campos
+
+    BIDENTIFICADOR  shift, and go to state 146
+
+    $default  reduce using rule 31 (lista_campos)
+
+    lista_campos  go to state 279
+
+
+State 270
+
+   22 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t . BCORCHETE_CIERRE BDE d_tipo
+
+    BCORCHETE_CIERRE  shift, and go to state 280
+
+
+State 271
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB . BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo
+
+    BIGUAL  shift, and go to state 281
+
+
+State 272
+
+  103 alternativa: BSI exp_b BENTONCES M instrucciones N . M lista_opciones M BFSI
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 282
+
+
+State 273
+
+  108 it_cota_exp: BMIENTRAS M exp_b BHACER M instrucciones . N M BFMIENTRAS
+
+    $default  reduce using rule 124 (N)
+
+    N  go to state 283
+
+
+State 274
+
+  109 it_cota_fija: BPARA aux_cota_fija BHACER M instrucciones N . M BFPARA
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 284
+
+
+State 275
+
+  117 d_p_form: BEND lista_id BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 117 (d_p_form)
+
+
+State 276
+
+  118 d_p_form: BSAL lista_id BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 118 (d_p_form)
+
+
+State 277
+
+  119 d_p_form: BES lista_id BDOS_PUNTOS d_tipo .
+
+    $default  reduce using rule 119 (d_p_form)
+
+
+State 278
+
+  114 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo . BPUNTO_Y_COMA
+
+    BPUNTO_Y_COMA  shift, and go to state 285
+
+
+State 279
+
+   30 lista_campos: BIDENTIFICADOR BDOS_PUNTOS d_tipo BPUNTO_Y_COMA lista_campos .
+
+    $default  reduce using rule 30 (lista_campos)
+
+
+State 280
+
+   22 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE . BDE d_tipo
+
+    BDE  shift, and go to state 286
+
+
+State 281
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB BIGUAL . d_tipo BPUNTO_Y_COMA lista_d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 287
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 282
+
+  103 alternativa: BSI exp_b BENTONCES M instrucciones N M . lista_opciones M BFSI
+
+    BSINO  shift, and go to state 288
+
+    $default  reduce using rule 105 (lista_opciones)
+
+    lista_opciones  go to state 289
+
+
+State 283
+
+  108 it_cota_exp: BMIENTRAS M exp_b BHACER M instrucciones N . M BFMIENTRAS
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 290
+
+
+State 284
+
+  109 it_cota_fija: BPARA aux_cota_fija BHACER M instrucciones N M . BFPARA
+
+    BFPARA  shift, and go to state 291
+
+
+State 285
+
+  114 f_cabecera: BIDENTIFICADOR BPARENTESIS_APERTURA lista_d_var BPARENTESIS_CIERRE BDEF d_tipo BPUNTO_Y_COMA .
+
+    $default  reduce using rule 114 (f_cabecera)
+
+
+State 286
+
+   22 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE . d_tipo
+
+    BIDENTIFICADOR        shift, and go to state 80
+    BTUPLA                shift, and go to state 81
+    BTABLA                shift, and go to state 82
+    BREF                  shift, and go to state 83
+    BTIPO_BASE            shift, and go to state 84
+    BLITERAL_CARACTER     shift, and go to state 85
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BIDENTIFICADORB       shift, and go to state 86
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    d_tipo       go to state 292
+    expresion_t  go to state 88
+    expresion    go to state 89
+    exp_a        go to state 55
+    operando     go to state 90
+    funcion_ll   go to state 65
+
+
+State 287
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB BIGUAL d_tipo . BPUNTO_Y_COMA lista_d_tipo
+
+    BPUNTO_Y_COMA  shift, and go to state 293
+
+
+State 288
+
+  104 lista_opciones: BSINO . exp_b BENTONCES M instrucciones N M lista_opciones
+
+    BIDENTIFICADOR        shift, and go to state 96
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 97
+    BNO                   shift, and go to state 98
+    BVERDADERO            shift, and go to state 99
+    BFALSO                shift, and go to state 100
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    exp_a              go to state 101
+    exp_b              go to state 294
+    operando           go to state 90
+    operando_booleano  go to state 103
+
+
+State 289
+
+  103 alternativa: BSI exp_b BENTONCES M instrucciones N M lista_opciones . M BFSI
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 295
+
+
+State 290
+
+  108 it_cota_exp: BMIENTRAS M exp_b BHACER M instrucciones N M . BFMIENTRAS
+
+    BFMIENTRAS  shift, and go to state 296
+
+
+State 291
+
+  109 it_cota_fija: BPARA aux_cota_fija BHACER M instrucciones N M BFPARA .
+
+    $default  reduce using rule 109 (it_cota_fija)
+
+
+State 292
+
+   22 d_tipo: BTABLA BCORCHETE_APERTURA expresion_t BPUNTOSS expresion_t BCORCHETE_CIERRE BDE d_tipo .
+
+    $default  reduce using rule 22 (d_tipo)
+
+
+State 293
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA . lista_d_tipo
+
+    BIDENTIFICADOR  shift, and go to state 12
+
+    $default  reduce using rule 20 (lista_d_tipo)
+
+    lista_d_tipo  go to state 297
+
+
+State 294
+
+   76 exp_b: exp_b . BY M exp_b
+   77      | exp_b . BO M exp_b
+  104 lista_opciones: BSINO exp_b . BENTONCES M instrucciones N M lista_opciones
+
+    BY         shift, and go to state 166
+    BO         shift, and go to state 167
+    BENTONCES  shift, and go to state 298
+
+
+State 295
+
+  103 alternativa: BSI exp_b BENTONCES M instrucciones N M lista_opciones M . BFSI
+
+    BFSI  shift, and go to state 299
+
+
+State 296
+
+  108 it_cota_exp: BMIENTRAS M exp_b BHACER M instrucciones N M BFMIENTRAS .
+
+    $default  reduce using rule 108 (it_cota_exp)
+
+
+State 297
+
+   19 lista_d_tipo: BIDENTIFICADOR BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo $@1 BIDENTIFICADORB BIGUAL d_tipo BPUNTO_Y_COMA lista_d_tipo .
+
+    $default  reduce using rule 19 (lista_d_tipo)
+
+
+State 298
+
+  104 lista_opciones: BSINO exp_b BENTONCES . M instrucciones N M lista_opciones
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 300
+
+
+State 299
+
+  103 alternativa: BSI exp_b BENTONCES M instrucciones N M lista_opciones M BFSI .
+
+    $default  reduce using rule 103 (alternativa)
+
+
+State 300
+
+  104 lista_opciones: BSINO exp_b BENTONCES M . instrucciones N M lista_opciones
+
+    BIDENTIFICADOR        shift, and go to state 42
+    BSUMA                 shift, and go to state 43
+    BMENOS                shift, and go to state 44
+    BPARENTESIS_APERTURA  shift, and go to state 45
+    BCONTINUAR            shift, and go to state 46
+    BSI                   shift, and go to state 47
+    BMIENTRAS             shift, and go to state 48
+    BPARA                 shift, and go to state 49
+    BIDENTIFICADORB       shift, and go to state 50
+    BLITERAL_ENTERO       shift, and go to state 51
+    BLITERAL_REAL         shift, and go to state 52
+
+    expresion            go to state 53
+    asignacion_booleana  go to state 54
+    exp_a                go to state 55
+    operando             go to state 56
+    operando_booleano    go to state 57
+    instrucciones        go to state 301
+    instruccion          go to state 59
+    asignacion           go to state 60
+    alternativa          go to state 61
+    iteracion            go to state 62
+    it_cota_exp          go to state 63
+    it_cota_fija         go to state 64
+    funcion_ll           go to state 65
+
+
+State 301
+
+  104 lista_opciones: BSINO exp_b BENTONCES M instrucciones . N M lista_opciones
+
+    $default  reduce using rule 124 (N)
+
+    N  go to state 302
+
+
+State 302
+
+  104 lista_opciones: BSINO exp_b BENTONCES M instrucciones N . M lista_opciones
+
+    $default  reduce using rule 123 (M)
+
+    M  go to state 303
+
+
+State 303
+
+  104 lista_opciones: BSINO exp_b BENTONCES M instrucciones N M . lista_opciones
+
+    BSINO  shift, and go to state 288
+
+    $default  reduce using rule 105 (lista_opciones)
+
+    lista_opciones  go to state 304
+
+
+State 304
+
+  104 lista_opciones: BSINO exp_b BENTONCES M instrucciones N M lista_opciones .
+
+    $default  reduce using rule 104 (lista_opciones)

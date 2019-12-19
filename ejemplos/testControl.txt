@@ -1,4 +1,4 @@
-algoritmo sumacomb;
+algoritmo control;
 
 ent n, m: real;
 sal suma: entero;
@@ -15,7 +15,7 @@ i2, comb2: real;
 b1,b3,b4,b5: booleano;
 fvar;
 
-b1 := i2 < comb2;
+b1 := verdadero;
 b3 := (i>comb) y (i2<comb2);
 b3 := (i>=comb) o b3;
 
