@@ -25,7 +25,7 @@ No hemos hecho arrays ni memoria dinámica ya que requería un tiempo del que no
 El compilador no reconoce procedimientos ni funciones.
 
 # Compilación
-El compilador consta de diferentes módulos: flex para reconocer los tokens, bison para la gramática, SymbolTable es la librería que implementa la tabla de símbolos y QuadruplesTable es la librería que implementa la tabla de cuádruplas.
+El compilador consta de diferentes módulos: flex para reconocer los tokens, bison para la gramática, SymbolTable es la librería que implementa la tabla de símbolos, QuadruplesTable es la librería que implementa la tabla de cuádruplas y la librería booleanos que implementa la funcionalidad de los booleanos y el control de flujo.
 Se proporciona un makefile que compila las librerías necesarias.
 
 # Comandos
@@ -39,7 +39,7 @@ Opciones:
 Para probar las características de nuestro compilador proporcionamos los ficheros control.txt, testIntercambio.txt y testSumacomb.txt que se encuentran en el directorio 'ejemplos/'.
 
 # Participación
-La carga de trabajo se ha dsitribuido en función de nuestras aptitudes y conocimientos, por lo que se ha repartido de la siguiente manera:
+La carga de trabajo se ha distribuido en función de nuestras aptitudes y conocimientos, por lo que se ha repartido de la siguiente manera:
 Javier Lasheras - 60%
 Miguel Lucas - 40%
 

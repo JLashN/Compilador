@@ -30,6 +30,7 @@ bisonte:
 
 run: a.out
 	@cat ejemplos/prueba.txt | ./compilador
+	@make clean
 clean: cleanArchivosFlex
 	@rm compilador
 	@echo "Todo limpio"

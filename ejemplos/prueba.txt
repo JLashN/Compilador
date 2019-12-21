@@ -1,0 +1,52 @@
+algoritmo control;
+
+ent n, m: real;
+sal suma: entero;
+
+{Prec: n= N AND m = M AND M >= N >0}
+const
+A=0;
+C="A";
+D='A';
+fconst;
+var
+i, comb: entero;
+i2, comb2: real;
+b1,b3,b4,b5: booleano;
+fvar;
+
+b1 := verdadero;
+b3 := (i>comb) y (i2<comb2);
+b3 := (i>=comb) o b3;
+
+comb2 := comb + comb2 * i - i2;
+
+i:= comb;
+suma:= comb;
+comb2:= i;
+
+mientras b3 hacer
+	para i := (comb+i) * i hasta suma + i hacer
+	    si i<n ->
+		suma := suma + comb
+	    [] i>n ->
+		comb := comb * (m - i-i) div (i + i)
+	    [] b1 ->
+		i := i + comb
+	    fsi;
+	    comb := i + comb;
+	    comb2:= i
+	fpara
+fmientras;
+
+mientras i<n hacer
+    suma := suma + comb;
+    comb := comb * (m - i-i) div (i + i);
+    i := i + comb
+fmientras;
+
+
+comb2:= i
+
+{Post: n =N AND suma = SUMATORIO(i=1..N)(M sobre i)}
+falgoritmo.
