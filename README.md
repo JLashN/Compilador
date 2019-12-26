@@ -36,7 +36,34 @@ Opciones:
 ./compilador [-i in_fichero_a_compilar ] [-o out_fichero_compilado(tabla de cuadruplas)] [-t out_tabla_de_simbolos] [-v out_reducciones] [-h muestra_instrucciones_de_uso] 
 Por ejemplo:
 ./compilador ejemplos/testSumacomb.txt -o a.out
-  
+
+#Lenguaje intermedio
+Nuestro compilador pasa de proAlg a un lenguaje intermedio que tiene las siguientes instrucciones:
+-1. sumaentero: Suma un numero entero a otro numero entero y lo guarda en la variable destino.
+-2. menosentero: Resta un numero entero a otro numero entero y lo guarda en la variable destino.
+-3. porentero: Multiplica un numero entero a otro numero entero y lo guarda en la variable destino.
+-4. entreentero: Divide un numero entero a otro numero entero y lo guarda en la variable destino.
+-5. modentero: Hace el modulo de un numero entero con otro numero entero y lo guarda en la variable destino.
+-6. sumareal: Suma un numero real a otro numero real y lo guarda en la variable destino.
+-7. menosreal: Resta un numero real a otro numero real y lo guarda en la variable destino.
+-8. porreal: Multiplica un numero real a otro numero real y lo guarda en la variable destino.
+-9. entrereal: Divide un numero real a otro numero real y lo guarda en la variable destino.
+-10. modreal: Hace el modulo de un numero real con otro numero real y lo guarda en la variable destino.
+-11. asignación: Guarda el valor de una variable en otra variable.
+-12. inttoreal: Convierte un valor entero a otro real y lo guarda en una variable.
+-13. truncar: Trunca un valor real y lo guarda en un variable.
+-14. ifmayor: Si la primera variable es mayor que la segunda, su valor, salta a la instrucción cuyo número es el destino.
+-15. ifmenor: Si la primera variable es menor que la segunda, su valor, salta a la instrucción cuyo número es el destino.
+-16. ifdiferente: Si la primera variable es diferente que la segunda, su valor, salta a la instrucción cuyo número es el destino.
+-17. ifigual: Si la primera variable es igual que la segunda, su valor, salta a la instrucción cuyo número es el destino.
+-18. ifmayorigual: Si la primera variable es mayor o igual que la segunda, su valor, salta a la instrucción cuyo número es el destino.
+-19. ifmenorigual: Si la primera variable es menor o igual que la segunda, su valor, salta a la instrucción cuyo número es el destino.
+-20. goto: Salta a la instrucción destino.
+-21. asignaciontrue: Asigna verdadero a una variable booleana.
+-22. asignacionfalse: Asigna false a una variable booleana.
+-23. fin: Es la última instrucción del programa. Representa el fin del programa.
+-24. i++: Suma uno a la variable destino.
+
 # Ejemplos
 Para probar las características de nuestro compilador proporcionamos los ficheros control.txt, testIntercambio.txt y testSumacomb.txt que se encuentran en el directorio 'ejemplos/'.
 Una manera más rápida de hacerlo funcionar y probar rápidamente nuestro compilador es usar el comando "make run".
