@@ -34,9 +34,13 @@ make clean
 ./compilador : lee de la entrada estandar(teclado)
 Opciones:
 ./compilador [-i in_fichero_a_compilar ] [-o out_fichero_compilado(tabla de cuadruplas)] [-t out_tabla_de_simbolos] [-v out_reducciones] [-h muestra_instrucciones_de_uso] 
+Por ejemplo:
+./compilador ejemplos/testSumacomb.txt -o a.out
   
 # Ejemplos
 Para probar las características de nuestro compilador proporcionamos los ficheros control.txt, testIntercambio.txt y testSumacomb.txt que se encuentran en el directorio 'ejemplos/'.
+Una manera más rápida de hacerlo funcionar y probar rápidamente nuestro compilador es usar el comando "make run".
+De esta manera, se compila el archivo prueba.txt de la carpeta ejemplos y se muestra el archivo compilado por pantalla.
 
 # Participación
 La carga de trabajo se ha distribuido en función de nuestras aptitudes y conocimientos, por lo que se ha repartido de la siguiente manera:

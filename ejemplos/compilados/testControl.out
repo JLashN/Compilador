@@ -1,0 +1,87 @@
+0: goto 3
+1: asignacionfalse nulo nulo b1
+2: goto 4
+3: asignaciontrue nulo nulo b1
+4: ifmayor i comb 6
+5: goto 8
+6: ifmenor i2 comb2 10
+7: goto 8
+8: asignacionfalse nulo nulo b3
+9: goto 11
+10: asignaciontrue nulo nulo b3
+11: ifmayorigual i comb 18
+12: goto 13
+13: asignaciontrue nulo nulo bt0
+14: ifigual bt0 b3 18
+15: goto 16
+16: asignacionfalse nulo nulo b3
+17: goto 19
+18: asignaciontrue nulo nulo b3
+19: inttoreal i nulo t2
+20: porreal comb2 t2 t1
+21: sumareal comb t1 t3
+22: menosreal t3 i2 t4
+23: asignacion t4 nulo comb2
+24: asignacion comb nulo i
+25: asignacion comb nulo suma
+26: inttoreal i nulo t5
+27: asignacion t5 nulo comb2
+28: ifmenor i n 30
+29: goto 33
+30: sumaentero suma comb t6
+31: asignacion t6 nulo suma
+32: goto 52
+33: ifmayor i n 35
+34: goto 47
+35: inttoreal i nulo t8
+36: menosreal m t8 t7
+37: inttoreal i nulo t10
+38: menosreal t7 t10 t9
+39: inttoreal comb nulo t12
+40: porreal t12 t9 t11
+41: sumaentero i i t13
+42: inttoreal t13 nulo t15
+43: entrereal t11 t15 t14
+44: truncar t14 nulo t11
+45: asignacion t11 nulo comb
+46: goto 52
+47: ifigual i n 49
+48: goto 52
+49: sumaentero i comb t16
+50: asignacion t16 nulo i
+51: goto 52
+52: sumaentero comb i t17
+53: porentero t17 i t18
+54: asignacion t18 nulo i
+55: sumaentero suma i t19
+56: asignacion t19 nulo t20
+57: ifmayor i t20 60
+58: i++ 4
+59: goto 61
+60: goto 66
+61: sumaentero i comb t21
+62: asignacion t21 nulo comb
+63: inttoreal i nulo t22
+64: asignacion t22 nulo comb2
+65: goto 57
+66: ifmenor i n 68
+67: goto 84
+68: sumaentero suma comb t23
+69: asignacion t23 nulo suma
+70: inttoreal i nulo t25
+71: menosreal m t25 t24
+72: inttoreal i nulo t27
+73: menosreal t24 t27 t26
+74: inttoreal comb nulo t29
+75: porreal t29 t26 t28
+76: sumaentero i i t30
+77: inttoreal t30 nulo t32
+78: entrereal t28 t32 t31
+79: truncar t31 nulo t28
+80: asignacion t28 nulo comb
+81: sumaentero i comb t33
+82: asignacion t33 nulo i
+83: goto 66
+84: inttoreal i nulo t34
+85: asignacion t34 nulo comb2
+86: fin 

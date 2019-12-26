@@ -1,0 +1,12 @@
+0: asignacion m nulo comb
+1: ifmenor i n 3
+2: goto 11
+3: sumaentero suma comb t0
+4: asignacion t0 nulo suma
+5: menosentero m i t1
+6: porentero comb t1 t2
+7: entreentero t2 i t3
+8: asignacion t3 nulo comb
+9: asignacion i nulo i
+10: goto 1
+11: fin 
