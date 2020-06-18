@@ -68,10 +68,3 @@ Nuestro compilador pasa de proAlg a un lenguaje intermedio que tiene las siguien
 Para probar las características de nuestro compilador proporcionamos los ficheros control.txt, testIntercambio.txt y testSumacomb.txt que se encuentran en el directorio 'ejemplos/'.
 Una manera más rápida de hacerlo funcionar y probar rápidamente nuestro compilador es usar el comando "make run".
 De esta manera, se compila el archivo prueba.txt de la carpeta ejemplos y se muestra el archivo compilado por pantalla.
-
-# Participación
-La carga de trabajo se ha distribuido en función de nuestras aptitudes y conocimientos, por lo que se ha repartido de la siguiente manera:
-Javier Lasheras - 60%
-Miguel Lucas - 40%
-
-
